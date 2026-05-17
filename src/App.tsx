@@ -182,7 +182,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
   );
 };
 
-const Hero = ({ t, scrollToSection }: any) => {
+const Hero = ({ t, scrollToSection, onWhatsAppClick }: any) => {
   return (
     <section id="home" className="relative h-[90vh] md:h-screen w-full overflow-hidden flex items-center">
       <div 
@@ -229,7 +229,7 @@ const Hero = ({ t, scrollToSection }: any) => {
           
           <div className="flex flex-col sm:flex-row gap-6">
             <button 
-              onClick={() => scrollToSection('booking')}
+              onClick={onWhatsAppClick}
               className="group gold-gradient text-white px-12 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3 hover:brightness-110 transition-all duration-500 shadow-2xl"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -790,7 +790,7 @@ const About = ({ t, scrollToSection, lang }: any) => {
               <img 
                 src={AboutImage} 
                 alt="Madinah Massage Atmosphere" 
-                className="rounded-[60px] relative z-10 shadow-3xl grayscale hover:grayscale-0 transition-all duration-1000"
+                className="rounded-[60px] relative z-10 shadow-3xl transition-all duration-500"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute top-12 left-12 p-10 glass rounded-[40px] z-20 shadow-2xl backdrop-blur-3xl hidden md:block border border-white/40">
@@ -840,7 +840,7 @@ const About = ({ t, scrollToSection, lang }: any) => {
   );
 };
 
-const Contact = ({ t }: any) => {
+const Contact = ({ t, onWhatsAppClick }: any) => {
   return (
     <section id="contact" className="py-32 bg-white relative">
       <div className="container mx-auto px-8">
@@ -876,7 +876,7 @@ const Contact = ({ t }: any) => {
               </div>
 
               <div className="mt-20 flex flex-wrap gap-6">
-                <button className="gold-gradient text-white px-10 py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-4 hover:shadow-2xl transition-all" onClick={() => window.open('https://wa.me/966506173369', '_blank')}>
+                <button className="gold-gradient text-white px-10 py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-4 hover:shadow-2xl transition-all" onClick={onWhatsAppClick}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.503-2.961-2.617-.087-.114-.708-.941-.708-1.792s.448-1.273.607-1.446c.159-.173.346-.217.462-.217s.231.006.332.013c.105.007.246-.04.384.295.144.346.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.289.072.398-.058c.109-.13.463-.535.586-.717.123-.181.246-.152.412-.094.167.058 1.055.498 1.236.587s.304.13.348.21c.043.079.043.462-.101.867z" />
                   </svg>
@@ -887,7 +887,7 @@ const Contact = ({ t }: any) => {
             <div className="lg:w-1/2 h-[500px] lg:h-auto min-h-[600px] relative">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14502.99221191398!2d39.60533038676571!3d24.47185012543977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15bdbe51199320e3%3A0x6bba843fdf91557!2sAl%20Masjid%20an%20Nabawi!5e0!3m2!1sen!2ssa!4v1715856422341!5m2!1sen!2ssa" 
-                className="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000 border-none"
+                className="w-full h-full transition-all duration-500 border-none"
                 allowFullScreen={true}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -901,7 +901,7 @@ const Contact = ({ t }: any) => {
   );
 };
 
-const Footer = ({ t, scrollToSection }: any) => {
+const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
   return (
     <footer className="bg-maroon text-white pt-32 pb-16 relative overflow-hidden">
       <div className="absolute inset-0 islamic-pattern opacity-10 pointer-events-none"></div>
@@ -918,11 +918,11 @@ const Footer = ({ t, scrollToSection }: any) => {
               Crafting premium wellness experiences for the global pilgrim in the Heart of Madinah. Redefining mobile spa services with luxury standards.
             </p>
             <div className="flex flex-wrap gap-4 mt-10">
-              <a href="https://wa.me/966506173369" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-500 text-gold shadow-lg group">
+              <button onClick={onWhatsAppClick} className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-500 text-gold shadow-lg group">
                 <svg width="24" height="24" viewBox="0 0 32 32" fill="currentColor">
                   <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.733 5.479 2.016 7.78L0 32l8.369-2.195c2.253 1.22 4.821 1.921 7.631 1.921c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.311 22.181c-.34.957-1.705 1.748-2.613 1.861-.624.08-1.44.144-2.316-.144-.544-.176-1.228-.404-2.108-.78-3.748-1.552-6.189-5.325-6.376-5.576-.184-.251-1.504-2.004-1.504-3.824 0-1.82 1.052-2.716 1.34-3.004.288-.288.752-.36 1.136-.36.144 0 .272.008.384.016.328.016.488.024.704.536.264.632.904 2.192.984 2.352.08.16.136.344.032.552-.104.208-.16.336-.32.512-.16.176-.344.4-.488.536-.168.16-.344.336-.144.68.2.336.888 1.464 1.904 2.368 1.312 1.168 2.416 1.528 2.76 1.696.344.168.544.144.752-.08.208-.224.888-1.032 1.128-1.392.24-.36.48-.304.808-.184.328.12 2.088 1.032 2.448 1.216.352.184.584.272.672.424.088.168.088.952-.256 1.904z" />
                 </svg>
-              </a>
+              </button>
               <a href="tel:+966506173369" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:text-maroon transition-all duration-500 text-gold shadow-lg">
                 <Phone className="w-5 h-5" />
               </a>
@@ -1013,40 +1013,26 @@ export default function App() {
       <Navbar lang={lang} setLang={setLang} t={t} scrollToSection={scrollToSection} />
       
       <main>
-        <Hero t={t} scrollToSection={scrollToSection} />
+        <Hero t={t} scrollToSection={scrollToSection} onWhatsAppClick={handleWhatsAppClick} />
         <Services t={t} scrollToSection={scrollToSection} setSelectedService={setSelectedService} />
         <Benefits t={t} />
         <About t={t} scrollToSection={scrollToSection} lang={lang} />
         <Gallery />
         <Reviews t={t} lang={lang} />
         <BookingForm t={t} selectedService={selectedService} scrollToSection={scrollToSection} lang={lang} />
-        <Contact t={t} />
+        <Contact t={t} onWhatsAppClick={handleWhatsAppClick} />
       </main>
 
-      <Footer t={t} scrollToSection={scrollToSection} />
+      <Footer t={t} scrollToSection={scrollToSection} onWhatsAppClick={handleWhatsAppClick} />
 
       {/* Floating WhatsApp */}
       <motion.button 
-        onClick={() => {
-          handleWhatsAppClick();
-          setTimeout(() => window.open('https://wa.me/966506173369', '_blank'), 500);
-        }}
+        onClick={handleWhatsAppClick}
         initial={{ scale: 0, opacity: 0 }}
-        animate={{ 
-          scale: [1, 1.1, 1],
-          opacity: 1,
-          boxShadow: [
-            "0 0 0 0px rgba(37, 211, 102, 0)",
-            "0 0 0 20px rgba(37, 211, 102, 0.2)",
-            "0 0 0 0px rgba(37, 211, 102, 0)"
-          ]
-        }}
-        transition={{ 
-          scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
-          boxShadow: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
-          opacity: { duration: 0.5 }
-        }}
-        className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl active:scale-95 transition-transform"
+        animate={{ scale: 1, opacity: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl transition-all"
       >
         <svg fill="#ffffff" width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.733 5.479 2.016 7.78L0 32l8.369-2.195c2.253 1.22 4.821 1.921 7.631 1.921c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.311 22.181c-.34.957-1.705 1.748-2.613 1.861-.624.08-1.44.144-2.316-.144-.544-.176-1.228-.404-2.108-.78-3.748-1.552-6.189-5.325-6.376-5.576-.184-.251-1.504-2.004-1.504-3.824 0-1.82 1.052-2.716 1.34-3.004.288-.288.752-.36 1.136-.36.144 0 .272.008.384.016.328.016.488.024.704.536.264.632.904 2.192.984 2.352.08.16.136.344.032.552-.104.208-.16.336-.32.512-.16.176-.344.4-.488.536-.168.16-.344.336-.144.68.2.336.888 1.464 1.904 2.368 1.312 1.168 2.416 1.528 2.76 1.696.344.168.544.144.752-.08.208-.224.888-1.032 1.128-1.392.24-.36.48-.304.808-.184.328.12 2.088 1.032 2.448 1.216.352.184.584.272.672.424.088.168.088.952-.256 1.904z"/>
