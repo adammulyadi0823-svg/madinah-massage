@@ -39,6 +39,7 @@ import Gallery6 from './assets/images/regenerated_image_1778939273169.png';
 import AboutImage from './assets/images/regenerated_image_1778941470110.png';
 import Gallery120 from './assets/images/regenerated_image_1778943907732.png';
 import FootMassageImg from './assets/images/regenerated_image_1778943911153.png';
+import Logo from './assets/images/logo.png';
 
 // --- Helpers ---
 
@@ -80,9 +81,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'glass py-4 shadow-sm' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-8 flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer group" onClick={() => scrollToSection('home')}>
-          <div className="w-10 h-10 gold-gradient rounded-full flex items-center justify-center text-white shadow-lg transition-transform group-hover:scale-105">
-            <span className="serif font-bold text-xl">M</span>
-          </div>
+          <img src={Logo} alt="Madinah Massage Logo" className="h-12 w-auto transition-transform group-hover:scale-105" />
           <div className="flex flex-col">
             <span className={`serif font-bold text-lg tracking-wider transition-colors ${isScrolled ? 'text-maroon' : 'text-white'}`}>
               MADINAH MASSAGE
@@ -909,9 +908,7 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-24">
           <div className="col-span-1 lg:col-span-1">
             <div className="flex items-center gap-3 mb-10">
-              <div className="w-10 h-10 gold-gradient rounded-full flex items-center justify-center text-white shadow-lg">
-                <span className="serif font-bold text-xl">M</span>
-              </div>
+              <img src={Logo} alt="Madinah Massage Logo" className="h-12 w-auto" />
               <span className="text-xl font-bold tracking-wider serif text-gold uppercase">MADINAH MASSAGE</span>
             </div>
             <p className="text-white/60 font-light leading-relaxed mb-10 text-sm">
@@ -1029,10 +1026,31 @@ export default function App() {
       <motion.button 
         onClick={handleWhatsAppClick}
         initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl transition-all"
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: 1,
+          boxShadow: [
+            "0 0 0 0px rgba(37, 211, 102, 0.7)",
+            "0 0 0 20px rgba(37, 211, 102, 0)",
+            "0 0 0 0px rgba(37, 211, 102, 0)"
+          ],
+        }}
+        transition={{
+          scale: {
+            repeat: Infinity,
+            duration: 2,
+            ease: "easeInOut"
+          },
+          boxShadow: {
+            repeat: Infinity,
+            duration: 2,
+            ease: "easeInOut"
+          },
+          opacity: { duration: 0.5 }
+        }}
+        whileHover={{ scale: 1.15 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl"
       >
         <svg fill="#ffffff" width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.733 5.479 2.016 7.78L0 32l8.369-2.195c2.253 1.22 4.821 1.921 7.631 1.921c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.311 22.181c-.34.957-1.705 1.748-2.613 1.861-.624.08-1.44.144-2.316-.144-.544-.176-1.228-.404-2.108-.78-3.748-1.552-6.189-5.325-6.376-5.576-.184-.251-1.504-2.004-1.504-3.824 0-1.82 1.052-2.716 1.34-3.004.288-.288.752-.36 1.136-.36.144 0 .272.008.384.016.328.016.488.024.704.536.264.632.904 2.192.984 2.352.08.16.136.344.032.552-.104.208-.16.336-.32.512-.16.176-.344.4-.488.536-.168.16-.344.336-.144.68.2.336.888 1.464 1.904 2.368 1.312 1.168 2.416 1.528 2.76 1.696.344.168.544.144.752-.08.208-.224.888-1.032 1.128-1.392.24-.36.48-.304.808-.184.328.12 2.088 1.032 2.448 1.216.352.184.584.272.672.424.088.168.088.952-.256 1.904z"/>
@@ -1053,7 +1071,7 @@ export default function App() {
                 <Heart className="w-5 h-5 focus:animate-pulse" />
               </div>
               <div>
-                <h5 className="font-bold text-slate-800 text-sm mb-1">Booking in Progress</h5>
+                <h5 className="font-bold text-slate-800 text-sm mb-1">{t.booking.toastTitle}</h5>
                 <p className="text-slate-500 text-xs leading-relaxed">
                   {t.booking.toast}
                 </p>

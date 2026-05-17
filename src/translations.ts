@@ -44,6 +44,7 @@ export interface Translation {
     female: string;
     additionalNotes: string;
     submit: string;
+    toastTitle: string;
     toast: string;
     whatsappMessagePrefix: string;
   };
@@ -124,6 +125,7 @@ export const translations: Record<Language, Translation> = {
       female: 'Female',
       additionalNotes: 'Additional Notes',
       submit: 'Confirm Booking',
+      toastTitle: 'Booking in Progress',
       toast: 'Please complete your booking details first so we can serve you better.',
       whatsappMessagePrefix: 'Hello Madinah Massage! I would like to book a massage service.',
     },
@@ -208,6 +210,7 @@ export const translations: Record<Language, Translation> = {
       female: 'أنثى',
       additionalNotes: 'ملاحظات إضافية',
       submit: 'تأكيد الحجز',
+      toastTitle: 'الحجز قيد المعالجة',
       toast: 'يرجى إكمال تفاصيل الحجز أولاً حتى نتمكن من خدمتك بشكل أفضل.',
       whatsappMessagePrefix: 'مرحباً مساج المدينة! أود حجز خدمة مساج.',
     },
@@ -292,6 +295,7 @@ export const translations: Record<Language, Translation> = {
       female: 'Perempuan',
       additionalNotes: 'Catatan Tambahan',
       submit: 'Konfirmasi Pesanan',
+      toastTitle: 'Pemesanan Sedang Berlangsung',
       toast: 'Silakan lengkapi detail pesanan Anda terlebih dahulu agar kami dapat melayani Anda dengan lebih baik.',
       whatsappMessagePrefix: 'Halo Madinah Massage! Saya ingin memesan layanan pijat.',
     },
