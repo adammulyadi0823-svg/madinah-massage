@@ -26,7 +26,8 @@ import {
   Droplets,
   ChevronDown,
   Info,
-  Instagram
+  Instagram,
+  ChevronUp
 } from 'lucide-react';
 import { translations, Language } from './translations';
 
@@ -990,7 +991,21 @@ export default function App() {
   const [lang, setLang] = useState<Language>('en');
   const [showToast, setShowToast] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const t = translations[lang];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show scroll to top button after 500px or past hero section
+      if (window.scrollY > 500) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -1003,6 +1018,10 @@ export default function App() {
     setShowToast(true);
     scrollToSection('booking');
     setTimeout(() => setShowToast(false), 4000);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -1021,6 +1040,44 @@ export default function App() {
       </main>
 
       <Footer t={t} scrollToSection={scrollToSection} onWhatsAppClick={handleWhatsAppClick} />
+
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            onClick={scrollToTop}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ 
+              scale: [1, 1.1, 1], 
+              opacity: 1,
+              boxShadow: [
+                "0 0 0 0px rgba(197, 160, 89, 0.7)",
+                "0 0 0 20px rgba(197, 160, 89, 0)",
+                "0 0 0 0px rgba(197, 160, 89, 0)"
+              ],
+            }}
+            transition={{
+              scale: {
+                repeat: Infinity,
+                duration: 2,
+                ease: "easeInOut"
+              },
+              boxShadow: {
+                repeat: Infinity,
+                duration: 2,
+                ease: "easeInOut"
+              },
+              opacity: { duration: 0.5 }
+            }}
+            exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.95 }}
+            className="fixed bottom-24 right-6 z-50 gold-gradient text-white p-2.5 rounded-full shadow-2xl border border-white/20"
+          >
+            <ChevronUp className="w-6 h-6" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Floating WhatsApp */}
       <motion.button 
@@ -1050,9 +1107,9 @@ export default function App() {
         }}
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl"
+        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-3 rounded-full shadow-2xl"
       >
-        <svg fill="#ffffff" width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.733 5.479 2.016 7.78L0 32l8.369-2.195c2.253 1.22 4.821 1.921 7.631 1.921c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.311 22.181c-.34.957-1.705 1.748-2.613 1.861-.624.08-1.44.144-2.316-.144-.544-.176-1.228-.404-2.108-.78-3.748-1.552-6.189-5.325-6.376-5.576-.184-.251-1.504-2.004-1.504-3.824 0-1.82 1.052-2.716 1.34-3.004.288-.288.752-.36 1.136-.36.144 0 .272.008.384.016.328.016.488.024.704.536.264.632.904 2.192.984 2.352.08.16.136.344.032.552-.104.208-.16.336-.32.512-.16.176-.344.4-.488.536-.168.16-.344.336-.144.68.2.336.888 1.464 1.904 2.368 1.312 1.168 2.416 1.528 2.76 1.696.344.168.544.144.752-.08.208-.224.888-1.032 1.128-1.392.24-.36.48-.304.808-.184.328.12 2.088 1.032 2.448 1.216.352.184.584.272.672.424.088.168.088.952-.256 1.904z"/>
         </svg>
       </motion.button>
