@@ -468,7 +468,7 @@ ${t.booking.preferredTime}: ${formData.time}
 ${t.booking.additionalNotes}: ${formData.notes}`;
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/6282141562370?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/966506173369?text=${encodedMessage}`, '_blank');
   };
 
   return (
@@ -500,7 +500,7 @@ ${t.booking.additionalNotes}: ${formData.notes}`;
                 </div>
                 <div>
                    <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Direct Support</p>
-                   <p className="font-bold text-slate-800 tracking-wide">+62 821-4156-2370</p>
+                   <p className="font-bold text-slate-800 tracking-wide">+966 50 617 3369</p>
                 </div>
               </div>
             </div>
@@ -876,7 +876,7 @@ const Contact = ({ t }: any) => {
               </div>
 
               <div className="mt-20 flex flex-wrap gap-6">
-                <button className="gold-gradient text-white px-10 py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-4 hover:shadow-2xl transition-all" onClick={() => window.open('https://wa.me/6282141562370', '_blank')}>
+                <button className="gold-gradient text-white px-10 py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-4 hover:shadow-2xl transition-all" onClick={() => window.open('https://wa.me/966506173369', '_blank')}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.503-2.961-2.617-.087-.114-.708-.941-.708-1.792s.448-1.273.607-1.446c.159-.173.346-.217.462-.217s.231.006.332.013c.105.007.246-.04.384.295.144.346.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.289.072.398-.058c.109-.13.463-.535.586-.717.123-.181.246-.152.412-.094.167.058 1.055.498 1.236.587s.304.13.348.21c.043.079.043.462-.101.867z" />
                   </svg>
@@ -918,12 +918,12 @@ const Footer = ({ t, scrollToSection }: any) => {
               Crafting premium wellness experiences for the global pilgrim in the Heart of Madinah. Redefining mobile spa services with luxury standards.
             </p>
             <div className="flex flex-wrap gap-4 mt-10">
-              <a href="https://wa.me/6282141562370" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-500 text-gold shadow-lg group">
+              <a href="https://wa.me/966506173369" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-500 text-gold shadow-lg group">
                 <svg width="24" height="24" viewBox="0 0 32 32" fill="currentColor">
                   <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.733 5.479 2.016 7.78L0 32l8.369-2.195c2.253 1.22 4.821 1.921 7.631 1.921c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.311 22.181c-.34.957-1.705 1.748-2.613 1.861-.624.08-1.44.144-2.316-.144-.544-.176-1.228-.404-2.108-.78-3.748-1.552-6.189-5.325-6.376-5.576-.184-.251-1.504-2.004-1.504-3.824 0-1.82 1.052-2.716 1.34-3.004.288-.288.752-.36 1.136-.36.144 0 .272.008.384.016.328.016.488.024.704.536.264.632.904 2.192.984 2.352.08.16.136.344.032.552-.104.208-.16.336-.32.512-.16.176-.344.4-.488.536-.168.16-.344.336-.144.68.2.336.888 1.464 1.904 2.368 1.312 1.168 2.416 1.528 2.76 1.696.344.168.544.144.752-.08.208-.224.888-1.032 1.128-1.392.24-.36.48-.304.808-.184.328.12 2.088 1.032 2.448 1.216.352.184.584.272.672.424.088.168.088.952-.256 1.904z" />
                 </svg>
               </a>
-              <a href="tel:+6282141562370" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:text-maroon transition-all duration-500 text-gold shadow-lg">
+              <a href="tel:+966506173369" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:text-maroon transition-all duration-500 text-gold shadow-lg">
                 <Phone className="w-5 h-5" />
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:gold-gradient hover:text-white transition-all duration-500 text-gold shadow-lg">
@@ -963,7 +963,7 @@ const Footer = ({ t, scrollToSection }: any) => {
             <ul className="space-y-8">
               <li className="flex items-start gap-4">
                 <Phone className="w-5 h-5 text-gold shrink-0" />
-                <span className="text-white/60 text-sm">+62 821 4156 2370</span>
+                <span className="text-white/60 text-sm">+966 50 617 3369</span>
               </li>
               <li className="flex items-start gap-4">
                 <Mail className="w-5 h-5 text-gold shrink-0" />
