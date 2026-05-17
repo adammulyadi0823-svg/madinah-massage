@@ -40,6 +40,15 @@ import AboutImage from './assets/images/regenerated_image_1778941470110.png';
 import Gallery120 from './assets/images/regenerated_image_1778943907732.png';
 import FootMassageImg from './assets/images/regenerated_image_1778943911153.png';
 
+// --- Helpers ---
+
+const getMeccaDateTime = () => {
+  const now = new Date();
+  const date = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Riyadh' }); // YYYY-MM-DD
+  const time = now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Riyadh', hour12: false, hour: '2-digit', minute: '2-digit' }); // HH:mm
+  return { date, time };
+};
+
 // --- Components ---
 
 const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
@@ -425,15 +434,16 @@ const Benefits = ({ t }: any) => {
   );
 };
 
-const BookingForm = ({ t, selectedService, scrollToSection }: any) => {
+const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
+  const meccaTime = getMeccaDateTime();
   const [formData, setFormData] = useState({
     name: '',
     hotel: '',
     room: '',
     service: t.services.items.fullBody90,
     gender: 'Male',
-    date: '',
-    time: '',
+    date: meccaTime.date,
+    time: meccaTime.time,
     notes: ''
   });
 
@@ -589,7 +599,12 @@ ${t.booking.additionalNotes}: ${formData.notes}`;
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">{t.booking.bookingDate}</label>
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">
+                      {t.booking.bookingDate} 
+                      <span className="text-gold ml-1">
+                        ({lang === 'ar' ? 'توقيت مكة' : (lang === 'id' ? 'Waktu Makkah' : 'Mecca Time')})
+                      </span>
+                    </label>
                     <input 
                       required
                       type="date" 
@@ -599,7 +614,12 @@ ${t.booking.additionalNotes}: ${formData.notes}`;
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">{t.booking.preferredTime}</label>
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">
+                      {t.booking.preferredTime}
+                      <span className="text-gold ml-1">
+                        ({lang === 'ar' ? 'توقيت مكة' : (lang === 'id' ? 'Waktu Makkah' : 'Mecca Time')})
+                      </span>
+                    </label>
                     <input 
                       required
                       type="time" 
@@ -999,7 +1019,7 @@ export default function App() {
         <About t={t} scrollToSection={scrollToSection} lang={lang} />
         <Gallery />
         <Reviews t={t} lang={lang} />
-        <BookingForm t={t} selectedService={selectedService} scrollToSection={scrollToSection} />
+        <BookingForm t={t} selectedService={selectedService} scrollToSection={scrollToSection} lang={lang} />
         <Contact t={t} />
       </main>
 
