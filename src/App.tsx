@@ -290,6 +290,8 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
       id: 'fullBody90', 
       title: t.services.items.fullBody90, 
       price: '220', 
+      oldPrice: '225',
+      discount: '2% OFF',
       img: Gallery3,
       features: ['Extended Stress Relief', 'Full Muscle Recovery', 'Premium Oils']
     },
@@ -297,6 +299,8 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
       id: 'fullBody120', 
       title: t.services.items.fullBody120, 
       price: '290', 
+      oldPrice: '300',
+      discount: '3% OFF',
       img: Gallery120,
       features: ['Ultimate Rejuvenation', 'Total Body Care', 'Sleep Better Focus']
     },
@@ -349,7 +353,7 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500"
+              className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col"
             >
               <div className="h-72 overflow-hidden relative">
                 <img 
@@ -359,15 +363,12 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute top-0 left-0 w-full h-full bg-black/10 transition-opacity group-hover:opacity-0"></div>
-                <div className="absolute top-6 left-6 gold-gradient text-white px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg">
-                  {service.price} {t.services.price}
-                </div>
               </div>
-              <div className="p-8">
+              <div className="p-8 flex flex-col flex-1">
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="serif text-xl font-bold text-slate-800 leading-tight group-hover:text-maroon transition-colors">{service.title}</h3>
                 </div>
-                <ul className="space-y-3 mb-10">
+                <ul className="space-y-3 mb-8 flex-1">
                   {service.features.map(f => (
                     <li key={f} className="flex items-center gap-3 text-slate-500 text-[11px] font-medium uppercase tracking-wide">
                       <div className="w-1.5 h-1.5 rounded-full bg-gold/40"></div>
@@ -375,6 +376,26 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
                     </li>
                   ))}
                 </ul>
+                
+                <div className="mb-6 pt-4 border-t border-slate-50">
+                  <div className="flex items-center gap-3 mb-1">
+                    {service.oldPrice && (
+                      <span className="text-slate-400 line-through text-sm font-medium">
+                        {service.oldPrice} {t.services.price}
+                      </span>
+                    )}
+                    {service.discount && (
+                      <span className="bg-gold/10 text-gold text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">
+                        {service.discount}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-2xl font-bold text-maroon">{service.price}</span>
+                    <span className="text-xs font-bold text-gold uppercase tracking-widest">{t.services.price}</span>
+                  </div>
+                </div>
+
                 <button 
                   onClick={() => handleBookNow(service.title)}
                   className="w-full py-4 bg-beige text-gold rounded-xl font-bold text-[10px] uppercase tracking-widest hover:gold-gradient hover:text-white transition-all duration-500"
@@ -455,17 +476,18 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const genderLabel = formData.gender === 'Male' ? t.booking.male : t.booking.female;
-    const message = `${t.booking.whatsappMessagePrefix}
     
-${t.booking.fullName}: ${formData.name}
-${t.booking.gender}: ${genderLabel}
-${t.booking.hotelName}: ${formData.hotel}
-${t.booking.roomNumber}: ${formData.room}
-${t.booking.serviceType}: ${formData.service}
-${t.booking.bookingDate}: ${formData.date}
-${t.booking.preferredTime}: ${formData.time}
-${t.booking.additionalNotes}: ${formData.notes}`;
+    // Price mapping logic
+    let totalPrice = 0;
+    const services = t.services.items;
+    
+    if (formData.service === services.fullBody60) totalPrice = 150;
+    else if (formData.service === services.fullBody90) totalPrice = 220;
+    else if (formData.service === services.fullBody120) totalPrice = 290;
+    else if (formData.service === services.footMassage60) totalPrice = 150;
+
+    const genderLabel = formData.gender === 'Male' ? t.booking.male : t.booking.female;
+    const message = `${t.booking.whatsappMessagePrefix}\n\n${t.booking.fullName}: ${formData.name}\n${t.booking.gender}: ${genderLabel}\n${t.booking.hotelName}: ${formData.hotel}\n${t.booking.roomNumber}: ${formData.room}\n${t.booking.serviceType}: ${formData.service}\n${t.booking.bookingDate}: ${formData.date}\n${t.booking.preferredTime}: ${formData.time}\n${t.booking.additionalNotes}: ${formData.notes}\n\nTotal = ${totalPrice} SAR\n\nPlease inform me about the therapist's availability. Thank you`;
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/966506173369?text=${encodedMessage}`, '_blank');
