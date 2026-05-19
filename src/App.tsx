@@ -27,7 +27,8 @@ import {
   ChevronDown,
   Info,
   Instagram,
-  ChevronUp
+  ChevronUp,
+  Leaf
 } from 'lucide-react';
 import { translations, Language } from './translations';
 
@@ -1009,6 +1010,47 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
   );
 };
 
+const FallingLeaf = ({ delay, duration, startX, size, color }: any) => {
+  return (
+    <motion.div
+      initial={{ y: -100, x: `${startX}vw`, rotate: 0, opacity: 0 }}
+      animate={{ 
+        y: '110vh', 
+        x: [`${startX}vw`, `${startX + 10}vw`, `${startX - 5}vw`, `${startX + 5}vw`],
+        rotate: [0, 180, 360, 720],
+        opacity: [0, 0.6, 0.6, 0]
+      }}
+      transition={{ 
+        duration, 
+        repeat: Infinity, 
+        delay, 
+        ease: "linear" 
+      }}
+      className={`fixed pointer-events-none ${color} z-[10]`}
+    >
+      <Leaf size={size} fill="currentColor" fillOpacity={0.3} />
+    </motion.div>
+  );
+};
+
+const FallingLeavesBackground = () => {
+  const leaves = Array.from({ length: 25 });
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-[10]">
+      {leaves.map((_, i) => (
+        <FallingLeaf 
+          key={i} 
+          delay={Math.random() * 20} 
+          duration={15 + Math.random() * 15} 
+          startX={Math.random() * 100} 
+          size={12 + Math.random() * 20}
+          color={Math.random() > 0.4 ? 'text-gold/30' : 'text-green-800/15'}
+        />
+      ))}
+    </div>
+  );
+};
+
 export default function App() {
   const [lang, setLang] = useState<Language>('en');
   const [showToast, setShowToast] = useState(false);
@@ -1048,6 +1090,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen">
+      <FallingLeavesBackground />
       <Navbar lang={lang} setLang={setLang} t={t} scrollToSection={scrollToSection} />
       
       <main>
