@@ -1,6 +1,8 @@
 {
-  "name": "Madinah Massage - Luxury Mobile Wellness",
-  "description": "Premium mobile massage and wellness service near Al-Masjid an-Nabawi in Madinah. Professional therapy for pilgrims and travelers.",
+  "name": "Madinah Massage - Professional Hotel Wellness Service",
+  "description": "Professional mobile massage and wellness service near Al-Masjid an-Nabawi in Madinah. Certified therapy for pilgrims and travelers.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

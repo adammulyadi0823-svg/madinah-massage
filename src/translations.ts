@@ -93,14 +93,14 @@ export const translations: Record<Language, Translation> = {
       bookNow: 'Book Now',
     },
     hero: {
-      headline: 'Premium Massage Service Near Masjid Nabawi',
-      subheadline: 'Professional mobile massage therapy for pilgrims, travelers, and families in Madinah. Relax your body after Umrah and long journeys.',
+      headline: 'Professional Hotel Massage in Madinah',
+      subheadline: 'Certified professional massage delivered directly to your hotel room near Masjid Nabawi. Male therapists for men, female therapists for women. Relieve fatigue and recover your body after Umrah.',
       bookViaWhatsApp: 'Book via WhatsApp',
       viewServices: 'View Services',
     },
     services: {
       title: 'Our Wellness Services',
-      subtitle: 'Premium treatments tailored for your recovery and relaxation',
+      subtitle: 'Professional treatments tailored for your recovery and relaxation',
       items: {
         fullBody60: 'Full Body Massage 60 Minutes',
         fullBody90: 'Full Body Massage 90 Minutes',
@@ -142,14 +142,14 @@ export const translations: Record<Language, Translation> = {
     },
     about: {
       title: 'About Madinah Massage',
-      content: 'MADINAH MASSAGE is a professional mobile massage service in Madinah. We specialize in providing premium wellness treatments directly to your hotel, apartment, or residence. Our mission is to support pilgrims and travelers in their journey by offering the ultimate relaxation experience near the Holy Mosque.',
+      content: 'MADINAH MASSAGE is a professional mobile massage service in Madinah. We specialize in providing professional wellness treatments directly to your hotel, apartment, or residence. Our mission is to support pilgrims and travelers in their journey by offering the ultimate relaxation experience near the Holy Mosque.',
       highlightTitle: 'Why Choose Us?',
       highlights: [
         'Professional & Certified Therapists',
-        'Hygienic & Premium Equipment',
+        'Hygienic & Professional Equipment',
         'Muslim-Friendly & Private',
         'Direct Hotel / Home Visits',
-        'Luxury Hospitality Standards',
+        'Professional Hospitality Standards',
       ],
     },
     contact: {
@@ -178,14 +178,14 @@ export const translations: Record<Language, Translation> = {
       bookNow: 'احجز الآن',
     },
     hero: {
-      headline: 'خدمة مساج فاخرة بالقرب من المسجد النبوي',
-      subheadline: 'علاج تدليك متنقل احترافي للمعتمرين والمسافرين والعائلات في المدينة المنورة. أرح جسدك بعد العمرة والرحلات الطويلة.',
+      headline: 'مساج فندقي احترافي في المدينة المنورة',
+      subheadline: 'جلسات مساج احترافية معتمدة تصل مباشرة إلى غرفتك الفندقية بالقرب من المسجد النبوي. معالجون للرجال، ومعالجات للنساء. تخلص من التعب واستعد نشاط جسمك بعد العمرة.',
       bookViaWhatsApp: 'احجز عبر واتساب',
       viewServices: 'عرض الخدمات',
     },
     services: {
       title: 'خدمات العافية لدينا',
-      subtitle: 'علاجات متميزة مصممة لاستعادتك واسترخائك',
+      subtitle: 'علاجات احترافية مصممة لاستعادتك واسترخائك',
       items: {
         fullBody60: 'مساج كامل للجسم 60 دقيقة',
         fullBody90: 'مساج كامل للجسم 90 دقيقة',
@@ -227,14 +227,14 @@ export const translations: Record<Language, Translation> = {
     },
     about: {
       title: 'حول مساج المدينة',
-      content: 'مساج المدينة هو خدمة تدليك متنقلة احترافية في المدينة المنورة. نحن متخصصون في تقديم علاجات عافية متميزة مباشرة إلى فندقك أو شقتك أو سكنك. مهمتنا هي دعم المعتمرين والمسافرين في رحلتهم من خلال تقديم تجربة استرخاء مثالية بالقرب من الحرم الشريف.',
+      content: 'مساج المدينة هو خدمة تدليك متنقلة احترافية في المدينة المنورة. نحن متخصصون في تقديم علاجات عافية احترافية مباشرة إلى فندقك أو شقتك أو سكنك. مهمتنا هي دعم المعتمرين والمسافرين في رحلتهم من خلال تقديم تجربة استرخاء مثالية بالقرب من الحرم الشريف.',
       highlightTitle: 'لماذا تختارنا؟',
       highlights: [
         'معالجون محترفون ومعتمدون',
-        'معدات صحية وفخمة',
+        'معدات صحية واحترافية',
         'صديق للمسلمين وخصوصية تامة',
         'زيارات مباشرة للفنادق والمنازل',
-        'معايير ضيافة فاخرة',
+        'معايير ضيافة احترافية',
       ],
     },
     contact: {
@@ -263,14 +263,14 @@ export const translations: Record<Language, Translation> = {
       bookNow: 'Pesan Sekarang',
     },
     hero: {
-      headline: 'Layanan Pijat Premium Dekat Masjid Nabawi',
-      subheadline: 'Terapi pijat panggilan profesional untuk jemaah, pelancong, dan keluarga di Madinah. Relaksasikan tubuh Anda setelah Umroh dan perjalanan panjang.',
+      headline: 'Pijat Hotel Profesional di Madinah',
+      subheadline: 'Layanan pijat profesional bersertifikat didatangkan langsung ke kamar hotel Anda di dekat Masjid Nabawi. Terapis pria untuk pria, terapis wanita untuk wanita. Hilangkan rasa lelah dan pulihkan tubuh Anda setelah Umroh.',
       bookViaWhatsApp: 'Pesan via WhatsApp',
       viewServices: 'Lihat Layanan',
     },
     services: {
       title: 'Layanan Kebugaran Kami',
-      subtitle: 'Perawatan premium yang disesuaikan untuk pemulihan dan relaksasi Anda',
+      subtitle: 'Perawatan profesional yang disesuaikan untuk pemulihan dan relaksasi Anda',
       items: {
         fullBody60: 'Pijat Seluruh Tubuh 60 Menit',
         fullBody90: 'Pijat Seluruh Tubuh 90 Menit',
@@ -312,14 +312,14 @@ export const translations: Record<Language, Translation> = {
     },
     about: {
       title: 'Tentang Madinah Massage',
-      content: 'MADINAH MASSAGE adalah layanan pijat panggilan profesional di Madinah. Kami spesialis dalam menyediakan perawatan kebugaran premium langsung ke hotel, apartemen, atau kediaman Anda. Misi kami adalah mendukung para jemaah dan pelancong dalam perjalanan mereka dengan menawarkan pengalaman relaksasi terbaik di dekat Masjid Nabawi.',
+      content: 'MADINAH MASSAGE adalah layanan pijat panggilan profesional di Madinah. Kami spesialis dalam menyediakan perawatan kebugaran profesional langsung ke hotel, apartemen, atau kediaman Anda. Misi kami adalah mendukung para jemaah dan pelancong dalam perjalanan mereka dengan menawarkan pengalaman relaksasi terbaik di dekat Masjid Nabawi.',
       highlightTitle: 'Mengapa Memilih Kami?',
       highlights: [
         'Terapis Profesional & Bersertifikat',
-        'Peralatan Higienis & Premium',
+        'Peralatan Higienis & Profesional',
         'Ramah Muslim & Privasi Terjaga',
         'Kunjungan Langsung ke Hotel / Rumah',
-        'Standar Hospitalitas Mewah',
+        'Standar Hospitalitas Profesional',
       ],
     },
     contact: {

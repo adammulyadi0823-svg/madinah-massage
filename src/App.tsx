@@ -89,7 +89,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
               MADINAH MASSAGE
             </span>
             <span className={`text-[9px] uppercase tracking-[0.2em] font-semibold ${isScrolled ? 'text-gold' : 'text-gold-light'}`}>
-              Luxury Wellness Service
+              Professional Wellness Service
             </span>
           </div>
         </div>
@@ -185,7 +185,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
 
 const Hero = ({ t, scrollToSection, onWhatsAppClick }: any) => {
   return (
-    <section id="home" className="relative h-[90vh] md:h-screen w-full overflow-hidden flex items-center">
+    <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center">
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${Gallery1})` }}
@@ -201,10 +201,15 @@ const Hero = ({ t, scrollToSection, onWhatsAppClick }: any) => {
         <source src="https://video.wixstatic.com/video/11062b_a766465451994af59325946808778f65/1080p/mp4/file.mp4" type="video/mp4" />
       </video>
       
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
-      <div className="absolute inset-0 islamic-pattern opacity-10 pointer-events-none"></div>
+      {/* 40% solid black overlay for maximum text legibility */}
+      <div className="absolute inset-0 bg-black/40 z-[1]"></div>
       
-      <div className="container mx-auto px-8 relative z-10 text-left max-w-7xl">
+      {/* Dark gradient overlay for rich contrast and elegant depth */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent z-[2]"></div>
+      <div className="absolute inset-0 islamic-pattern opacity-10 pointer-events-none z-[3]"></div>
+      
+      {/* Safe padding-top (pt-36) prevents content from ever overlapping with the fixed Header navbar on any device size */}
+      <div className="container mx-auto px-8 relative z-10 text-left max-w-7xl pt-36 pb-20">
         <motion.div
            initial={{ opacity: 0, x: -30 }}
            animate={{ opacity: 1, x: 0 }}
@@ -217,14 +222,10 @@ const Hero = ({ t, scrollToSection, onWhatsAppClick }: any) => {
               Sacred Serenity
             </span>
           </div>
-          <h1 className="text-5xl md:text-8xl text-white font-bold mb-8 leading-[1.1] serif">
-            {t.hero.headline.split(' Near ').map((part: string, i: number) => (
-              <span key={part} className="block">
-                {part}{i === 0 && ' Near'}
-              </span>
-            ))}
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white font-bold mb-8 leading-[1.15] serif tracking-tight">
+            {t.hero.headline}
           </h1>
-          <p className="text-white/70 text-lg md:text-xl mb-12 font-light leading-relaxed max-w-xl">
+          <p className="text-white/80 text-base md:text-lg lg:text-xl mb-12 font-light leading-relaxed max-w-xl">
             {t.hero.subheadline}
           </p>
           
@@ -240,18 +241,21 @@ const Hero = ({ t, scrollToSection, onWhatsAppClick }: any) => {
             </button>
             
             <div className="hidden md:flex items-center gap-4">
-              <div className="p-4 glass rounded-2xl flex items-center gap-6 text-white">
+              <div 
+                className="p-4 rounded-xl flex items-center gap-6 text-white border border-gold-light/40 backdrop-blur-md shadow-2xl"
+                style={{ backgroundColor: 'rgba(15, 23, 42, 0.85)' }}
+              >
                 <div className="text-center border-r border-white/20 pr-6">
-                  <div className="serif text-2xl text-gold-light font-bold">100%</div>
-                  <div className="text-[9px] uppercase tracking-widest font-bold opacity-60">Privacy</div>
+                  <div className="serif text-2xl text-gold-light font-black tracking-wide">100%</div>
+                  <div className="text-[9px] uppercase tracking-[0.15em] font-bold text-white/90">Privacy</div>
                 </div>
                 <div className="text-center border-r border-white/20 pr-6">
-                  <div className="serif text-2xl text-gold-light font-bold">24/7</div>
-                  <div className="text-[9px] uppercase tracking-widest font-bold opacity-60">Available</div>
+                  <div className="serif text-2xl text-gold-light font-black tracking-wide">24/7</div>
+                  <div className="text-[9px] uppercase tracking-[0.15em] font-bold text-white/90">Available</div>
                 </div>
                 <div className="text-center">
-                  <div className="serif text-2xl text-gold-light font-bold">5.0</div>
-                  <div className="text-[9px] uppercase tracking-widest font-bold opacity-60">Rating</div>
+                  <div className="serif text-2xl text-gold-light font-black tracking-wide">5.0</div>
+                  <div className="text-[9px] uppercase tracking-[0.15em] font-bold text-white/90">Rating</div>
                 </div>
               </div>
             </div>
@@ -294,7 +298,7 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
       oldPrice: '225',
       discount: '2% OFF',
       img: Gallery3,
-      features: ['Extended Stress Relief', 'Full Muscle Recovery', 'Premium Oils']
+      features: ['Extended Stress Relief', 'Full Muscle Recovery', 'Professional Oils']
     },
     { 
       id: 'fullBody120', 
@@ -736,15 +740,43 @@ const Reviews = ({ t, lang }: any) => {
     { name: 'Ahmad Faisal', country: 'Indonesia', text: 'Sangat recommended buat jamaah haji/umroh yang pegal-pegal. Terapisnya sopan dan sangat ahli. Langsung datang ke kamar hotel!', stars: 5 },
     { name: 'Sarah Malik', country: 'Malaysia', text: 'The best mobile massage in Madinah. Very professional and convenient. I could sleep so much better after the treatment.', stars: 5 },
     { name: 'Ibrahim Khaleb', country: 'Saudi Arabia', text: 'خدمة ممتازة واحترافية عالية. المعالج وصل في الموعد وكان الترتيب رائعاً.', stars: 5 },
-    { name: 'Nur Azura', country: 'Singapore', text: 'Highly professional. They bring everything including clean towels and premium oils. Perfect after a long flight.', stars: 5 },
+    { name: 'Nur Azura', country: 'Singapore', text: 'Highly professional. They bring everything including clean towels and professional oils. Perfect after a long flight.', stars: 5 },
     { name: 'Siti Rahma', country: 'Indonesia', text: 'Pijatannya mantap sekali. Terapis ramah dan sangat membantu pemulihan kaki yang bengkak setelah tawaf.', stars: 5 },
   ];
+
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 768;
+  const cardWidth = isMobile ? 260 : 450;
+  const gap = isMobile ? 16 : 24;
+
+  const handleDragEnd = (event: any, info: any) => {
+    const swipeThreshold = 50;
+    if (info.offset.x < -swipeThreshold) {
+      if (activeIndex < reviews.length - 1) {
+        setActiveIndex(activeIndex + 1);
+      }
+    } else if (info.offset.x > swipeThreshold) {
+      if (activeIndex > 0) {
+        setActiveIndex(activeIndex - 1);
+      }
+    }
+  };
 
   return (
     <section id="reviews" className="py-32 bg-beige overflow-hidden relative">
       <div className="absolute inset-0 islamic-pattern opacity-10 pointer-events-none"></div>
-      <div className="container mx-auto px-8 relative z-10">
-        <div className="text-center mb-20">
+      
+      {/* Title Container */}
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16 pb-4">
           <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-[1px] w-8 bg-gold"></div>
               <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">Client Testimonials</span>
@@ -752,34 +784,90 @@ const Reviews = ({ t, lang }: any) => {
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-maroon serif">{t.nav.reviews}</h2>
         </div>
+      </div>
 
-        <div className="flex gap-10 overflow-x-auto pb-16 snap-x no-scrollbar">
-          {reviews.map((r, i) => (
-            <motion.div 
-              key={i}
-              className="min-w-[340px] md:min-w-[450px] p-12 bg-white rounded-[48px] snap-center shadow-xl border border-slate-50 relative"
-            >
-              <div className="absolute top-10 right-10 opacity-20">
-                 <svg width="40" height="40" viewBox="0 0 24 24" fill="#C5A059"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H14.017C13.4647 8 13.017 7.55228 13.017 7V4C13.017 3.44772 13.4647 3 14.017 3H19.017C20.6739 3 22.017 4.34315 22.017 6V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM2.01697 21L2.01697 18C2.01697 16.8954 2.9124 16 4.01697 16H7.01697C7.56925 16 8.01697 15.5523 8.01697 15V9C8.01697 8.44772 7.56925 8 7.01697 8H2.01697C1.46468 8 1.01697 7.55228 1.01697 7V4C1.01697 3.44772 1.46468 3 2.01697 3H7.01697C8.67382 3 10.017 4.34315 10.017 6V15C10.017 18.3137 7.33068 21 4.01697 21H2.01697Z" /></svg>
-              </div>
-              <div className="flex items-center gap-5 mb-10">
-                <div className="w-16 h-16 gold-gradient text-white rounded-full flex items-center justify-center font-bold text-2xl serif shadow-lg">
-                  {r.name[0]}
+      {/* Full-width Carousel Viewport */}
+      <div className="relative w-full overflow-visible py-8 flex items-center justify-start">
+        <motion.div
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onDragEnd={handleDragEnd}
+          animate={{
+            x: (windowWidth / 2) - (activeIndex * (cardWidth + gap) + cardWidth / 2)
+          }}
+          transition={{ type: 'spring', stiffness: 220, damping: 26 }}
+          className="flex cursor-grab active:cursor-grabbing items-center"
+          style={{ width: 'max-content', gap: `${gap}px` }}
+        >
+          {reviews.map((r, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <motion.div
+                key={i}
+                animate={{
+                  scale: isActive ? (isMobile ? 1.1 : 1.15) : (isMobile ? 0.8 : 0.85),
+                  opacity: isActive ? 1.0 : (isMobile ? 0.45 : 0.5),
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 26 }}
+                className={`p-6 md:p-12 bg-white rounded-[32px] md:rounded-[36px] border transition-shadow duration-500 relative flex flex-col justify-between shrink-0 select-none ${
+                  isActive 
+                    ? 'shadow-2xl shadow-maroon/15 border-gold/40 z-20' 
+                    : 'shadow-md border-slate-100 z-10'
+                }`}
+                style={{ 
+                  width: `${cardWidth}px`,
+                  minWidth: `${cardWidth}px`,
+                }}
+              >
+                <div className="absolute top-8 right-8 opacity-10">
+                   <svg width="32" height="32" viewBox="0 0 24 24" fill="#C5A059"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H14.017C13.4647 8 13.017 7.55228 13.017 7V4C13.017 3.44772 13.4647 3 14.017 3H19.017C20.6739 3 22.017 4.34315 22.017 6V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM2.01697 21L2.01697 18C2.01697 16.8954 2.9124 16 4.01697 16H7.01697C7.56925 16 8.01697 15.5523 8.01697 15V9C8.01697 8.44772 7.56925 8 7.01697 8H2.01697C1.46468 8 1.01697 7.55228 1.01697 7V4C1.01697 3.44772 1.46468 3 2.01697 3H7.01697C8.67382 3 10.017 4.34315 10.017 6V15C10.017 18.3137 7.33068 21 4.01697 21H2.01697Z" /></svg>
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-800 text-lg serif">{r.name}</h4>
-                  <p className="text-[10px] text-gold uppercase tracking-[0.2em] font-bold">{r.country}</p>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 gold-gradient text-white rounded-full flex items-center justify-center font-bold text-lg serif shadow-md shrink-0">
+                      {r.name[0]}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-800 text-base serif leading-tight">{r.name}</h4>
+                      <p className="text-[9px] text-gold uppercase tracking-[0.2em] font-bold mt-0.5">{r.country}</p>
+                    </div>
+                  </div>
+                  <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 font-light italic">
+                    "{r.text}"
+                  </p>
                 </div>
-              </div>
-              <p className="text-slate-600 text-lg leading-relaxed mb-10 font-light italic">"{r.text}"</p>
-              <div className="flex gap-1.5">
-                {Array.from({length: r.stars}).map((_, idx) => <Star key={idx} className="w-4 h-4 fill-gold text-gold" />)}
-              </div>
-            </motion.div>
+                <div className="flex gap-1">
+                  {Array.from({length: r.stars}).map((_, idx) => (
+                    <Star key={idx} className="w-3.5 h-3.5 fill-gold text-gold" />
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
+
+      {/* Dots & Stats Container */}
+      <div className="container mx-auto px-4 relative z-10 mt-8">
+        {/* Pagination Dots */}
+        <div className="flex justify-center items-center gap-2.5">
+          {reviews.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIndex(i)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                i === activeIndex 
+                  ? 'w-7 bg-maroon shadow-sm' 
+                  : 'w-2.5 bg-maroon/35 hover:bg-maroon/60'
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
           ))}
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 mt-12 bg-white/50 backdrop-blur-sm p-12 rounded-[40px] border border-white/50">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 mt-20 bg-white/50 backdrop-blur-sm p-12 rounded-[40px] border border-white/50">
           {[
             { label: lang === 'id' ? 'Jamaah Terlayani' : 'Happy Clients', value: '700+' },
             { label: 'Daily Treatments', value: '25+' },
@@ -936,7 +1024,7 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
               <span className="text-xl font-bold tracking-wider serif text-gold uppercase">MADINAH MASSAGE</span>
             </div>
             <p className="text-white/60 font-light leading-relaxed mb-10 text-sm">
-              Crafting premium wellness experiences for the global pilgrim in the Heart of Madinah. Redefining mobile spa services with luxury standards.
+              Crafting professional wellness experiences for the global pilgrim in the Heart of Madinah. Redefining mobile spa services with professional standards.
             </p>
             <div className="flex flex-wrap gap-4 mt-10">
               <button onClick={onWhatsAppClick} className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-500 text-gold shadow-lg group">
