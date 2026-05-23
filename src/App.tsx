@@ -867,12 +867,11 @@ const Reviews = ({ t, lang }: any) => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 mt-20 bg-white/50 backdrop-blur-sm p-12 rounded-[40px] border border-white/50">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-12 mt-20 bg-white/50 backdrop-blur-sm p-12 rounded-[40px] border border-white/50">
           {[
             { label: lang === 'id' ? 'Jamaah Terlayani' : 'Happy Clients', value: '700+' },
             { label: 'Daily Treatments', value: '25+' },
-            { label: 'Review Rating', value: '5.0/5' },
-            { label: 'Years Experienced Therapists', value: '7+' }
+            { label: 'Review Rating', value: '5.0/5' }
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <h3 className="text-4xl font-bold text-maroon mb-2 serif">{stat.value}</h3>
