@@ -98,7 +98,7 @@ export const translations: Record<Language, Translation> = {
       viewServices: 'View Services',
     },
     services: {
-      title: 'Our Wellness Services',
+      title: 'Special services for the Hajj season',
       subtitle: 'Professional treatments tailored for your recovery and relaxation',
       items: {
         fullBody60: 'Full Body Massage 60 Minutes',
