@@ -76,7 +76,6 @@ export interface Translation {
   };
   footer: {
     quickLinks: string;
-    rights: string;
   };
 }
 
@@ -163,7 +162,6 @@ export const translations: Record<Language, Translation> = {
     },
     footer: {
       quickLinks: 'Quick Links',
-      rights: 'All rights reserved.',
     },
   },
   ar: {
@@ -248,7 +246,6 @@ export const translations: Record<Language, Translation> = {
     },
     footer: {
       quickLinks: 'روابط سريعة',
-      rights: 'جميع الحقوق محفوظة.',
     },
   },
   id: {
@@ -333,7 +330,6 @@ export const translations: Record<Language, Translation> = {
     },
     footer: {
       quickLinks: 'Tautan Cepat',
-      rights: 'Hak cipta dilindungi undang-undang.',
     },
   },
 };

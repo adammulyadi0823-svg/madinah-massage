@@ -287,32 +287,32 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
     { 
       id: 'fullBody60', 
       title: t.services.items.fullBody60, 
-      price: '150', 
+      price: '250', 
       img: Gallery1,
       features: ['Deep Relaxation', 'Oil Massage', 'Full Body Focus']
     },
     { 
       id: 'fullBody90', 
       title: t.services.items.fullBody90, 
-      price: '220', 
-      oldPrice: '225',
-      discount: '2% OFF',
+      price: '365', 
+      oldPrice: '375',
+      discount: '10 Sar OFF',
       img: Gallery3,
       features: ['Extended Stress Relief', 'Full Muscle Recovery', 'Professional Oils']
     },
     { 
       id: 'fullBody120', 
       title: t.services.items.fullBody120, 
-      price: '290', 
-      oldPrice: '300',
-      discount: '3% OFF',
+      price: '480', 
+      oldPrice: '500',
+      discount: '20 Sar OFF',
       img: Gallery120,
       features: ['Ultimate Rejuvenation', 'Total Body Care', 'Sleep Better Focus']
     },
     { 
       id: 'footMassage60', 
       title: t.services.items.footMassage60, 
-      price: '150', 
+      price: '250', 
       img: FootMassageImg,
       features: ['Foot Reflexology', 'Warm Towel', 'Herbal Water Soak']
     },
@@ -486,10 +486,10 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
     let totalPrice = 0;
     const services = t.services.items;
     
-    if (formData.service === services.fullBody60) totalPrice = 150;
-    else if (formData.service === services.fullBody90) totalPrice = 220;
-    else if (formData.service === services.fullBody120) totalPrice = 290;
-    else if (formData.service === services.footMassage60) totalPrice = 150;
+    if (formData.service === services.fullBody60) totalPrice = 250;
+    else if (formData.service === services.fullBody90) totalPrice = 365;
+    else if (formData.service === services.fullBody120) totalPrice = 480;
+    else if (formData.service === services.footMassage60) totalPrice = 250;
 
     const genderLabel = formData.gender === 'Male' ? t.booking.male : t.booking.female;
     const message = `${t.booking.whatsappMessagePrefix}\n\n${t.booking.fullName}: ${formData.name}\n${t.booking.gender}: ${genderLabel}\n${t.booking.hotelName}: ${formData.hotel}\n${t.booking.roomNumber}: ${formData.room}\n${t.booking.serviceType}: ${formData.service}\n${t.booking.bookingDate}: ${formData.date}\n${t.booking.preferredTime}: ${formData.time}\n${t.booking.additionalNotes}: ${formData.notes}\n\nTotal = ${totalPrice} SAR\n\nPlease inform me about the therapist's availability. Thank you`;
@@ -1087,7 +1087,7 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
         </div>
 
         <div className="border-t border-white/5 pt-16 flex flex-col md:row items-center justify-between gap-10 text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold">
-          <p>© 2024 MADINAH MASSAGE. {t.footer.rights}</p>
+          <p>© 2024 MADINAH MASSAGE</p>
           <div className="flex gap-10">
             <a href="#" className="hover:text-gold transition-colors">Privacy</a>
             <a href="#" className="hover:text-gold transition-colors">Terms</a>
