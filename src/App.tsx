@@ -872,7 +872,7 @@ const Reviews = ({ t, lang }: any) => {
             { label: lang === 'id' ? 'Jamaah Terlayani' : 'Happy Clients', value: '700+' },
             { label: 'Daily Treatments', value: '25+' },
             { label: 'Review Rating', value: '5.0/5' },
-            { label: 'Expert Staff', value: '18+' }
+            { label: 'Years Experienced Therapists', value: '7+' }
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <h3 className="text-4xl font-bold text-maroon mb-2 serif">{stat.value}</h3>
