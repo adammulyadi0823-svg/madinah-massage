@@ -146,18 +146,18 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden w-full px-8 mt-2 flex justify-end"
+            className="lg:hidden w-full px-8 mt-2.5 flex justify-end"
           >
-            <div className="flex items-center gap-1 border border-white/15 bg-white/5 backdrop-blur-sm rounded-full px-2 py-1 shadow-sm">
+            <div className="flex items-center gap-2 border border-white/15 bg-white/5 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-sm">
               {languages.map((l, i) => (
-                <span key={l.id} className="flex items-center gap-1">
+                <span key={l.id} className="flex items-center gap-2">
                   <button 
                     onClick={() => setLang(l.id as Language)}
-                    className={`flex items-center px-1.5 py-0.5 rounded-full text-[8.5px] font-bold uppercase transition-all ${lang === l.id ? 'bg-maroon text-white shadow-sm' : 'text-white/70 hover:text-white'}`}
+                    className={`flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold uppercase transition-all ${lang === l.id ? 'bg-maroon text-white shadow-sm' : 'text-white/70 hover:text-white'}`}
                   >
                     <span>{l.id === 'ar' ? 'الـعـربـيـة' : l.id}</span>
                   </button>
-                  {i < languages.length - 1 && <span className="text-[8px] text-white/20 font-light">|</span>}
+                  {i < languages.length - 1 && <span className="text-[10px] text-white/25 font-light">|</span>}
                 </span>
               ))}
             </div>
