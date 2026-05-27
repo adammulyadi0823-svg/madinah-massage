@@ -1145,6 +1145,20 @@ export default function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const t = translations[lang];
 
+  // KODE PERBAIKAN: Otomatis mendeteksi hash URL (#services dll) saat web dibuka pertama kali
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      // Beri sedikit jeda waktu (timeout) agar komponen React selesai loading di browser
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 800); 
+    }
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       // Show scroll to top button after 500px or past hero section
