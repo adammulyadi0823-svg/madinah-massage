@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Phone, 
@@ -114,7 +114,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
                     onClick={() => setLang(l.id as Language)}
                     className={`text-[10px] font-bold uppercase transition-colors ${lang === l.id ? 'text-gold' : (isScrolled ? 'text-slate-400 hover:text-slate-800' : 'text-white/50 hover:text-white')}`}
                   >
-                    {l.id}
+                    {l.id === 'ar' ? 'الـعـربـيـة' : l.id}
                   </button>
                   {i < languages.length - 1 && <span className="text-[10px] text-slate-300">|</span>}
                 </span>
@@ -137,6 +137,33 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
           </button>
         </div>
       </div>
+
+      {/* Mobile Language Switcher (Muncul di bawah header bar pada tampilan mobile, hilang ketika di-scroll) */}
+      <AnimatePresence>
+        {!isScrolled && (
+          <motion.div 
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="lg:hidden w-full px-8 mt-2 flex justify-end"
+          >
+            <div className="flex items-center gap-1 border border-white/15 bg-white/5 backdrop-blur-sm rounded-full px-2 py-1 shadow-sm">
+              {languages.map((l, i) => (
+                <span key={l.id} className="flex items-center gap-1">
+                  <button 
+                    onClick={() => setLang(l.id as Language)}
+                    className={`flex items-center px-1.5 py-0.5 rounded-full text-[8.5px] font-bold uppercase transition-all ${lang === l.id ? 'bg-maroon text-white shadow-sm' : 'text-white/70 hover:text-white'}`}
+                  >
+                    <span>{l.id === 'ar' ? 'الـعـربـيـة' : l.id}</span>
+                  </button>
+                  {i < languages.length - 1 && <span className="text-[8px] text-white/20 font-light">|</span>}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -183,23 +210,14 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
   );
 };
 
-const Hero = ({ t, scrollToSection, onWhatsAppClick }: any) => {
+const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
   return (
     <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center">
+      {/* Premium static background image */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${Gallery1})` }}
       ></div>
-      <video 
-        autoPlay 
-        loop 
-        muted 
-        playsInline 
-        className="absolute inset-0 w-full h-full object-cover opacity-60"
-        poster={Gallery1}
-      >
-        <source src="https://video.wixstatic.com/video/11062b_a766465451994af59325946808778f65/1080p/mp4/file.mp4" type="video/mp4" />
-      </video>
       
       {/* 40% solid black overlay for maximum text legibility */}
       <div className="absolute inset-0 bg-black/40 z-[1]"></div>
@@ -280,7 +298,7 @@ const Hero = ({ t, scrollToSection, onWhatsAppClick }: any) => {
       </motion.div>
     </section>
   );
-};
+});
 
 const Services = ({ t, scrollToSection, setSelectedService }: any) => {
   const serviceList = [
@@ -1097,7 +1115,7 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
   );
 };
 
-const FallingLeaf = ({ delay, duration, startX, size, color }: any) => {
+const FallingLeaf = React.memo(({ delay, duration, startX, size, color }: any) => {
   return (
     <motion.div
       initial={{ y: -100, x: `${startX}vw`, rotate: 0, opacity: 0 }}
@@ -1105,7 +1123,7 @@ const FallingLeaf = ({ delay, duration, startX, size, color }: any) => {
         y: '110vh', 
         x: [`${startX}vw`, `${startX + 10}vw`, `${startX - 5}vw`, `${startX + 5}vw`],
         rotate: [0, 180, 360, 720],
-        opacity: [0, 0.6, 0.6, 0]
+        opacity: [0, 0.45, 0.45, 0]
       }}
       transition={{ 
         duration, 
@@ -1115,28 +1133,40 @@ const FallingLeaf = ({ delay, duration, startX, size, color }: any) => {
       }}
       className={`fixed pointer-events-none ${color} z-[10]`}
     >
-      <Leaf size={size} fill="currentColor" fillOpacity={0.3} />
+      <Leaf size={size} fill="currentColor" fillOpacity={0.25} />
     </motion.div>
   );
-};
+});
 
-const FallingLeavesBackground = () => {
-  const leaves = Array.from({ length: 25 });
+const FallingLeavesBackground = React.memo(() => {
+  // Memoize lead parameters to strictly avoid recalculations on scroll/re-render.
+  // We reduce count to 15 to cut calculation costs in half, maintaining high class visuals.
+  const leaves = useMemo(() => {
+    return Array.from({ length: 15 }).map((_, i) => ({
+      key: i,
+      delay: Math.random() * 20,
+      duration: 15 + Math.random() * 15,
+      startX: Math.random() * 100,
+      size: 12 + Math.random() * 20,
+      color: Math.random() > 0.4 ? 'text-gold/25' : 'text-green-800/10'
+    }));
+  }, []);
+
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-[10]">
-      {leaves.map((_, i) => (
+      {leaves.map((leaf) => (
         <FallingLeaf 
-          key={i} 
-          delay={Math.random() * 20} 
-          duration={15 + Math.random() * 15} 
-          startX={Math.random() * 100} 
-          size={12 + Math.random() * 20}
-          color={Math.random() > 0.4 ? 'text-gold/30' : 'text-green-800/15'}
+          key={leaf.key} 
+          delay={leaf.delay} 
+          duration={leaf.duration} 
+          startX={leaf.startX} 
+          size={leaf.size}
+          color={leaf.color}
         />
       ))}
     </div>
   );
-};
+});
 
 export default function App() {
   const [lang, setLang] = useState<Language>('en');
