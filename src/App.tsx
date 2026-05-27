@@ -442,11 +442,11 @@ const Benefits = ({ t }: any) => {
           {benefitList.map((b, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="flex flex-col gap-6 group cursor-default"
+              viewport={{ once: true, amount: 0.02 }}
+              transition={{ duration: 0.5, delay: idx * 0.04, ease: "easeOut" }}
+              className="flex flex-col gap-5 group cursor-default"
             >
               <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-gold border border-white/10 group-hover:gold-gradient group-hover:text-white transition-all duration-500">
                 {b.icon}
