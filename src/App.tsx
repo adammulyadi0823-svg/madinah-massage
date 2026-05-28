@@ -42,6 +42,8 @@ import AboutImage from './assets/images/regenerated_image_1778941470110.png';
 import Gallery120 from './assets/images/regenerated_image_1778943907732.png';
 import FootMassageImg from './assets/images/regenerated_image_1778943911153.png';
 import Logo from './assets/images/logo.png';
+// @ts-ignore
+import videoBg from './assets/images/video beground home page.mp4';
 
 // --- Helpers ---
 
@@ -211,13 +213,49 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
 };
 
 const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          setIsVideoPlaying(true);
+        }).catch(err => {
+          console.log("Autoplay did not start automatically, attempting on interaction:", err);
+        });
+      }
+    }
+  }, []);
+
+  const handleVideoPlaying = () => {
+    setIsVideoPlaying(true);
+  };
+
   return (
     <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center bg-black">
       {/* Background Image: Berfungsi selalu sebagai latar belakang dasar agar web langsung indah tanpa jeda kedip hitam */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-100 z-0 pointer-events-none"
+        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1500] ${isVideoPlaying ? 'opacity-30' : 'opacity-100'} z-0 pointer-events-none`}
         style={{ backgroundImage: `url(${Gallery1})` }}
       ></div>
+      
+      {/* High-Performance background video with GPU-acceleration attributes */}
+      <video
+        ref={videoRef}
+        src={videoBg}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        onLoadedData={handleVideoPlaying}
+        onCanPlay={handleVideoPlaying}
+        onPlaying={handleVideoPlaying}
+        className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-[1500] ${isVideoPlaying ? 'opacity-70' : 'opacity-0'} pointer-events-none`}
+        style={{ transform: 'translateZ(0)' }}
+      />
       
       {/* gradasi bayangan di sebelah kiri agar tulisan sangat mudah dibaca, sementara sebelah kanan/tengah video tetap bersinar cerah sepenuhnya */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-[2]"></div>
