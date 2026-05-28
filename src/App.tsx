@@ -255,14 +255,14 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
         onCanPlay={handleVideoPlaying}
         onPlaying={handleVideoPlaying}
         onCanPlayThrough={handleVideoPlaying}
-        className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-60' : 'opacity-0'} pointer-events-none`}
+        className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
         style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
       >
         <source src={videoBg} type="video/mp4" />
       </video>
       
-      {/* Gradasi bayangan di sebelah kiri agar tulisan sangat mudah dibaca, sementara sebelah kanan/tengah video tetap bersinar cerah sepenuhnya */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-[2]"></div>
+      {/* Very soft screen-wide gradient to blend borders nicely without overall darkening */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent z-[2]"></div>
       <div className="absolute inset-0 islamic-pattern opacity-10 pointer-events-none z-[3]"></div>
       
       {/* Safe padding-top (pt-36) prevents content from ever overlapping with the fixed Header navbar on any device size */}
@@ -271,18 +271,27 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
            initial={{ opacity: 0, x: -30 }}
            animate={{ opacity: 1, x: 0 }}
            transition={{ duration: 1 }}
-           className="max-w-2xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+           className="max-w-2xl select-none"
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="h-[1px] w-12 bg-gold"></div>
-            <span className="serif text-gold text-xs sm:text-sm uppercase tracking-[0.3em] font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+            <span 
+              className="serif text-gold text-xs sm:text-sm uppercase tracking-[0.3em] font-medium"
+              style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.4)' }}
+            >
               Sacred Serenity
             </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white font-bold mb-8 leading-[1.15] serif tracking-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.95)]">
+          <h1 
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white font-bold mb-8 leading-[1.15] serif tracking-tight"
+            style={{ textShadow: '0 4px 16px rgba(0,0,0,0.8), 0 8px 32px rgba(0,0,0,0.5), 0 16px 64px rgba(0,0,0,0.3)' }}
+          >
             {t.hero.headline}
           </h1>
-          <p className="text-white/95 text-base md:text-lg lg:text-xl mb-12 font-medium leading-relaxed max-w-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
+          <p 
+            className="text-white/95 text-base md:text-lg lg:text-xl mb-12 font-medium leading-relaxed max-w-xl"
+            style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.4)' }}
+          >
             {t.hero.subheadline}
           </p>
           
