@@ -42,7 +42,6 @@ import AboutImage from './assets/images/regenerated_image_1778941470110.png';
 import Gallery120 from './assets/images/regenerated_image_1778943907732.png';
 import FootMassageImg from './assets/images/regenerated_image_1778943911153.png';
 import Logo from './assets/images/logo.png';
-const bgSpaVideo = '/bg-spa.mp4';
 
 // --- Helpers ---
 
@@ -212,60 +211,13 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
 };
 
 const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoSrc, setVideoSrc] = useState(bgSpaVideo);
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      // Force instant play
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(err => {
-          console.log("Autoplay did not start automatically:", err);
-        });
-      }
-    }
-  }, [videoSrc]);
-
-  const handleVideoError = () => {
-    if (!hasError) {
-      console.log("Local video empty or failed. Swapping to high-performance CDN video.");
-      setHasError(true);
-      // Use a premium, guaranteed, high-performance spa massage stock video URL
-      setVideoSrc("https://assets.mixkit.co/videos/preview/mixkit-massage-therapy-for-a-relaxed-woman-in-a-spa-41584-large.mp4");
-    }
-  };
-
-  const handleVideoPlaying = () => {
-    setIsVideoLoaded(true);
-  };
-
   return (
     <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center bg-black">
       {/* Background Image: Berfungsi selalu sebagai latar belakang dasar agar web langsung indah tanpa jeda kedip hitam */}
       <div 
-        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-30' : 'opacity-80'} z-0 pointer-events-none`}
+        className="absolute inset-0 bg-cover bg-center opacity-100 z-0 pointer-events-none"
         style={{ backgroundImage: `url(${Gallery1})` }}
       ></div>
-
-      {/* High-Performance background video with full brightness and high clarity */}
-      <video
-        ref={videoRef}
-        key={videoSrc}
-        src={videoSrc}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        onError={handleVideoError}
-        onLoadedData={handleVideoPlaying}
-        onCanPlay={handleVideoPlaying}
-        onPlaying={handleVideoPlaying}
-        className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
-      />
       
       {/* gradasi bayangan di sebelah kiri agar tulisan sangat mudah dibaca, sementara sebelah kanan/tengah video tetap bersinar cerah sepenuhnya */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-[2]"></div>
