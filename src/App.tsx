@@ -109,16 +109,16 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
           ))}
           
           <div className={`flex items-center gap-6 ${lang === 'ar' ? 'mr-4' : 'ml-4'}`}>
-            <div className={`flex items-center gap-2 border rounded-full px-3 py-1 ${isScrolled ? 'border-slate-200 bg-white/50' : 'border-white/20 bg-white/10'}`}>
+            <div className="flex items-center gap-2 border border-white/15 bg-black/45 backdrop-blur-md rounded-full px-2 py-1 shadow-md shadow-black/15">
               {languages.map((l, i) => (
                 <span key={l.id} className="flex items-center gap-2">
                    <button 
                     onClick={() => setLang(l.id as Language)}
-                    className={`text-[10px] font-bold uppercase transition-colors ${lang === l.id ? 'text-gold' : (isScrolled ? 'text-slate-400 hover:text-slate-800' : 'text-white/50 hover:text-white')}`}
+                    className={`flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase transition-all duration-300 ${lang === l.id ? 'bg-maroon text-white shadow-sm scale-105' : 'text-white/80 hover:text-white hover:scale-105'}`}
                   >
-                    {l.id === 'ar' ? 'الـعـربـيـة' : l.id}
+                    <span>{l.id === 'ar' ? 'الـعـربـيـة' : l.id}</span>
                   </button>
-                  {i < languages.length - 1 && <span className="text-[10px] text-slate-300">|</span>}
+                  {i < languages.length - 1 && <span className="text-[10px] text-white/30 font-medium">|</span>}
                 </span>
               ))}
             </div>
@@ -1228,6 +1228,19 @@ export default function App() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const t = translations[lang];
+
+  // Dynamic setup for Google site verification to ensure GSC finds it under any state
+  useEffect(() => {
+    let meta = document.querySelector('meta[name="google-site-verification"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'google-site-verification');
+      meta.setAttribute('content', 'nQjCSFMsfo9qahZ8W3da-YYkACijhpYx8SZYOk2caLo');
+      document.head.appendChild(meta);
+    } else {
+      meta.setAttribute('content', 'nQjCSFMsfo9qahZ8W3da-YYkACijhpYx8SZYOk2caLo');
+    }
+  }, []);
 
   // Synchronize dynamic URL path with language selection
   useEffect(() => {

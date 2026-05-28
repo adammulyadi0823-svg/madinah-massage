@@ -125,7 +125,7 @@ export const translations: Record<Language, Translation> = {
     },
     hero: {
       headline: 'Professional Hotel Massage in Madinah',
-      subheadline: 'Certified professional massage delivered directly to your hotel room near Masjid Nabawi. Male therapists for men, female therapists for women. Relieve fatigue and recover your body after Umrah.',
+      subheadline: 'Relieve fatigue and restore your body after Umrah, long flights, travels, or busy days. Certified professional massage delivered directly to your hotel room near Masjid Nabawi in Madinah. Male therapists for men, female therapists for women.',
       bookViaWhatsApp: 'Book via WhatsApp',
       viewServices: 'View Services',
     },
@@ -241,7 +241,7 @@ export const translations: Record<Language, Translation> = {
     },
     hero: {
       headline: 'مساج فندقي احترافي في المدينة المنورة',
-      subheadline: 'جلسات مساج احترافية معتمدة تصل مباشرة إلى غرفتك الفندقية بالقرب من المسجد النبوي. معالجون للرجال، ومعالجات للنساء. تخلص من التعب واستعد نشاط جسمك بعد العمرة.',
+      subheadline: 'تخلص من التعب واستعد نشاط جسدك بعد العمرة، الرحلات الطويلة، السفر، أو الأيام الحافلة بالعمل. مساج فندقي احترافي ومعتمد يصل مباشرة إلى غرفتك الفندقية بالقرب من المسجد النبوي في المدينة المنورة. معالجون للرجال، ومعالجات للنساء.',
       bookViaWhatsApp: 'احجز عبر واتساب',
       viewServices: 'عرض الخدمات',
     },
@@ -357,7 +357,7 @@ export const translations: Record<Language, Translation> = {
     },
     hero: {
       headline: 'Pijat Hotel Profesional di Madinah',
-      subheadline: 'Layanan pijat profesional bersertifikat didatangkan langsung ke kamar hotel Anda di dekat Masjid Nabawi. Terapis pria untuk pria, terapis wanita untuk wanita. Hilangkan rasa lelah dan pulihkan tubuh Anda setelah Umroh.',
+      subheadline: 'Hilangkan rasa lelah dan pulihkan tubuh Anda setelah Umroh, penerbangan panjang, perjalanan jauh, atau hari-hari yang sibuk. Layanan pijat profesional bersertifikat didatangkan langsung ke kamar hotel Anda di dekat Masjid Nabawi di Madinah. Terapis pria untuk pria, terapis wanita untuk wanita.',
       bookViaWhatsApp: 'Pesan via WhatsApp',
       viewServices: 'Lihat Layanan',
     },
