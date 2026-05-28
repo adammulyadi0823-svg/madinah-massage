@@ -235,13 +235,15 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
 
   return (
     <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center bg-black">
-      {/* Background Image: Berfungsi selalu sebagai latar belakang dasar agar web langsung indah tanpa jeda kedip hitam */}
-      <div 
-        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1500] ${isVideoPlaying ? 'opacity-30' : 'opacity-100'} z-0 pointer-events-none`}
-        style={{ backgroundImage: `url(${Gallery1})` }}
-      ></div>
+      {/* Background Image: Only shown when video is not yet playing, avoiding resource-heavy alpha-blending ghosting */}
+      {!isVideoPlaying && (
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-100 z-0 pointer-events-none"
+          style={{ backgroundImage: `url(${Gallery1})` }}
+        ></div>
+      )}
       
-      {/* High-Performance background video with GPU-acceleration attributes */}
+      {/* High-Performance, clear, and bright background video */}
       <video
         ref={videoRef}
         src={videoBg}
@@ -253,12 +255,11 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
         onLoadedData={handleVideoPlaying}
         onCanPlay={handleVideoPlaying}
         onPlaying={handleVideoPlaying}
-        className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-[1500] ${isVideoPlaying ? 'opacity-70' : 'opacity-0'} pointer-events-none`}
-        style={{ transform: 'translateZ(0)' }}
+        className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-75' : 'opacity-0'} pointer-events-none`}
       />
       
-      {/* gradasi bayangan di sebelah kiri agar tulisan sangat mudah dibaca, sementara sebelah kanan/tengah video tetap bersinar cerah sepenuhnya */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-[2]"></div>
+      {/* Soft and subtle highlight gradient to keep text readable without darkening the gorgeous video */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent z-[2]"></div>
       <div className="absolute inset-0 islamic-pattern opacity-10 pointer-events-none z-[3]"></div>
       
       {/* Safe padding-top (pt-36) prevents content from ever overlapping with the fixed Header navbar on any device size */}
