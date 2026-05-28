@@ -211,16 +211,35 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
 };
 
 const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
+  // Tautan video ambient wellness berkecepatan tinggi dengan cadangan (multi-source fallback)
+  const videoSources = [
+    "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0227e339f379c4e8b6110dc297e68df&profile_id=139&oauth2_token_id=57447761",
+    "https://assets.mixkit.co/videos/preview/mixkit-massage-therapy-for-a-relaxed-woman-in-a-spa-41584-large.mp4"
+  ];
+
   return (
-    <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center">
-      {/* Premium static background image */}
+    <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center bg-black">
+      {/* Background Image: Berfungsi selalu sebagai latar belakang dasar agar web langsung indah tanpa jeda kedip hitam */}
       <div 
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center opacity-40 z-0 pointer-events-none"
         style={{ backgroundImage: `url(${Gallery1})` }}
       ></div>
+
+      {/* Background Video Streaming: Menggunakan pemutar native yang langsung berjalan otomatis di atas gambar latar */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-60 pointer-events-none"
+      >
+        {videoSources.map((src, idx) => (
+          <source key={idx} src={src} type="video/mp4" />
+        ))}
+      </video>
       
       {/* 40% solid black overlay for maximum text legibility */}
-      <div className="absolute inset-0 bg-black/40 z-[1]"></div>
+      <div className="absolute inset-0 bg-black/45 z-[1]"></div>
       
       {/* Dark gradient overlay for rich contrast and elegant depth */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent z-[2]"></div>
