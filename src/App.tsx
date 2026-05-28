@@ -1242,6 +1242,15 @@ export default function App() {
     }
   }, []);
 
+  // Force update favicon to bust browser caches immediately on load
+  useEffect(() => {
+    const iconLinks = document.querySelectorAll("link[rel*='icon']");
+    iconLinks.forEach((link) => {
+      const el = link as HTMLLinkElement;
+      el.href = `/favicon.png?v=3`;
+    });
+  }, []);
+
   // Synchronize dynamic URL path with language selection
   useEffect(() => {
     const currentPath = window.location.pathname.toLowerCase().replace(/\/$/, "");
