@@ -217,9 +217,13 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.play().catch(err => {
-        console.log("Autoplay did not start automatically, will play on interaction:", err);
-      });
+      // Force instant play
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          console.log("Autoplay did not start automatically:", err);
+        });
+      }
     }
   }, []);
 
@@ -234,16 +238,20 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
       {/* High-Performance background video with full brightness and high clarity */}
       <video
         ref={videoRef}
+        src={bgSpaVideo}
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
-        poster={Gallery1}
+        onCanPlay={(e) => {
+          e.currentTarget.play().catch(() => {});
+        }}
+        onLoadedMetadata={(e) => {
+          e.currentTarget.play().catch(() => {});
+        }}
         className="absolute inset-0 w-full h-full object-cover z-0 opacity-100 pointer-events-none"
-      >
-        <source src={bgSpaVideo} type="video/mp4" />
-      </video>
+      />
       
       {/* gradasi bayangan di sebelah kiri agar tulisan sangat mudah dibaca, sementara sebelah kanan/tengah video tetap bersinar cerah sepenuhnya */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-[2]"></div>
