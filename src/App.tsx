@@ -43,7 +43,7 @@ import Gallery120 from './assets/images/regenerated_image_1778943907732.png';
 import FootMassageImg from './assets/images/regenerated_image_1778943911153.png';
 import Logo from './assets/images/logo.png';
 // @ts-ignore
-import videoBg from './assets/images/video beground home page.mp4';
+import videoBg from './assets/images/bg-spa.mp4';
 
 // --- Helpers ---
 
@@ -246,7 +246,6 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
       {/* High-Performance, clear, and bright background video */}
       <video
         ref={videoRef}
-        src={videoBg}
         autoPlay
         loop
         muted
@@ -255,8 +254,12 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
         onLoadedData={handleVideoPlaying}
         onCanPlay={handleVideoPlaying}
         onPlaying={handleVideoPlaying}
+        onCanPlayThrough={handleVideoPlaying}
         className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-75' : 'opacity-0'} pointer-events-none`}
-      />
+        style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
+      >
+        <source src={videoBg} type="video/mp4" />
+      </video>
       
       {/* Soft and subtle highlight gradient to keep text readable without darkening the gorgeous video */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent z-[2]"></div>
