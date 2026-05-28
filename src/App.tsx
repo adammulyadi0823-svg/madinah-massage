@@ -255,14 +255,14 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
         onCanPlay={handleVideoPlaying}
         onPlaying={handleVideoPlaying}
         onCanPlayThrough={handleVideoPlaying}
-        className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-75' : 'opacity-0'} pointer-events-none`}
+        className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-60' : 'opacity-0'} pointer-events-none`}
         style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
       >
         <source src={videoBg} type="video/mp4" />
       </video>
       
-      {/* Soft and subtle highlight gradient to keep text readable without darkening the gorgeous video */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent z-[2]"></div>
+      {/* Gradasi bayangan di sebelah kiri agar tulisan sangat mudah dibaca, sementara sebelah kanan/tengah video tetap bersinar cerah sepenuhnya */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-[2]"></div>
       <div className="absolute inset-0 islamic-pattern opacity-10 pointer-events-none z-[3]"></div>
       
       {/* Safe padding-top (pt-36) prevents content from ever overlapping with the fixed Header navbar on any device size */}
