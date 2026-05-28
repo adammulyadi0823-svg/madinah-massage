@@ -42,8 +42,7 @@ import AboutImage from './assets/images/regenerated_image_1778941470110.png';
 import Gallery120 from './assets/images/regenerated_image_1778943907732.png';
 import FootMassageImg from './assets/images/regenerated_image_1778943911153.png';
 import Logo from './assets/images/logo.png';
-// @ts-ignore
-import bgSpaVideo from './assets/images/bg-spa.mp4';
+const bgSpaVideo = '/bg-spa.mp4';
 
 // --- Helpers ---
 
