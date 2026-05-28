@@ -135,7 +135,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
         {/* Mobile Toggle */}
         <div className="lg:hidden flex items-center gap-4">
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            {isMobileMenuOpen ? <X className="text-slate-900" /> : <Menu className={isScrolled ? 'text-slate-900' : 'text-white'} />}
+            {isMobileMenuOpen ? <X className={isScrolled ? 'text-slate-900' : 'text-white'} /> : <Menu className={isScrolled ? 'text-slate-900' : 'text-white'} />}
           </button>
         </div>
       </div>
@@ -150,16 +150,16 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
             transition={{ duration: 0.25 }}
             className={`lg:hidden w-full px-8 mt-2.5 flex ${lang === 'ar' ? 'justify-start' : 'justify-end'}`}
           >
-            <div className="flex items-center gap-2 border border-white/15 bg-white/5 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-sm">
+            <div className="flex items-center gap-2 border border-white/15 bg-black/45 backdrop-blur-md rounded-full px-3.5 py-1.5 shadow-lg shadow-black/25">
               {languages.map((l, i) => (
                 <span key={l.id} className="flex items-center gap-2">
                   <button 
                     onClick={() => setLang(l.id as Language)}
-                    className={`flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold uppercase transition-all ${lang === l.id ? 'bg-maroon text-white shadow-sm' : 'text-white/70 hover:text-white'}`}
+                    className={`flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase transition-all duration-300 ${lang === l.id ? 'bg-maroon text-white shadow-md scale-105' : 'text-white/90 hover:text-white hover:scale-105'}`}
                   >
                     <span>{l.id === 'ar' ? 'الـعـربـيـة' : l.id}</span>
                   </button>
-                  {i < languages.length - 1 && <span className="text-[10px] text-white/25 font-light">|</span>}
+                  {i < languages.length - 1 && <span className="text-[10px] text-white/30 font-medium">|</span>}
                 </span>
               ))}
             </div>
