@@ -108,7 +108,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
             </a>
           ))}
           
-          <div className="flex items-center gap-6 ml-4">
+          <div className={`flex items-center gap-6 ${lang === 'ar' ? 'mr-4' : 'ml-4'}`}>
             <div className={`flex items-center gap-2 border rounded-full px-3 py-1 ${isScrolled ? 'border-slate-200 bg-white/50' : 'border-white/20 bg-white/10'}`}>
               {languages.map((l, i) => (
                 <span key={l.id} className="flex items-center gap-2">
@@ -148,7 +148,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden w-full px-8 mt-2.5 flex justify-end"
+            className={`lg:hidden w-full px-8 mt-2.5 flex ${lang === 'ar' ? 'justify-start' : 'justify-end'}`}
           >
             <div className="flex items-center gap-2 border border-white/15 bg-white/5 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-sm">
               {languages.map((l, i) => (
@@ -212,7 +212,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
   );
 };
 
-const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
+const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
@@ -266,9 +266,9 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
       <div className="absolute inset-0 islamic-pattern opacity-10 pointer-events-none z-[3]"></div>
       
       {/* Safe padding-top (pt-36) prevents content from ever overlapping with the fixed Header navbar on any device size */}
-      <div className="container mx-auto px-8 relative z-10 text-left max-w-7xl pt-36 pb-20">
+      <div className={`container mx-auto px-8 relative z-10 max-w-7xl pt-36 pb-20 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
         <motion.div
-           initial={{ opacity: 0, x: -30 }}
+           initial={{ opacity: 0, x: lang === 'ar' ? 30 : -30 }}
            animate={{ opacity: 1, x: 0 }}
            transition={{ duration: 1 }}
            className="max-w-2xl select-none"
@@ -290,7 +290,7 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
           </h1>
           <p 
             className="text-white/95 text-base md:text-lg lg:text-xl mb-12 font-medium leading-relaxed max-w-xl"
-            style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.4)' }}
+            style={{ textShadow: '0 2px 4px rgba(0,0,0,1), 0 4px 16px rgba(0,0,0,1), 0 8px 32px rgba(0,0,0,1), 0 16px 48px rgba(0,0,0,0.95)' }}
           >
             {t.hero.subheadline}
           </p>
@@ -311,11 +311,11 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
                 className="p-4 rounded-xl flex items-center gap-6 text-white border border-gold-light/40 backdrop-blur-md shadow-2xl"
                 style={{ backgroundColor: 'rgba(15, 23, 42, 0.85)' }}
               >
-                <div className="text-center border-r border-white/20 pr-6">
+                <div className={`text-center ${lang === 'ar' ? 'border-l border-white/20 pl-6' : 'border-r border-white/20 pr-6'}`}>
                   <div className="serif text-2xl text-gold-light font-black tracking-wide">100%</div>
                   <div className="text-[9px] uppercase tracking-[0.15em] font-bold text-white/90">Privacy</div>
                 </div>
-                <div className="text-center border-r border-white/20 pr-6">
+                <div className={`text-center ${lang === 'ar' ? 'border-l border-white/20 pl-6' : 'border-r border-white/20 pr-6'}`}>
                   <div className="serif text-2xl text-gold-light font-black tracking-wide">24/7</div>
                   <div className="text-[9px] uppercase tracking-[0.15em] font-bold text-white/90">Available</div>
                 </div>
@@ -336,7 +336,7 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
       <motion.div 
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-16 right-16 text-white/50 cursor-pointer hidden md:flex items-center gap-4"
+        className={`absolute bottom-16 ${lang === 'ar' ? 'left-16' : 'right-16'} text-white/50 cursor-pointer hidden md:flex items-center gap-4`}
         onClick={() => scrollToSection('services')}
       >
         <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Scroll Down</span>
@@ -593,7 +593,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                 </div>
                 <div>
                    <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Direct Support</p>
-                   <p className="font-bold text-slate-800 tracking-wide">+966 50 617 3369</p>
+                   <p className="font-bold text-slate-800 tracking-wide" dir="ltr">+966 50 617 3369</p>
                 </div>
               </div>
             </div>
@@ -604,7 +604,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">{t.booking.fullName}</label>
+                    <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>{t.booking.fullName}</label>
                     <input 
                       required
                       type="text" 
@@ -616,7 +616,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">{t.booking.gender}</label>
+                    <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>{t.booking.gender}</label>
                     <div className="flex gap-4">
                       {['Male', 'Female'].map((g) => (
                         <button
@@ -638,7 +638,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">{t.booking.hotelName}</label>
+                    <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>{t.booking.hotelName}</label>
                     <input 
                       required
                       type="text" 
@@ -649,7 +649,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">{t.booking.roomNumber}</label>
+                    <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>{t.booking.roomNumber}</label>
                     <input 
                       required
                       type="text" 
@@ -662,7 +662,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">{t.booking.serviceType}</label>
+                  <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>{t.booking.serviceType}</label>
                   <div className="flex gap-3">
                     <div className="flex-1 relative">
                       <select 
@@ -675,7 +675,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                         <option>{t.services.items.fullBody120}</option>
                         <option>{t.services.items.footMassage60}</option>
                       </select>
-                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                      <div className={`absolute ${lang === 'ar' ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 pointer-events-none text-slate-400`}>
                         <ChevronDown className="w-4 h-4" />
                       </div>
                     </div>
@@ -692,7 +692,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">
+                    <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>
                       {t.booking.bookingDate} 
                       <span className="text-gold ml-1">
                         ({lang === 'ar' ? 'توقيت مكة' : (lang === 'id' ? 'Waktu Makkah' : 'Mecca Time')})
@@ -707,7 +707,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">
+                    <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>
                       {t.booking.preferredTime}
                       <span className="text-gold ml-1">
                         ({lang === 'ar' ? 'توقيت مكة' : (lang === 'id' ? 'Waktu Makkah' : 'Mecca Time')})
@@ -724,7 +724,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 ml-1">{t.booking.additionalNotes}</label>
+                  <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>{t.booking.additionalNotes}</label>
                   <textarea 
                     rows={2}
                     className="w-full bg-slate-50 border border-slate-100 rounded-xl px-6 py-3 text-slate-800 focus:outline-none focus:border-gold transition-all shadow-sm resize-none"
@@ -837,7 +837,7 @@ const Reviews = ({ t, lang }: any) => {
   };
 
   return (
-    <section id="reviews" className="py-32 bg-beige overflow-hidden relative">
+    <section id="reviews" className="py-32 bg-beige overflow-hidden relative" dir="ltr">
       <div className="absolute inset-0 islamic-pattern opacity-10 pointer-events-none"></div>
       
       {/* Title Container */}
@@ -960,16 +960,16 @@ const About = ({ t, scrollToSection, lang }: any) => {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative pr-12 pb-12"
+              className={`relative ${lang === 'ar' ? 'pl-12' : 'pr-12'} pb-12`}
             >
-              <div className="absolute top-0 right-0 w-2/3 h-2/3 gold-gradient rounded-[60px] translate-x-8 translate-y-8"></div>
+              <div className={`absolute top-0 ${lang === 'ar' ? 'left-0' : 'right-0'} w-2/3 h-2/3 gold-gradient rounded-[60px] ${lang === 'ar' ? '-translate-x-8' : 'translate-x-8'} translate-y-8`}></div>
               <img 
                 src={AboutImage} 
                 alt="Madinah Massage Atmosphere" 
                 className="rounded-[60px] relative z-10 shadow-3xl transition-all duration-500"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute top-12 left-12 p-10 glass rounded-[40px] z-20 shadow-2xl backdrop-blur-3xl hidden md:block border border-white/40">
+              <div className={`absolute top-12 ${lang === 'ar' ? 'right-12' : 'left-12'} p-10 glass rounded-[40px] z-20 shadow-2xl backdrop-blur-3xl hidden md:block border border-white/40`}>
                 <span className="serif text-6xl font-bold block text-maroon mb-2">700+</span>
                 <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-gold">{lang === 'id' ? 'Jamaah Terlayani' : (lang === 'ar' ? 'معتمر مخدوم' : 'Pilgrims Served')}</span>
               </div>
@@ -986,7 +986,7 @@ const About = ({ t, scrollToSection, lang }: any) => {
                 <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">The Heritage</span>
               </div>
               <h2 className="text-4xl md:text-7xl font-bold mb-10 serif text-maroon leading-tight">{t.about.title}</h2>
-              <p className="text-slate-600 text-xl leading-relaxed mb-12 font-light italic border-l-4 border-gold/20 pl-8">
+              <p className={`text-slate-600 text-xl leading-relaxed mb-12 font-light italic ${lang === 'ar' ? 'border-r-4 border-gold/20 pr-8' : 'border-l-4 border-gold/20 pl-8'}`}>
                 {t.about.content}
               </p>
               
@@ -1137,7 +1137,7 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
             <ul className="space-y-8">
               <li className="flex items-start gap-4">
                 <Phone className="w-5 h-5 text-gold shrink-0" />
-                <span className="text-white/60 text-sm">+966 50 617 3369</span>
+                <span className="text-white/60 text-sm" dir="ltr">+966 50 617 3369</span>
               </li>
               <li className="flex items-start gap-4">
                 <Mail className="w-5 h-5 text-gold shrink-0" />
@@ -1217,11 +1217,38 @@ const FallingLeavesBackground = React.memo(() => {
 });
 
 export default function App() {
-  const [lang, setLang] = useState<Language>('en');
+  const [lang, setLang] = useState<Language>(() => {
+    const path = window.location.pathname.toLowerCase().replace(/\/$/, "");
+    if (path === '/ar') return 'ar';
+    if (path === '/id') return 'id';
+    if (path === '/en') return 'en';
+    return 'en';
+  });
   const [showToast, setShowToast] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const t = translations[lang];
+
+  // Synchronize dynamic URL path with language selection
+  useEffect(() => {
+    const currentPath = window.location.pathname.toLowerCase().replace(/\/$/, "");
+    const targetPath = `/${lang}`;
+    if (currentPath !== targetPath) {
+      window.history.pushState({ lang }, "", targetPath + window.location.hash);
+    }
+  }, [lang]);
+
+  // Handle browser back and forward navigation gracefully
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.toLowerCase().replace(/\/$/, "");
+      if (path === '/ar') setLang('ar');
+      else if (path === '/id') setLang('id');
+      else if (path === '/en') setLang('en');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // KODE PERBAIKAN: Otomatis mendeteksi hash URL (#services dll) saat web dibuka pertama kali
   useEffect(() => {
@@ -1268,12 +1295,12 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <FallingLeavesBackground />
       <Navbar lang={lang} setLang={setLang} t={t} scrollToSection={scrollToSection} />
       
       <main>
-        <Hero t={t} scrollToSection={scrollToSection} onWhatsAppClick={handleWhatsAppClick} />
+        <Hero t={t} scrollToSection={scrollToSection} onWhatsAppClick={handleWhatsAppClick} lang={lang} />
         <Services t={t} scrollToSection={scrollToSection} setSelectedService={setSelectedService} />
         <Benefits t={t} />
         <About t={t} scrollToSection={scrollToSection} lang={lang} />
@@ -1316,7 +1343,7 @@ export default function App() {
             exit={{ scale: 0, opacity: 0 }}
             whileHover={{ scale: 1.15 }}
             whileTap={{ scale: 0.95 }}
-            className="fixed bottom-24 right-6 z-50 gold-gradient text-white p-2.5 rounded-full shadow-2xl border border-white/20"
+            className={`fixed bottom-24 ${lang === 'ar' ? 'left-6' : 'right-6'} z-50 gold-gradient text-white p-2.5 rounded-full shadow-2xl border border-white/20`}
           >
             <ChevronUp className="w-6 h-6" />
           </motion.button>
@@ -1351,7 +1378,7 @@ export default function App() {
         }}
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-3 rounded-full shadow-2xl"
+        className={`fixed bottom-6 ${lang === 'ar' ? 'left-6' : 'right-6'} z-50 bg-[#25D366] text-white p-3 rounded-full shadow-2xl`}
       >
         <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.733 5.479 2.016 7.78L0 32l8.369-2.195c2.253 1.22 4.821 1.921 7.631 1.921c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.311 22.181c-.34.957-1.705 1.748-2.613 1.861-.624.08-1.44.144-2.316-.144-.544-.176-1.228-.404-2.108-.78-3.748-1.552-6.189-5.325-6.376-5.576-.184-.251-1.504-2.004-1.504-3.824 0-1.82 1.052-2.716 1.34-3.004.288-.288.752-.36 1.136-.36.144 0 .272.008.384.016.328.016.488.024.704.536.264.632.904 2.192.984 2.352.08.16.136.344.032.552-.104.208-.16.336-.32.512-.16.176-.344.4-.488.536-.168.16-.344.336-.144.68.2.336.888 1.464 1.904 2.368 1.312 1.168 2.416 1.528 2.76 1.696.344.168.544.144.752-.08.208-.224.888-1.032 1.128-1.392.24-.36.48-.304.808-.184.328.12 2.088 1.032 2.448 1.216.352.184.584.272.672.424.088.168.088.952-.256 1.904z"/>
@@ -1365,7 +1392,7 @@ export default function App() {
             initial={{ opacity: 0, x: 200 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 200 }}
-            className="fixed bottom-24 right-8 z-[60] glass p-6 rounded-2xl shadow-2xl max-w-sm border-l-4 border-maroon"
+            className={`fixed bottom-24 ${lang === 'ar' ? 'left-8' : 'right-8'} z-[60] glass p-6 rounded-2xl shadow-2xl max-w-sm border-l-4 border-maroon`}
           >
             <div className="flex gap-4 items-start">
               <div className="bg-maroon/10 p-2 rounded-lg text-maroon">
