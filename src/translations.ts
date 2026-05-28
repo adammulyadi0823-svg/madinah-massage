@@ -28,6 +28,12 @@ export interface Translation {
     };
     price: string;
     minutes: string;
+    features: {
+      fullBody60: string[];
+      fullBody90: string[];
+      fullBody120: string[];
+      footMassage60: string[];
+    };
   };
   booking: {
     title: string;
@@ -47,9 +53,15 @@ export interface Translation {
     toastTitle: string;
     toast: string;
     whatsappMessagePrefix: string;
+    tag: string;
+    namePlaceholder: string;
+    hotelPlaceholder: string;
+    roomPlaceholder: string;
+    meccaTimeLabel: string;
   };
   benefits: {
     title: string;
+    subtitle: string;
     items: {
       stressRelief: string;
       sleep: string;
@@ -61,9 +73,22 @@ export interface Translation {
   };
   about: {
     title: string;
+    tag: string;
     content: string;
     highlightTitle: string;
     highlights: string[];
+    pilgrimsServed: string;
+    learnMore: string;
+  };
+  gallery: {
+    tag: string;
+    title: string;
+  };
+  reviews: {
+    tag: string;
+    happyClients: string;
+    dailyTreatments: string;
+    reviewRating: string;
   };
   contact: {
     title: string;
@@ -73,9 +98,16 @@ export interface Translation {
     email: string;
     hours: string;
     location: string;
+    contactTag: string;
+    locationDesc: string;
+    hoursDesc: string;
   };
   footer: {
     quickLinks: string;
+    footerDesc: string;
+    footerServices: string;
+    footerSupport: string;
+    footerSvcsList: string[];
   };
 }
 
@@ -108,6 +140,12 @@ export const translations: Record<Language, Translation> = {
       },
       price: 'SAR',
       minutes: 'Min',
+      features: {
+        fullBody60: ['Deep Relaxation', 'Oil Massage', 'Full Body Focus'],
+        fullBody90: ['Extended Stress Relief', 'Full Muscle Recovery', 'Professional Oils'],
+        fullBody120: ['Ultimate Rejuvenation', 'Total Body Care', 'Sleep Better Focus'],
+        footMassage60: ['Foot Reflexology', 'Warm Towel', 'Herbal Water Soak']
+      }
     },
     booking: {
       title: 'Reserve Your Session',
@@ -127,9 +165,15 @@ export const translations: Record<Language, Translation> = {
       toastTitle: 'Booking in Progress',
       toast: 'Please complete your booking details first so we can serve you better.',
       whatsappMessagePrefix: 'Hello Madinah Massage! I would like to book a massage service.',
+      tag: 'Reservations',
+      namePlaceholder: 'Your Name',
+      hotelPlaceholder: 'Hotel Name',
+      roomPlaceholder: 'Room No',
+      meccaTimeLabel: 'Mecca Time'
     },
     benefits: {
-      title: 'Beneifts of Our Therapy',
+      title: 'Benefits of Our Therapy',
+      subtitle: 'Why Madinah Massage',
       items: {
         stressRelief: 'Stress Relief',
         sleep: 'Better Sleep',
@@ -141,6 +185,7 @@ export const translations: Record<Language, Translation> = {
     },
     about: {
       title: 'About Madinah Massage',
+      tag: 'The Heritage',
       content: 'MADINAH MASSAGE is a professional mobile massage service in Madinah. We specialize in providing professional wellness treatments directly to your hotel, apartment, or residence. Our mission is to support pilgrims and travelers in their journey by offering the ultimate relaxation experience near the Holy Mosque.',
       highlightTitle: 'Why Choose Us?',
       highlights: [
@@ -150,6 +195,18 @@ export const translations: Record<Language, Translation> = {
         'Direct Hotel / Home Visits',
         'Professional Hospitality Standards',
       ],
+      pilgrimsServed: 'Pilgrims Served',
+      learnMore: 'Learn more about our standards'
+    },
+    gallery: {
+      tag: 'The Ambiance',
+      title: 'Visual Gallery'
+    },
+    reviews: {
+      tag: 'Client Testimonials',
+      happyClients: 'Happy Clients',
+      dailyTreatments: 'Daily Treatments',
+      reviewRating: 'Review Rating'
     },
     contact: {
       title: 'Get In Touch',
@@ -159,9 +216,16 @@ export const translations: Record<Language, Translation> = {
       email: 'Email',
       hours: 'Operating Hours',
       location: 'Service Area',
+      contactTag: 'Get In Touch',
+      locationDesc: 'Central Madinah & Hotels near Masjid Nabawi. We come to you.',
+      hoursDesc: '24 Hours / 7 Days. Global Concierge Standards.'
     },
     footer: {
       quickLinks: 'Quick Links',
+      footerDesc: 'Crafting professional wellness experiences for the global pilgrim in the Heart of Madinah. Redefining mobile spa services with professional standards.',
+      footerServices: 'Services',
+      footerSupport: 'Support',
+      footerSvcsList: ['Full Body Therapy', 'Foot Reflexology', 'Umrah Recovery', 'Deep Tissue']
     },
   },
   ar: {
@@ -182,7 +246,7 @@ export const translations: Record<Language, Translation> = {
       viewServices: 'عرض الخدمات',
     },
     services: {
-      title: 'خدمات العافية لدينا',
+      title: 'خدمات خاصة لموسم الحج',
       subtitle: 'علاجات احترافية مصممة لاستعادتك واسترخائك',
       items: {
         fullBody60: 'مساج كامل للجسم 60 دقيقة',
@@ -190,8 +254,14 @@ export const translations: Record<Language, Translation> = {
         fullBody120: 'مساج كامل للجسم 120 دقيقة',
         footMassage60: 'مساج للقدمين 60 دقيقة',
       },
-      price: 'ريد',
+      price: 'ريال',
       minutes: 'دقيقة',
+      features: {
+        fullBody60: ['استرخاء عميق', 'مساج بالزيت', 'تركيز كامل للجسم'],
+        fullBody90: ['تخفيف التوتر الممدد', 'استعادة كاملة للعضلات', 'زيوت احترافية'],
+        fullBody120: ['تجديد مثالي للنشاط', 'عناية كاملة بالجسم', 'تركيز لنوم أفضل'],
+        footMassage60: ['تدليك انعكاسي للقدمين', 'منشفة دافئة', 'نقع بالماء العشبي']
+      }
     },
     booking: {
       title: 'احجز جلستك',
@@ -211,9 +281,15 @@ export const translations: Record<Language, Translation> = {
       toastTitle: 'الحجز قيد المعالجة',
       toast: 'يرجى إكمال تفاصيل الحجز أولاً حتى نتمكن من خدمتك بشكل أفضل.',
       whatsappMessagePrefix: 'مرحباً مساج المدينة! أود حجز خدمة مساج.',
+      tag: 'الحجوزات',
+      namePlaceholder: 'اسمك',
+      hotelPlaceholder: 'اسم الفندق',
+      roomPlaceholder: 'رقم الغرفة',
+      meccaTimeLabel: 'توقيت مكة'
     },
     benefits: {
       title: 'فوائد علاجنا',
+      subtitle: 'لماذا مساج المدينة',
       items: {
         stressRelief: 'تخفيف التوتر',
         sleep: 'نوم أفضل',
@@ -225,6 +301,7 @@ export const translations: Record<Language, Translation> = {
     },
     about: {
       title: 'حول مساج المدينة',
+      tag: 'تراثنا',
       content: 'مساج المدينة هو خدمة تدليك متنقلة احترافية في المدينة المنورة. نحن متخصصون في تقديم علاجات عافية احترافية مباشرة إلى فندقك أو شقتك أو سكنك. مهمتنا هي دعم المعتمرين والمسافرين في رحلتهم من خلال تقديم تجربة استرخاء مثالية بالقرب من الحرم الشريف.',
       highlightTitle: 'لماذا تختارنا؟',
       highlights: [
@@ -234,6 +311,18 @@ export const translations: Record<Language, Translation> = {
         'زيارات مباشرة للفنادق والمنازل',
         'معايير ضيافة احترافية',
       ],
+      pilgrimsServed: 'معتمر مخدوم',
+      learnMore: 'تعرف على المزيد عن معاييرنا'
+    },
+    gallery: {
+      tag: 'الأجواء',
+      title: 'معرض الصور'
+    },
+    reviews: {
+      tag: 'آراء عملائنا',
+      happyClients: 'العملاء السعداء',
+      dailyTreatments: 'جلسات يومية',
+      reviewRating: 'تقييم المراجعات'
     },
     contact: {
       title: 'تواصل معنا',
@@ -243,9 +332,16 @@ export const translations: Record<Language, Translation> = {
       email: 'البريد الإلكتروني',
       hours: 'ساعات العمل',
       location: 'منطقة الخدمة',
+      contactTag: 'تواصل معنا',
+      locationDesc: 'وسط المدينة المنورة والفنادق القريبة من المسجد النبوي. نأتي إليك.',
+      hoursDesc: '٢٤ ساعة / ٧ أيام. معايير ضيافة عالمية.'
     },
     footer: {
       quickLinks: 'روابط سريعة',
+      footerDesc: 'صياغة تجارب عافية احترافية للمعتمرين من جميع أنحاء العالم في قلب المدينة المنورة. إعادة تعريف خدمات السبا المتنقلة بمعايير احترافية.',
+      footerServices: 'خدماتنا',
+      footerSupport: 'الدعم',
+      footerSvcsList: ['جسم كامل', 'مساج قدمين', 'استشفاء العمرة', 'أنسجة عميقة']
     },
   },
   id: {
@@ -266,7 +362,7 @@ export const translations: Record<Language, Translation> = {
       viewServices: 'Lihat Layanan',
     },
     services: {
-      title: 'Layanan Kebugaran Kami',
+      title: 'Layanan khusus untuk musim haji',
       subtitle: 'Perawatan profesional yang disesuaikan untuk pemulihan dan relaksasi Anda',
       items: {
         fullBody60: 'Pijat Seluruh Tubuh 60 Menit',
@@ -276,6 +372,12 @@ export const translations: Record<Language, Translation> = {
       },
       price: 'SAR',
       minutes: 'Menit',
+      features: {
+        fullBody60: ['Relaksasi Mendalam', 'Pijat Minyak', 'Fokus Seluruh Tubuh'],
+        fullBody90: ['Pereda Stres Ekstra', 'Pemulihan Otot Total', 'Minyak Profesional'],
+        fullBody120: ['Peremajaan Maksimal', 'Perawatan Seluruh Tubuh', 'Fokus Tidur Nyenyak'],
+        footMassage60: ['Refleksologi Kaki', 'Handuk Hangat', 'Rendaman Air Herbal']
+      }
     },
     booking: {
       title: 'Reservasi Sesi Anda',
@@ -295,9 +397,15 @@ export const translations: Record<Language, Translation> = {
       toastTitle: 'Pemesanan Sedang Berlangsung',
       toast: 'Silakan lengkapi detail pesanan Anda terlebih dahulu agar kami dapat melayani Anda dengan lebih baik.',
       whatsappMessagePrefix: 'Halo Madinah Massage! Saya ingin memesan layanan pijat.',
+      tag: 'Reservasi',
+      namePlaceholder: 'Nama Anda',
+      hotelPlaceholder: 'Nama Hotel',
+      roomPlaceholder: 'No Kamar',
+      meccaTimeLabel: 'Waktu Makkah'
     },
     benefits: {
       title: 'Manfaat Terapi Kami',
+      subtitle: 'Mengapa Madinah Massage',
       items: {
         stressRelief: 'Penghilang Stres',
         sleep: 'Tidur Lebih Nyenyak',
@@ -309,6 +417,7 @@ export const translations: Record<Language, Translation> = {
     },
     about: {
       title: 'Tentang Madinah Massage',
+      tag: 'Warisan Kami',
       content: 'MADINAH MASSAGE adalah layanan pijat panggilan profesional di Madinah. Kami spesialis dalam menyediakan perawatan kebugaran profesional langsung ke hotel, apartemen, atau kediaman Anda. Misi kami adalah mendukung para jemaah dan pelancong dalam perjalanan mereka dengan menawarkan pengalaman relaksasi terbaik di dekat Masjid Nabawi.',
       highlightTitle: 'Mengapa Memilih Kami?',
       highlights: [
@@ -318,6 +427,18 @@ export const translations: Record<Language, Translation> = {
         'Kunjungan Langsung ke Hotel / Rumah',
         'Standar Hospitalitas Profesional',
       ],
+      pilgrimsServed: 'Jamaah Terlayani',
+      learnMore: 'Pelajari lebih lanjut tentang standar kami'
+    },
+    gallery: {
+      tag: 'Suasana',
+      title: 'Galeri Visual'
+    },
+    reviews: {
+      tag: 'Testimoni Klien',
+      happyClients: 'Klien Puas',
+      dailyTreatments: 'Perawatan Harian',
+      reviewRating: 'Rating Ulasan'
     },
     contact: {
       title: 'Hubungi Kami',
@@ -327,9 +448,16 @@ export const translations: Record<Language, Translation> = {
       email: 'Email',
       hours: 'Jam Operasional',
       location: 'Area Layanan',
+      contactTag: 'Hubungi Kami',
+      locationDesc: 'Pusat Madinah & Hotel dekat Masjid Nabawi. Kami datang ke tempat Anda.',
+      hoursDesc: '24 Jam / 7 Hari. Standar Layanan Global.'
     },
     footer: {
       quickLinks: 'Tautan Cepat',
+      footerDesc: 'Menghadirkan pengalaman kebugaran profesional bagi jemaah global di Jantung Kota Madinah. Mendefinisikan ulang layanan spa panggilan dengan standar profesional.',
+      footerServices: 'Layanan',
+      footerSupport: 'Dukungan',
+      footerSvcsList: ['Terapi Seluruh Tubuh', 'Pijat Refleksi Kaki', 'Pemulihan Umroh', 'Jaringan Dalam']
     },
   },
 };

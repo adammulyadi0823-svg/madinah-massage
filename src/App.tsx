@@ -355,7 +355,7 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
       title: t.services.items.fullBody60, 
       price: '250', 
       img: Gallery1,
-      features: ['Deep Relaxation', 'Oil Massage', 'Full Body Focus']
+      features: t.services.features.fullBody60
     },
     { 
       id: 'fullBody90', 
@@ -364,7 +364,7 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
       oldPrice: '375',
       discount: '10 Sar OFF',
       img: Gallery3,
-      features: ['Extended Stress Relief', 'Full Muscle Recovery', 'Professional Oils']
+      features: t.services.features.fullBody90
     },
     { 
       id: 'fullBody120', 
@@ -373,14 +373,14 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
       oldPrice: '500',
       discount: '20 Sar OFF',
       img: Gallery120,
-      features: ['Ultimate Rejuvenation', 'Total Body Care', 'Sleep Better Focus']
+      features: t.services.features.fullBody120
     },
     { 
       id: 'footMassage60', 
       title: t.services.items.footMassage60, 
       price: '250', 
       img: FootMassageImg,
-      features: ['Foot Reflexology', 'Warm Towel', 'Herbal Water Soak']
+      features: t.services.features.footMassage60
     },
   ];
 
@@ -499,7 +499,7 @@ const Benefits = ({ t }: any) => {
         <div className="max-w-xl mb-16">
           <div className="flex items-center gap-3 mb-4">
             <div className="h-[1px] w-8 bg-gold"></div>
-            <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">Why Madinah Massage</span>
+            <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">{t.benefits.subtitle}</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold serif leading-tight">{t.benefits.title}</h2>
         </div>
@@ -577,7 +577,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
           <div className="lg:w-1/2">
              <div className="flex items-center gap-3 mb-6">
                 <div className="h-[1px] w-8 bg-gold"></div>
-                <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">Reservations</span>
+                <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">{t.booking.tag}</span>
             </div>
             <h2 className="text-4xl md:text-6xl font-bold mb-8 serif text-maroon leading-tight">
               {t.booking.title}
@@ -609,7 +609,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                       required
                       type="text" 
                       className="w-full bg-slate-50 border border-slate-100 rounded-xl px-6 py-4 text-slate-800 focus:outline-none focus:border-gold transition-all shadow-sm"
-                      placeholder="Your Name"
+                      placeholder={t.booking.namePlaceholder}
                       value={formData.name}
                       onChange={e => setFormData({...formData, name: e.target.value})}
                     />
@@ -643,7 +643,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                       required
                       type="text" 
                       className="w-full bg-slate-50 border border-slate-100 rounded-xl px-6 py-4 text-slate-800 focus:outline-none focus:border-gold transition-all shadow-sm"
-                      placeholder="Hotel Name"
+                      placeholder={t.booking.hotelPlaceholder}
                       value={formData.hotel}
                       onChange={e => setFormData({...formData, hotel: e.target.value})}
                     />
@@ -654,7 +654,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                       required
                       type="text" 
                       className="w-full bg-slate-50 border border-slate-100 rounded-xl px-6 py-4 text-slate-800 focus:outline-none focus:border-gold transition-all shadow-sm"
-                      placeholder="Room No"
+                      placeholder={t.booking.roomPlaceholder}
                       value={formData.room}
                       onChange={e => setFormData({...formData, room: e.target.value})}
                     />
@@ -695,7 +695,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                     <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>
                       {t.booking.bookingDate} 
                       <span className="text-gold ml-1">
-                        ({lang === 'ar' ? 'توقيت مكة' : (lang === 'id' ? 'Waktu Makkah' : 'Mecca Time')})
+                        ({t.booking.meccaTimeLabel})
                       </span>
                     </label>
                     <input 
@@ -710,7 +710,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                     <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>
                       {t.booking.preferredTime}
                       <span className="text-gold ml-1">
-                        ({lang === 'ar' ? 'توقيت مكة' : (lang === 'id' ? 'Waktu Makkah' : 'Mecca Time')})
+                        ({t.booking.meccaTimeLabel})
                       </span>
                     </label>
                     <input 
@@ -750,7 +750,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
   );
 };
 
-const Gallery = () => {
+const Gallery = ({ t }: any) => {
   const images = [
     Gallery1,
     Gallery2,
@@ -766,10 +766,10 @@ const Gallery = () => {
         <div className="text-center mb-20">
           <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-[1px] w-8 bg-gold"></div>
-              <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">The Ambiance</span>
+              <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">{t.gallery.tag}</span>
               <div className="h-[1px] w-8 bg-gold"></div>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-maroon serif">Visual Gallery</h2>
+          <h2 className="text-4xl md:text-6xl font-bold text-maroon serif">{t.gallery.title}</h2>
         </div>
         
         <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
@@ -845,7 +845,7 @@ const Reviews = ({ t, lang }: any) => {
         <div className="text-center mb-16 pb-4">
           <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-[1px] w-8 bg-gold"></div>
-              <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">Client Testimonials</span>
+              <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">{t.reviews.tag}</span>
               <div className="h-[1px] w-8 bg-gold"></div>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-maroon serif">{t.nav.reviews}</h2>
@@ -935,9 +935,9 @@ const Reviews = ({ t, lang }: any) => {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-12 mt-20 bg-white/50 backdrop-blur-sm p-12 rounded-[40px] border border-white/50">
           {[
-            { label: lang === 'id' ? 'Jamaah Terlayani' : 'Happy Clients', value: '700+' },
-            { label: 'Daily Treatments', value: '25+' },
-            { label: 'Review Rating', value: '5.0/5' }
+            { label: t.reviews.happyClients, value: '700+' },
+            { label: t.reviews.dailyTreatments, value: '25+' },
+            { label: t.reviews.reviewRating, value: '5.0/5' }
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <h3 className="text-4xl font-bold text-maroon mb-2 serif">{stat.value}</h3>
@@ -971,7 +971,7 @@ const About = ({ t, scrollToSection, lang }: any) => {
               />
               <div className={`absolute top-12 ${lang === 'ar' ? 'right-12' : 'left-12'} p-10 glass rounded-[40px] z-20 shadow-2xl backdrop-blur-3xl hidden md:block border border-white/40`}>
                 <span className="serif text-6xl font-bold block text-maroon mb-2">700+</span>
-                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-gold">{lang === 'id' ? 'Jamaah Terlayani' : (lang === 'ar' ? 'معتمر مخدوم' : 'Pilgrims Served')}</span>
+                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-gold">{t.about.pilgrimsServed}</span>
               </div>
             </motion.div>
           </div>
@@ -983,7 +983,7 @@ const About = ({ t, scrollToSection, lang }: any) => {
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="h-[1px] w-8 bg-gold"></div>
-                <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">The Heritage</span>
+                <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">{t.about.tag}</span>
               </div>
               <h2 className="text-4xl md:text-7xl font-bold mb-10 serif text-maroon leading-tight">{t.about.title}</h2>
               <p className={`text-slate-600 text-xl leading-relaxed mb-12 font-light italic ${lang === 'ar' ? 'border-r-4 border-gold/20 pr-8' : 'border-l-4 border-gold/20 pl-8'}`}>
@@ -1005,7 +1005,7 @@ const About = ({ t, scrollToSection, lang }: any) => {
                 onClick={() => scrollToSection('contact')}
                 className="mt-16 flex items-center gap-4 text-maroon hover:text-gold transition-colors font-bold uppercase tracking-[0.3em] text-xs"
               >
-                Learn more about our standards
+                {t.about.learnMore}
                 <ArrowRight className="w-5 h-5" />
               </button>
             </motion.div>
@@ -1025,7 +1025,7 @@ const Contact = ({ t, onWhatsAppClick }: any) => {
             <div className="lg:w-1/2 p-12 lg:p-24">
               <div className="flex items-center gap-3 mb-6">
                 <div className="h-[1px] w-8 bg-gold"></div>
-                <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">Get In Touch</span>
+                <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">{t.contact.contactTag}</span>
               </div>
               <h2 className="text-4xl md:text-7xl font-bold mb-10 serif text-maroon leading-tight">{t.contact.title}</h2>
               <p className="text-slate-500 mb-16 text-lg font-light">{t.contact.info}</p>
@@ -1037,7 +1037,7 @@ const Contact = ({ t, onWhatsAppClick }: any) => {
                   </div>
                   <div>
                     <h4 className="font-bold text-slate-800 mb-2 uppercase tracking-widest text-[11px]">{t.contact.location}</h4>
-                    <p className="text-slate-500 text-sm leading-relaxed">Central Madinah & Hotels near Masjid Nabawi. We come to you.</p>
+                    <p className="text-slate-500 text-sm leading-relaxed">{t.contact.locationDesc}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-8 group">
@@ -1046,7 +1046,7 @@ const Contact = ({ t, onWhatsAppClick }: any) => {
                   </div>
                   <div>
                     <h4 className="font-bold text-slate-800 mb-2 uppercase tracking-widest text-[11px]">{t.contact.hours}</h4>
-                    <p className="text-slate-500 text-sm leading-relaxed">24 Hours / 7 Days. Global Concierge Standards.</p>
+                    <p className="text-slate-500 text-sm leading-relaxed">{t.contact.hoursDesc}</p>
                   </div>
                 </div>
               </div>
@@ -1089,7 +1089,7 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
               <span className="text-xl font-bold tracking-wider serif text-gold uppercase">MADINAH MASSAGE</span>
             </div>
             <p className="text-white/60 font-light leading-relaxed mb-10 text-sm">
-              Crafting professional wellness experiences for the global pilgrim in the Heart of Madinah. Redefining mobile spa services with professional standards.
+              {t.footer.footerDesc}
             </p>
             <div className="flex flex-wrap gap-4 mt-10">
               <button onClick={onWhatsAppClick} className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-500 text-gold shadow-lg group">
@@ -1124,16 +1124,16 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
           </div>
 
           <div>
-            <h4 className="text-sm font-bold mb-10 serif text-gold uppercase tracking-[0.2em]">Services</h4>
+            <h4 className="text-sm font-bold mb-10 serif text-gold uppercase tracking-[0.2em]">{t.footer.footerServices}</h4>
             <ul className="space-y-6">
-              {['Full Body Therapy', 'Foot Reflexology', 'Umrah Recovery', 'Deep Tissue'].map(s => (
+              {t.footer.footerSvcsList.map((s: string) => (
                 <li key={s} className="text-white/60 text-sm uppercase tracking-widest font-medium">{s}</li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-sm font-bold mb-10 serif text-gold uppercase tracking-[0.2em]">Support</h4>
+            <h4 className="text-sm font-bold mb-10 serif text-gold uppercase tracking-[0.2em]">{t.footer.footerSupport}</h4>
             <ul className="space-y-8">
               <li className="flex items-start gap-4">
                 <Phone className="w-5 h-5 text-gold shrink-0" />
@@ -1304,7 +1304,7 @@ export default function App() {
         <Services t={t} scrollToSection={scrollToSection} setSelectedService={setSelectedService} />
         <Benefits t={t} />
         <About t={t} scrollToSection={scrollToSection} lang={lang} />
-        <Gallery />
+        <Gallery t={t} />
         <Reviews t={t} lang={lang} />
         <BookingForm t={t} selectedService={selectedService} scrollToSection={scrollToSection} lang={lang} />
         <Contact t={t} onWhatsAppClick={handleWhatsAppClick} />
