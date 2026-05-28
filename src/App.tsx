@@ -42,6 +42,8 @@ import AboutImage from './assets/images/regenerated_image_1778941470110.png';
 import Gallery120 from './assets/images/regenerated_image_1778943907732.png';
 import FootMassageImg from './assets/images/regenerated_image_1778943911153.png';
 import Logo from './assets/images/logo.png';
+// @ts-ignore
+import bgSpaVideo from './assets/images/bg-spa.mp4';
 
 // --- Helpers ---
 
@@ -211,19 +213,40 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
 };
 
 const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.log("Autoplay did not start automatically, will play on interaction:", err);
+      });
+    }
+  }, []);
+
   return (
-    <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center">
-      {/* Premium static background image */}
+    <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center bg-black">
+      {/* Background Image: Berfungsi selalu sebagai latar belakang dasar agar web langsung indah tanpa jeda kedip hitam */}
       <div 
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center opacity-40 z-0 pointer-events-none"
         style={{ backgroundImage: `url(${Gallery1})` }}
       ></div>
+
+      {/* High-Performance background video with full brightness and high clarity */}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        poster={Gallery1}
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-100 pointer-events-none"
+      >
+        <source src={bgSpaVideo} type="video/mp4" />
+      </video>
       
-      {/* 40% solid black overlay for maximum text legibility */}
-      <div className="absolute inset-0 bg-black/40 z-[1]"></div>
-      
-      {/* Dark gradient overlay for rich contrast and elegant depth */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent z-[2]"></div>
+      {/* gradasi bayangan di sebelah kiri agar tulisan sangat mudah dibaca, sementara sebelah kanan/tengah video tetap bersinar cerah sepenuhnya */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-[2]"></div>
       <div className="absolute inset-0 islamic-pattern opacity-10 pointer-events-none z-[3]"></div>
       
       {/* Safe padding-top (pt-36) prevents content from ever overlapping with the fixed Header navbar on any device size */}
@@ -231,19 +254,19 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick }: any) => {
         <motion.div
            initial={{ opacity: 0, x: -30 }}
            animate={{ opacity: 1, x: 0 }}
-           transition={{ duration: 1.2, ease: 'easeOut' }}
-           className="max-w-2xl"
+           transition={{ duration: 1 }}
+           className="max-w-2xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="h-[1px] w-12 bg-gold"></div>
-            <span className="text-gold-light uppercase tracking-[0.4em] text-[11px] font-bold">
+            <span className="serif text-gold text-xs sm:text-sm uppercase tracking-[0.3em] font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
               Sacred Serenity
             </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white font-bold mb-8 leading-[1.15] serif tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white font-bold mb-8 leading-[1.15] serif tracking-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.95)]">
             {t.hero.headline}
           </h1>
-          <p className="text-white/80 text-base md:text-lg lg:text-xl mb-12 font-light leading-relaxed max-w-xl">
+          <p className="text-white/95 text-base md:text-lg lg:text-xl mb-12 font-medium leading-relaxed max-w-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
             {t.hero.subheadline}
           </p>
           
