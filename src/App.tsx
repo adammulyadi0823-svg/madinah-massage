@@ -215,31 +215,36 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
 const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkDevice = () => {
-      const isMobileSize = window.innerWidth < 768;
-      const isMobileUA = /android|iphone|ipad|ipod|iemobile|opera mini/i.test(navigator.userAgent);
-      setIsMobile(isMobileSize || isMobileUA);
-    };
-    checkDevice();
-    window.addEventListener('resize', checkDevice);
-    return () => window.removeEventListener('resize', checkDevice);
-  }, []);
-
-  useEffect(() => {
-    if (!isMobile && videoRef.current) {
+    if (videoRef.current) {
+      // Ensure the video element is explicitly muted (modern browsers strictly require this to allow autoplay)
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
           setIsVideoPlaying(true);
         }).catch(err => {
-          console.log("Autoplay did not start automatically, attempting on interaction:", err);
+          console.log("Autoplay was prevented by browser security/settings, listening for interaction:", err);
+          
+          // Fallback context: trigger play immediately as soon as the user touches or clicks anywhere on the screen
+          const playOnGesture = () => {
+            if (videoRef.current) {
+              videoRef.current.play().then(() => {
+                setIsVideoPlaying(true);
+                document.removeEventListener('click', playOnGesture);
+                document.removeEventListener('touchstart', playOnGesture);
+              }).catch(() => {});
+            }
+          };
+          document.addEventListener('click', playOnGesture, { passive: true });
+          document.addEventListener('touchstart', playOnGesture, { passive: true });
         });
       }
     }
-  }, [isMobile]);
+  }, []);
 
   const handleVideoPlaying = () => {
     setIsVideoPlaying(true);
@@ -247,33 +252,32 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
 
   return (
     <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center bg-black">
-      {/* Background Image: Only shown when video is not yet playing or on mobile, avoiding resource-heavy alpha-blending ghosting */}
-      {(isMobile || !isVideoPlaying) && (
+      {/* Background Image: Shown initially using the poster-blend style or until the video starts playing */}
+      {!isVideoPlaying && (
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-100 z-0 pointer-events-none"
           style={{ backgroundImage: `url(${Gallery1})` }}
         ></div>
       )}
       
-      {/* High-Performance, clear, and bright background video (only rendered on non-mobile devices to prevent GPU crashes or horizontal stripes) */}
-      {!isMobile && (
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          onLoadedData={handleVideoPlaying}
-          onCanPlay={handleVideoPlaying}
-          onPlaying={handleVideoPlaying}
-          onCanPlayThrough={handleVideoPlaying}
-          className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
-          style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
-        >
-          <source src={videoBg} type="video/mp4" />
-        </video>
-      )}
+      {/* High-Performance, clear, and bright background video */}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        poster={Gallery1}
+        onLoadedData={handleVideoPlaying}
+        onCanPlay={handleVideoPlaying}
+        onPlaying={handleVideoPlaying}
+        onCanPlayThrough={handleVideoPlaying}
+        className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
+        style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
+      >
+        <source src={videoBg} type="video/mp4" />
+      </video>
       
       {/* Very soft screen-wide gradient to blend borders nicely without overall darkening */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent z-[2]"></div>
