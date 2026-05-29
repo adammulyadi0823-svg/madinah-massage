@@ -215,9 +215,21 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
 const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (videoRef.current) {
+    const checkDevice = () => {
+      const isMobileSize = window.innerWidth < 768;
+      const isMobileUA = /android|iphone|ipad|ipod|iemobile|opera mini/i.test(navigator.userAgent);
+      setIsMobile(isMobileSize || isMobileUA);
+    };
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile && videoRef.current) {
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
@@ -227,7 +239,7 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
         });
       }
     }
-  }, []);
+  }, [isMobile]);
 
   const handleVideoPlaying = () => {
     setIsVideoPlaying(true);
@@ -235,31 +247,33 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
 
   return (
     <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center bg-black">
-      {/* Background Image: Only shown when video is not yet playing, avoiding resource-heavy alpha-blending ghosting */}
-      {!isVideoPlaying && (
+      {/* Background Image: Only shown when video is not yet playing or on mobile, avoiding resource-heavy alpha-blending ghosting */}
+      {(isMobile || !isVideoPlaying) && (
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-100 z-0 pointer-events-none"
           style={{ backgroundImage: `url(${Gallery1})` }}
         ></div>
       )}
       
-      {/* High-Performance, clear, and bright background video */}
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        onLoadedData={handleVideoPlaying}
-        onCanPlay={handleVideoPlaying}
-        onPlaying={handleVideoPlaying}
-        onCanPlayThrough={handleVideoPlaying}
-        className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
-        style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
-      >
-        <source src={videoBg} type="video/mp4" />
-      </video>
+      {/* High-Performance, clear, and bright background video (only rendered on non-mobile devices to prevent GPU crashes or horizontal stripes) */}
+      {!isMobile && (
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          onLoadedData={handleVideoPlaying}
+          onCanPlay={handleVideoPlaying}
+          onPlaying={handleVideoPlaying}
+          onCanPlayThrough={handleVideoPlaying}
+          className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
+          style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
+        >
+          <source src={videoBg} type="video/mp4" />
+        </video>
+      )}
       
       {/* Very soft screen-wide gradient to blend borders nicely without overall darkening */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent z-[2]"></div>
@@ -1187,6 +1201,19 @@ const FallingLeaf = React.memo(({ delay, duration, startX, size, color }: any) =
 });
 
 const FallingLeavesBackground = React.memo(() => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkDevice = () => {
+      const isMobileSize = window.innerWidth < 768;
+      const isMobileUA = /android|iphone|ipad|ipod|iemobile|opera mini/i.test(navigator.userAgent);
+      setIsMobile(isMobileSize || isMobileUA);
+    };
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
   // Memoize lead parameters to strictly avoid recalculations on scroll/re-render.
   // We reduce count to 15 to cut calculation costs in half, maintaining high class visuals.
   const leaves = useMemo(() => {
@@ -1199,6 +1226,10 @@ const FallingLeavesBackground = React.memo(() => {
       color: Math.random() > 0.4 ? 'text-gold/25' : 'text-green-800/10'
     }));
   }, []);
+
+  if (isMobile) {
+    return null; // Prevents continuous redrawing and trail glitches on mobile GPU canvas layers
+  }
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-[10]">
