@@ -1350,7 +1350,7 @@ export default function App() {
     }
     toastTimeoutRef.current = setTimeout(() => {
       setShowToast(false);
-    }, 10000);
+    }, 8000);
   };
 
   useEffect(() => {
