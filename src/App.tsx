@@ -1260,6 +1260,7 @@ export default function App() {
     return 'en';
   });
   const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef<any>(null);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const t = translations[lang];
@@ -1344,8 +1345,21 @@ export default function App() {
   const handleWhatsAppClick = () => {
     setShowToast(true);
     scrollToSection('booking');
-    setTimeout(() => setShowToast(false), 4000);
+    if (toastTimeoutRef.current) {
+      clearTimeout(toastTimeoutRef.current);
+    }
+    toastTimeoutRef.current = setTimeout(() => {
+      setShowToast(false);
+    }, 10000);
   };
+
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
