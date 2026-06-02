@@ -85,7 +85,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'glass py-4 shadow-sm' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-8 flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer group" onClick={() => scrollToSection('home')}>
-          <img src={Logo} alt="Madinah Massage Logo" className="h-12 w-auto transition-transform group-hover:scale-105" />
+          <img src={Logo} alt="Madinah Massage Logo" className="h-12 w-auto transition-transform group-hover:scale-105" referrerPolicy="no-referrer" />
           <div className="flex flex-col">
             <span className={`serif font-bold text-lg tracking-wider transition-colors ${isScrolled ? 'text-maroon' : 'text-white'}`}>
               MADINAH MASSAGE
@@ -1170,7 +1170,7 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-24">
           <div className="col-span-1 lg:col-span-1">
             <div className="flex items-center gap-3 mb-10">
-              <img src={Logo} alt="Madinah Massage Logo" className="h-12 w-auto" />
+              <img src={Logo} alt="Madinah Massage Logo" className="h-12 w-auto" referrerPolicy="no-referrer" />
               <span className="text-xl font-bold tracking-wider serif text-gold uppercase">MADINAH MASSAGE</span>
             </div>
             <p className="text-white/60 font-light leading-relaxed mb-10 text-sm">
