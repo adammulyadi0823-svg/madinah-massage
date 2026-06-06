@@ -678,7 +678,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                 </div>
                 <div>
                    <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Direct Support</p>
-                   <p className="font-bold text-slate-800 tracking-wide" dir="ltr">+966 50 617 3369</p>
+                   <p className="font-bold text-slate-800 tracking-wide selectable" dir="ltr">+966 50 617 3369</p>
                 </div>
               </div>
             </div>
@@ -1222,7 +1222,7 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
             <ul className="space-y-8">
               <li className="flex items-start gap-4">
                 <Phone className="w-5 h-5 text-gold shrink-0" />
-                <span className="text-white/60 text-sm" dir="ltr">+966 50 617 3369</span>
+                <span className="text-white/60 text-sm selectable" dir="ltr">+966 50 617 3369</span>
               </li>
               <li className="flex items-start gap-4">
                 <Mail className="w-5 h-5 text-gold shrink-0" />
@@ -1363,6 +1363,18 @@ export default function App() {
       if (activeEl === 'input' || activeEl === 'textarea') {
         return;
       }
+
+      // Selalu ijinkan menyalin nomor telepon atau elemen yang memiliki class 'selectable'
+      const selection = window.getSelection()?.toString() || '';
+      const isPhoneNumber = /^[+\s\d()-]{4,25}$/.test(selection.trim());
+
+      const target = e.target as HTMLElement | null;
+      const isSelectableEl = target?.closest?.('.selectable') || target?.closest?.('a[href^="tel:"]');
+
+      if (isPhoneNumber || isSelectableEl) {
+        return; // Ijinkan penyalinan
+      }
+
       e.preventDefault();
       setShowCopyToast(true);
       if (copyToastTimeoutRef.current) clearTimeout(copyToastTimeoutRef.current);
@@ -1371,9 +1383,18 @@ export default function App() {
 
     const preventContextMenu = (e: MouseEvent) => {
       const activeEl = document.activeElement?.tagName?.toLowerCase();
-      const targetEl = (e.target as HTMLElement).tagName?.toLowerCase();
-      if (activeEl === 'input' || activeEl === 'textarea' || targetEl === 'input' || targetEl === 'textarea') {
-        return;
+      const target = e.target as HTMLElement | null;
+      const targetEl = target?.tagName?.toLowerCase();
+
+      if (
+        activeEl === 'input' || 
+        activeEl === 'textarea' || 
+        targetEl === 'input' || 
+        targetEl === 'textarea' ||
+        target?.closest?.('.selectable') ||
+        target?.closest?.('a[href^="tel:"]')
+      ) {
+        return; // Ijinkan klik kanan di nomor ponsel/konten tertentu
       }
       e.preventDefault();
     };
@@ -1389,6 +1410,12 @@ export default function App() {
       // Ctrl+C / Cmd+C
       if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
         if (!isInputting) {
+          const selection = window.getSelection()?.toString() || '';
+          const isPhoneNumber = /^[+\s\d()-]{4,25}$/.test(selection.trim());
+          if (isPhoneNumber) {
+            return; // Biarkan salin nomor telepon
+          }
+
           e.preventDefault();
           setShowCopyToast(true);
           if (copyToastTimeoutRef.current) clearTimeout(copyToastTimeoutRef.current);
