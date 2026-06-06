@@ -13,7 +13,20 @@
 
 @layer base {
   body {
-    @apply bg-cream text-slate-800 font-sans antialiased;
+    @apply bg-cream text-slate-800 font-sans antialiased select-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  input, textarea, select {
+    @apply select-text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
   }
   h1, h2, h3, h4, .serif {
     @apply font-serif;

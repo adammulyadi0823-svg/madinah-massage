@@ -1328,6 +1328,8 @@ export default function App() {
   });
   const [showToast, setShowToast] = useState(false);
   const toastTimeoutRef = useRef<any>(null);
+  const [showCopyToast, setShowCopyToast] = useState(false);
+  const copyToastTimeoutRef = useRef<any>(null);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const t = translations[lang];
@@ -1352,6 +1354,77 @@ export default function App() {
       const el = link as HTMLLinkElement;
       el.href = `/favicon.png?v=3`;
     });
+  }, []);
+
+  // Mengunci penyalinan teks, klik kanan, seret gambar, serta shortcut keyboard salin/inspeksi
+  useEffect(() => {
+    const preventCopy = (e: ClipboardEvent) => {
+      const activeEl = document.activeElement?.tagName?.toLowerCase();
+      if (activeEl === 'input' || activeEl === 'textarea') {
+        return;
+      }
+      e.preventDefault();
+      setShowCopyToast(true);
+      if (copyToastTimeoutRef.current) clearTimeout(copyToastTimeoutRef.current);
+      copyToastTimeoutRef.current = setTimeout(() => setShowCopyToast(false), 3000);
+    };
+
+    const preventContextMenu = (e: MouseEvent) => {
+      const activeEl = document.activeElement?.tagName?.toLowerCase();
+      const targetEl = (e.target as HTMLElement).tagName?.toLowerCase();
+      if (activeEl === 'input' || activeEl === 'textarea' || targetEl === 'input' || targetEl === 'textarea') {
+        return;
+      }
+      e.preventDefault();
+    };
+
+    const preventDrag = (e: DragEvent) => {
+      e.preventDefault();
+    };
+
+    const preventKeys = (e: KeyboardEvent) => {
+      const activeEl = document.activeElement?.tagName?.toLowerCase();
+      const isInputting = activeEl === 'input' || activeEl === 'textarea';
+
+      // Ctrl+C / Cmd+C
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
+        if (!isInputting) {
+          e.preventDefault();
+          setShowCopyToast(true);
+          if (copyToastTimeoutRef.current) clearTimeout(copyToastTimeoutRef.current);
+          copyToastTimeoutRef.current = setTimeout(() => setShowCopyToast(false), 3000);
+        }
+      }
+      // Ctrl+A / Cmd+A
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'a' || e.key === 'A')) {
+        if (!isInputting) {
+          e.preventDefault();
+        }
+      }
+      // Ctrl+U
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U')) {
+        e.preventDefault();
+      }
+      // F12 or Developer Tools
+      if (
+        e.key === 'F12' || 
+        ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C'))
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('copy', preventCopy);
+    document.addEventListener('contextmenu', preventContextMenu);
+    document.addEventListener('dragstart', preventDrag);
+    window.addEventListener('keydown', preventKeys);
+
+    return () => {
+      document.removeEventListener('copy', preventCopy);
+      document.removeEventListener('contextmenu', preventContextMenu);
+      document.removeEventListener('dragstart', preventDrag);
+      window.removeEventListener('keydown', preventKeys);
+    };
   }, []);
 
   // Synchronize dynamic URL path with language selection
@@ -1543,6 +1616,40 @@ export default function App() {
                 </p>
               </div>
               <button onClick={() => setShowToast(false)}>
+                <X className="w-4 h-4 text-slate-400" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      {/* Elegant Copy Protection Toast Notification */}
+      <AnimatePresence>
+        {showCopyToast && (
+          <motion.div 
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.9 }}
+            className={`fixed bottom-28 ${lang === 'ar' ? 'left-8' : 'right-8'} z-[61] glass p-5 rounded-2xl shadow-2xl max-w-sm border-l-4 border-maroon select-none`}
+            style={{ pointerEvents: 'auto' }}
+          >
+            <div className="flex gap-4 items-center">
+              <div className="bg-maroon/10 p-2 rounded-lg text-maroon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6z"/>
+                  <path d="M12 8v4"/>
+                  <path d="M12 16h.01"/>
+                </svg>
+              </div>
+              <div className="flex-1">
+                <h5 className="font-bold text-slate-800 text-sm mb-0.5">
+                  {lang === 'ar' ? 'محتوى محمي' : lang === 'id' ? 'Konten Dilindungi' : 'Protected Content'}
+                </h5>
+                <p className="text-slate-500 text-xs font-medium leading-relaxed">
+                  {lang === 'ar' ? 'نسخ النصوص والصور غير مسموح به في هذا الموقع.' : lang === 'id' ? 'Penyalinan teks dan gambar tidak diizinkan di situs ini.' : 'Copying text and images is disabled on this website.'}
+                </p>
+              </div>
+              <button onClick={() => setShowCopyToast(false)} className="ml-2 p-1 hover:bg-slate-100 rounded">
                 <X className="w-4 h-4 text-slate-400" />
               </button>
             </div>
