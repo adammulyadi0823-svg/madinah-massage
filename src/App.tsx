@@ -41,7 +41,7 @@ import Gallery6 from './assets/images/regenerated_image_1778939273169.png';
 import AboutImage from './assets/images/regenerated_image_1778941470110.png';
 import Gallery120 from './assets/images/regenerated_image_1778943907732.png';
 import FootMassageImg from './assets/images/regenerated_image_1778943911153.png';
-import Logo from './assets/images/logo.png';
+import Logo from './assets/images/regenerated_image_1780779334505.png';
 // @ts-ignore
 import videoBg from './assets/images/bg-spa.mp4';
 
@@ -1147,7 +1147,7 @@ const Contact = ({ t, onWhatsAppClick }: any) => {
             </div>
             <div className="lg:w-1/2 h-[500px] lg:h-auto min-h-[600px] relative">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14502.99221191398!2d39.60533038676571!3d24.47185012543977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15bdbe51199320e3%3A0x6bba843fdf91557!2sAl%20Masjid%20an%20Nabawi!5e0!3m2!1sen!2ssa!4v1715856422341!5m2!1sen!2ssa" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3630.7093345479023!2d39.6098745!3d24.4725712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15bdbf0b888153e3%3A0x62d0a53b30822ae5!2sMadinah+Massage!5e0!3m2!1sen!2ssa!4v1715856422341!5m2!1sen!2ssa" 
                 className="w-full h-full transition-all duration-500 border-none"
                 allowFullScreen={true}
                 loading="lazy"
@@ -1366,7 +1366,8 @@ export default function App() {
 
       // Selalu ijinkan menyalin nomor telepon atau elemen yang memiliki class 'selectable'
       const selection = window.getSelection()?.toString() || '';
-      const isPhoneNumber = /^[+\s\d()-]{4,25}$/.test(selection.trim());
+      const trimmed = selection.trim();
+      const isPhoneNumber = /^[+\s\d()-]{4,25}$/.test(trimmed) || trimmed.includes("966") || trimmed.includes("3369");
 
       const target = e.target as HTMLElement | null;
       const isSelectableEl = target?.closest?.('.selectable') || target?.closest?.('a[href^="tel:"]');
@@ -1411,9 +1412,14 @@ export default function App() {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
         if (!isInputting) {
           const selection = window.getSelection()?.toString() || '';
-          const isPhoneNumber = /^[+\s\d()-]{4,25}$/.test(selection.trim());
-          if (isPhoneNumber) {
-            return; // Biarkan salin nomor telepon
+          const trimmed = selection.trim();
+          const isPhoneNumber = /^[+\s\d()-]{4,25}$/.test(trimmed) || trimmed.includes("966") || trimmed.includes("3369");
+          
+          const target = e.target as HTMLElement | null;
+          const isSelectableEl = target?.closest?.('.selectable') || target?.closest?.('a[href^="tel:"]');
+
+          if (isPhoneNumber || isSelectableEl) {
+            return; // Biarkan salin nomor telepon / elemen selectable
           }
 
           e.preventDefault();
