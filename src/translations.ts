@@ -20,6 +20,7 @@ export interface Translation {
   services: {
     title: string;
     subtitle: string;
+    genderTag: string;
     items: {
       fullBody60: string;
       fullBody90: string;
@@ -130,8 +131,9 @@ export const translations: Record<Language, Translation> = {
       viewServices: 'View Services',
     },
     services: {
-      title: 'Special services for the Hajj season',
+      title: 'Our Professional Services',
       subtitle: 'Professional treatments tailored for your recovery and relaxation',
+      genderTag: 'Male Therapists for Men, Female Therapists for Women',
       items: {
         fullBody60: 'Full Body Massage 60 Minutes',
         fullBody90: 'Full Body Massage 90 Minutes',
@@ -246,8 +248,9 @@ export const translations: Record<Language, Translation> = {
       viewServices: 'عرض الخدمات',
     },
     services: {
-      title: 'خدمات خاصة لموسم الحج',
+      title: 'خدماتنا الاحترافية',
       subtitle: 'علاجات احترافية مصممة لاستعادتك واسترخائك',
+      genderTag: 'معالجون للرجال، ومعالجات للنساء',
       items: {
         fullBody60: 'مساج كامل للجسم 60 دقيقة',
         fullBody90: 'مساج كامل للجسم 90 دقيقة',
@@ -362,8 +365,9 @@ export const translations: Record<Language, Translation> = {
       viewServices: 'Lihat Layanan',
     },
     services: {
-      title: 'Layanan khusus untuk musim haji',
+      title: 'Layanan Profesional Kami',
       subtitle: 'Perawatan profesional yang disesuaikan untuk pemulihan dan relaksasi Anda',
+      genderTag: 'Terapis Pria untuk Pria, Terapis Wanita untuk Wanita',
       items: {
         fullBody60: 'Pijat Seluruh Tubuh 60 Menit',
         fullBody90: 'Pijat Seluruh Tubuh 90 Menit',

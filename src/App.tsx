@@ -425,36 +425,36 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
     { 
       id: 'fullBody60', 
       title: t.services.items.fullBody60, 
-      price: '250', 
-      oldPrice: '255',
-      discount: '5 Sar OFF',
+      price: '165', 
+      oldPrice: '200',
+      discount: '35 Sar OFF',
       img: Gallery1,
       features: t.services.features.fullBody60
     },
     { 
       id: 'fullBody90', 
       title: t.services.items.fullBody90, 
-      price: '365', 
-      oldPrice: '375',
-      discount: '10 Sar OFF',
+      price: '245', 
+      oldPrice: '300',
+      discount: '55 Sar OFF',
       img: Gallery3,
       features: t.services.features.fullBody90
     },
     { 
       id: 'fullBody120', 
       title: t.services.items.fullBody120, 
-      price: '480', 
-      oldPrice: '500',
-      discount: '20 Sar OFF',
+      price: '320', 
+      oldPrice: '400',
+      discount: '80 Sar OFF',
       img: Gallery120,
       features: t.services.features.fullBody120
     },
     { 
       id: 'footMassage60', 
       title: t.services.items.footMassage60, 
-      price: '250', 
-      oldPrice: '255',
-      discount: '5 Sar OFF',
+      price: '165', 
+      oldPrice: '200',
+      discount: '35 Sar OFF',
       img: FootMassageImg,
       features: t.services.features.footMassage60
     },
@@ -480,7 +480,12 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
               <div className="h-[1px] w-8 bg-gold"></div>
               <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">The Collection</span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-maroon serif leading-tight">{t.services.title}</h2>
+            <h2 className="text-4xl md:text-6xl font-bold text-maroon serif leading-tight">
+              {t.services.title}
+              <span className="block mt-3 text-sm md:text-base font-sans tracking-wider text-amber-700 font-semibold">
+                {t.services.genderTag}
+              </span>
+            </h2>
           </motion.div>
           <motion.p 
              initial={{ opacity: 0 }}
@@ -637,10 +642,10 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
     let totalPrice = 0;
     const services = t.services.items;
     
-    if (formData.service === services.fullBody60) totalPrice = 250;
-    else if (formData.service === services.fullBody90) totalPrice = 365;
-    else if (formData.service === services.fullBody120) totalPrice = 480;
-    else if (formData.service === services.footMassage60) totalPrice = 250;
+    if (formData.service === services.fullBody60) totalPrice = 165;
+    else if (formData.service === services.fullBody90) totalPrice = 245;
+    else if (formData.service === services.fullBody120) totalPrice = 320;
+    else if (formData.service === services.footMassage60) totalPrice = 165;
 
     const genderLabel = formData.gender === 'Male' ? t.booking.male : t.booking.female;
     const message = `${t.booking.whatsappMessagePrefix}\n\n${t.booking.fullName}: ${formData.name}\n${t.booking.gender}: ${genderLabel}\n${t.booking.hotelName}: ${formData.hotel}\n${t.booking.roomNumber}: ${formData.room}\n${t.booking.serviceType}: ${formData.service}\n${t.booking.bookingDate}: ${formData.date}\n${t.booking.preferredTime}: ${formData.time}\n${t.booking.additionalNotes}: ${formData.notes}\n\nTotal = ${totalPrice} SAR\n\nPlease inform me about the therapist's availability. Thank you`;
@@ -1054,7 +1059,7 @@ const About = ({ t, scrollToSection, lang }: any) => {
                 className="rounded-[60px] relative z-10 shadow-3xl transition-all duration-500"
                 referrerPolicy="no-referrer"
               />
-              <div className={`absolute top-12 ${lang === 'ar' ? 'right-12' : 'left-12'} p-10 glass rounded-[40px] z-20 shadow-2xl backdrop-blur-3xl hidden md:block border border-white/40`}>
+              <div className={`absolute -top-10 ${lang === 'ar' ? '-right-10' : '-left-10'} p-10 glass rounded-[40px] z-20 shadow-2xl backdrop-blur-3xl hidden md:block border border-white/40`}>
                 <span className="serif text-6xl font-bold block text-maroon mb-2">700+</span>
                 <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-gold">{t.about.pilgrimsServed}</span>
               </div>
@@ -1147,7 +1152,7 @@ const Contact = ({ t, onWhatsAppClick }: any) => {
             </div>
             <div className="lg:w-1/2 h-[500px] lg:h-auto min-h-[600px] relative">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3630.7093345479023!2d39.6098745!3d24.4725712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15bdbf0b888153e3%3A0x62d0a53b30822ae5!2sMadinah+Massage!5e0!3m2!1sen!2ssa!4v1715856422341!5m2!1sen!2ssa" 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6500!2d39.6111818!3d24.4686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssa!4v1715856422341!5m2!1sen!2ssa" 
                 className="w-full h-full transition-all duration-500 border-none"
                 allowFullScreen={true}
                 loading="lazy"
