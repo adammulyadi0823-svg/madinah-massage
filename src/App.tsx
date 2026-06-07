@@ -297,7 +297,7 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
               className="serif text-gold text-xs sm:text-sm uppercase tracking-[0.3em] font-medium"
               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.4)' }}
             >
-              Sacred Serenity
+              SACRED SERENITY
             </span>
           </div>
           <h1 
