@@ -13,6 +13,7 @@ export interface Translation {
   };
   hero: {
     headline: string;
+    forMenAndWomen: string;
     subheadline: string;
     bookViaWhatsApp: string;
     viewServices: string;
@@ -126,7 +127,8 @@ export const translations: Record<Language, Translation> = {
     },
     hero: {
       headline: 'Professional Hotel Call-Out Massage in Madinah',
-      subheadline: 'We come to your hotel room anywhere around Masjid Nabawi. Certified male & female therapists delivering professional recovery straight to you. Male therapists for men, female therapists for women.',
+      forMenAndWomen: 'for Men & Women',
+      subheadline: 'Looking for the best hotel massage for men or women in Madinah? We bring wellness services straight to your room anywhere near Masjid Nabawi. Enjoy a recovery session with our professional and experienced team: male therapists for men and female therapists for women, ensuring 100% privacy, comfort, and safety.',
       bookViaWhatsApp: 'Book via WhatsApp',
       viewServices: 'View Services',
     },
@@ -243,7 +245,8 @@ export const translations: Record<Language, Translation> = {
     },
     hero: {
       headline: 'مساج فندقي احترافي بالطلب في المدينة المنورة',
-      subheadline: 'نأتي إلى غرفتك الفندقية في أي مكان حول المسجد النبوي. معالجون ومعالجات معتمدون يقدمون خدمات الاستشفاء الاحترافية إليك مباشرة. معالجون للرجال ومعالجات للنساء.',
+      forMenAndWomen: 'للرجال والنساء',
+      subheadline: 'هل تبحث عن أفضل مساج فندقي للرجال أو النساء في المدينة المنورة؟ نقدم خدمات الاستشفاء والعافية مباشرة إلى غرفتك في أي مكان بالقرب من المسجد النبوي. استمتع بجلسة استشفاء مع فريقنا المحترف وذو الخبرة: معالجون للرجال ومعالجات للنساء، مع ضمان الخصوصية والراحة والأمان بنسبة 100%.',
       bookViaWhatsApp: 'احجز عبر واتساب',
       viewServices: 'عرض الخدمات',
     },
@@ -360,7 +363,8 @@ export const translations: Record<Language, Translation> = {
     },
     hero: {
       headline: 'Pijat Panggilan Hotel Profesional di Madinah',
-      subheadline: 'Kami datang ke kamar hotel Anda di mana saja di sekitar Masjid Nabawi. Terapis pria & wanita bersertifikat menghadirkan layanan pemulihan profesional langsung ke tempat Anda. Terapis pria untuk pria, terapis wanita untuk wanita.',
+      forMenAndWomen: 'untuk Pria & Wanita',
+      subheadline: 'Mencari pijat hotel terbaik untuk pria atau wanita di Madinah? Kami menghadirkan layanan kebugaran langsung ke kamar Anda di mana saja di dekat Masjid Nabawi. Nikmati sesi pemulihan bersama tim kami yang profesional dan berpengalaman: terapis pria untuk pria dan terapis wanita untuk wanita, menjamin 100% privasi, kenyamanan, dan keamanan.',
       bookViaWhatsApp: 'Pesan via WhatsApp',
       viewServices: 'Lihat Layanan',
     },

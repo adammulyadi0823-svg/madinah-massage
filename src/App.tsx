@@ -38,12 +38,15 @@ import Gallery3 from './assets/images/regenerated_image_1778940104622.png';
 import Gallery4 from './assets/images/regenerated_image_1778944756929.jpg';
 import Gallery5 from './assets/images/regenerated_image_1778944758586.jpg';
 import Gallery6 from './assets/images/regenerated_image_1778939273169.png';
+import Gallery7 from './assets/images/regenerated_image_1781174056393.png';
+import Gallery8 from './assets/images/regenerated_image_1781174059793.png';
+import Gallery9 from './assets/images/regenerated_image_1781174089109.png';
 import AboutImage from './assets/images/regenerated_image_1778941470110.png';
 import Gallery120 from './assets/images/regenerated_image_1778943907732.png';
 import FootMassageImg from './assets/images/regenerated_image_1778943911153.png';
 import Logo from './assets/images/regenerated_image_1780779334505.png';
 // @ts-ignore
-import videoBg from './assets/images/bg-spa.mp4';
+import videoBg from './assets/images/bg-spa.webm';
 
 // --- Helpers ---
 
@@ -215,6 +218,19 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
 const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  useEffect(() => {
+    // Elegant background image caching to guarantee premium, non-choppy fade-in
+    const img = new Image();
+    img.src = Gallery1;
+    if (img.complete) {
+      setIsImageLoaded(true);
+    } else {
+      img.onload = () => setIsImageLoaded(true);
+      img.onerror = () => setIsImageLoaded(true); // Fallback to display on error
+    }
+  }, []);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -251,16 +267,17 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
   };
 
   return (
-    <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center bg-black">
-      {/* Background Image: Shown initially using the poster-blend style or until the video starts playing */}
-      {!isVideoPlaying && (
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-100 z-0 pointer-events-none"
-          style={{ backgroundImage: `url(${Gallery1})` }}
-        ></div>
-      )}
+    <section id="home" className="relative min-h-[95vh] md:min-h-screen w-full overflow-hidden flex items-center bg-[#050505]">
+      {/* Deep elegant dark baseline so the screen is never bright or blank during initial loads */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#050505] to-[#020202] z-0"></div>
+
+      {/* Background Image: Loaded in-memory first, then beautifully and instantly faded in once fully cached */}
+      <div 
+        className={`absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-1000 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ backgroundImage: `url(${Gallery1})`, zIndex: 1 }}
+      ></div>
       
-      {/* High-Performance, clear, and bright background video */}
+      {/* High-Performance, clear, and bright background video at z-2, fading in beautifully */}
       <video
         ref={videoRef}
         autoPlay
@@ -268,15 +285,18 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
         muted
         playsInline
         preload="auto"
-        poster={Gallery1}
         onLoadedData={handleVideoPlaying}
         onCanPlay={handleVideoPlaying}
         onPlaying={handleVideoPlaying}
         onCanPlayThrough={handleVideoPlaying}
-        className={`absolute inset-0 w-full h-full object-cover z-0 ${isVideoPlaying ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
-        style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden' }}
+        onError={(e) => {
+          console.warn("Hero video playback was prevented or failed. Falling back gracefully to static image.", e);
+          setIsVideoPlaying(false);
+        }}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isVideoPlaying ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
+        style={{ transform: 'translate3d(0,0,0)', backfaceVisibility: 'hidden', zIndex: 2 }}
       >
-        <source src={videoBg} type="video/mp4" />
+        <source src={videoBg} type="video/webm" />
       </video>
       
       {/* Very soft screen-wide gradient to blend borders nicely without overall darkening */}
@@ -305,6 +325,9 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
             style={{ textShadow: '0 4px 16px rgba(0,0,0,0.8), 0 8px 32px rgba(0,0,0,0.5), 0 16px 64px rgba(0,0,0,0.3)' }}
           >
             {t.hero.headline}
+            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-gold/90 mt-4 serif normal-case">
+              {t.hero.forMenAndWomen}
+            </span>
           </h1>
           <p 
             className="text-white/95 text-base md:text-lg lg:text-xl mb-12 font-medium leading-relaxed max-w-xl"
@@ -511,12 +534,16 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
                 <img 
                   src={service.img} 
                   alt={service.title} 
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute top-0 left-0 w-full h-full bg-black/10 transition-opacity group-hover:opacity-0"></div>
               </div>
               <div className="p-8 flex flex-col flex-1">
+                <span className="text-[11px] font-bold text-amber-600/90 tracking-widest uppercase mb-1.5 block">
+                  {t.hero.forMenAndWomen}
+                </span>
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="serif text-xl font-bold text-slate-800 leading-tight group-hover:text-maroon transition-colors">{service.title}</h3>
                 </div>
@@ -844,9 +871,9 @@ const Gallery = ({ t }: any) => {
   const images = [
     Gallery1,
     Gallery2,
-    'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1974&auto=format&fit=crop',
-    Gallery4,
-    Gallery5,
+    Gallery7,
+    Gallery8,
+    Gallery9,
     Gallery6,
   ];
 
@@ -875,6 +902,7 @@ const Gallery = ({ t }: any) => {
               <img 
                 src={src} 
                 alt={`Gallery ${i}`} 
+                loading="lazy"
                 className="w-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
@@ -1056,6 +1084,7 @@ const About = ({ t, scrollToSection, lang }: any) => {
               <img 
                 src={AboutImage} 
                 alt="Madinah Massage Atmosphere" 
+                loading="lazy"
                 className="rounded-[60px] relative z-10 shadow-3xl transition-all duration-500"
                 referrerPolicy="no-referrer"
               />
@@ -1175,7 +1204,7 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-24">
           <div className="col-span-1 lg:col-span-1">
             <div className="flex items-center gap-3 mb-10">
-              <img src={Logo} alt="Madinah Massage Logo" className="h-12 w-auto" referrerPolicy="no-referrer" />
+              <img src={Logo} alt="Madinah Massage Logo" className="h-12 w-auto" loading="lazy" referrerPolicy="no-referrer" />
               <span className="text-xl font-bold tracking-wider serif text-gold uppercase">MADINAH MASSAGE</span>
             </div>
             <p className="text-white/60 font-light leading-relaxed mb-10 text-sm">
