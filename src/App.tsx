@@ -218,19 +218,6 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
 const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
-
-  useEffect(() => {
-    // Elegant background image caching to guarantee premium, non-choppy fade-in
-    const img = new Image();
-    img.src = Gallery1;
-    if (img.complete) {
-      setIsImageLoaded(true);
-    } else {
-      img.onload = () => setIsImageLoaded(true);
-      img.onerror = () => setIsImageLoaded(true); // Fallback to display on error
-    }
-  }, []);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -271,9 +258,9 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
       {/* Deep elegant dark baseline so the screen is never bright or blank during initial loads */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#050505] to-[#020202] z-0"></div>
 
-      {/* Background Image: Loaded in-memory first, then beautifully and instantly faded in once fully cached */}
+      {/* Background Image: Directly visible on first render (no opacity delay) to guarantee immediate display */}
       <div 
-        className={`absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-1000 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className="absolute inset-0 bg-cover bg-center pointer-events-none opacity-100"
         style={{ backgroundImage: `url(${Gallery1})`, zIndex: 1 }}
       ></div>
       
