@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Specifically allow crawlers to fetch all favicon and asset paths
+Allow: /favicon.png
+Allow: /favicon.ico
+Allow: /assets/

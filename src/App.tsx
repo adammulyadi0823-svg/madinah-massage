@@ -32,7 +32,7 @@ import {
 } from 'lucide-react';
 import { translations, Language } from './translations';
 
-import Gallery1 from './assets/images/regenerated_image_1778939241565.png';
+import Gallery1 from './assets/images/regenerated_image_1778939241565.jpg';
 import Gallery2 from './assets/images/regenerated_image_1778939273697.png';
 import Gallery3 from './assets/images/regenerated_image_1778940104622.png';
 import Gallery4 from './assets/images/regenerated_image_1778944756929.jpg';
