@@ -149,7 +149,7 @@ export const translations: Record<Language, Translation> = {
         fullBody60: ['Deep Relaxation', 'Oil Massage', 'Full Body Focus'],
         fullBody90: ['Extended Stress Relief', 'Full Muscle Recovery', 'Professional Oils'],
         fullBody120: ['Ultimate Rejuvenation', 'Total Body Care', 'Sleep Better Focus'],
-        footMassage60: ['Foot Reflexology', 'Warm Towel', 'Herbal Water Soak']
+        footMassage60: ['Foot Reflexology', 'Cream & Oil Massage', 'Relieve Foot Fatigue']
       }
     },
     booking: {
@@ -269,7 +269,7 @@ export const translations: Record<Language, Translation> = {
         fullBody60: ['استرخاء عميق', 'مساج بالزيت', 'تركيز كامل للجسم'],
         fullBody90: ['تخفيف التوتر الممدد', 'استعادة كاملة للعضلات', 'زيوت احترافية'],
         fullBody120: ['تجديد مثالي للنشاط', 'عناية كاملة بالجسم', 'تركيز لنوم أفضل'],
-        footMassage60: ['تدليك انعكاسي للقدمين', 'منشفة دافئة', 'نقع بالماء العشبي']
+        footMassage60: ['تدليك انعكاسي للقدمين', 'مساج بالكريم والزيت', 'تخفيف تعب القدمين']
       }
     },
     booking: {
@@ -389,7 +389,7 @@ export const translations: Record<Language, Translation> = {
         fullBody60: ['Relaksasi Mendalam', 'Pijat Minyak', 'Fokus Seluruh Tubuh'],
         fullBody90: ['Pereda Stres Ekstra', 'Pemulihan Otot Total', 'Minyak Profesional'],
         fullBody120: ['Peremajaan Maksimal', 'Perawatan Seluruh Tubuh', 'Fokus Tidur Nyenyak'],
-        footMassage60: ['Refleksologi Kaki', 'Handuk Hangat', 'Rendaman Air Herbal']
+        footMassage60: ['Refleksologi Kaki', 'Pijat Krim & Minyak', 'Mengurangi Lelah Kaki']
       }
     },
     booking: {
