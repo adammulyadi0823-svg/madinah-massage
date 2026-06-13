@@ -676,7 +676,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
   };
 
   return (
-    <section id="booking" className="py-24 bg-beige/50 relative overflow-hidden">
+    <section id="booking-section" className="py-24 bg-beige/50 relative overflow-hidden">
       <div className="absolute top-12 right-12 opacity-5 pointer-events-none">
         <svg width="120" height="120" viewBox="0 0 100 100">
            <path d="M50 0L61 39L100 50L61 61L50 100L39 61L0 50L39 39Z" fill="#5D101D"/>
@@ -710,7 +710,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
             </div>
           </div>
 
-          <div className="lg:w-1/2 w-full">
+          <div className="lg:w-1/2 w-full scroll-mt-28" id="booking">
             <div className="bg-white p-8 md:p-14 rounded-[40px] shadow-2xl border border-slate-100 relative">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-4">
