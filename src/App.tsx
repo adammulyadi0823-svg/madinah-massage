@@ -26,7 +26,6 @@ import {
   Droplets,
   ChevronDown,
   Info,
-  Instagram,
   ChevronUp,
   Leaf
 } from 'lucide-react';
@@ -642,6 +641,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
     time: meccaTime.time,
     notes: ''
   });
+  const [isDiscountActive, setIsDiscountActive] = useState(true);
 
   useEffect(() => {
     if (selectedService) {
@@ -649,20 +649,88 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
     }
   }, [selectedService]);
 
+  const priceDetails = useMemo(() => {
+    const services = t.services.items;
+    let originalPrice = 200;
+    let finalPrice = 165;
+    let discount = 35;
+
+    if (formData.service === services.fullBody60) {
+      originalPrice = 200;
+      finalPrice = isDiscountActive ? 165 : 200;
+      discount = isDiscountActive ? 35 : 0;
+    } else if (formData.service === services.fullBody90) {
+      originalPrice = 300;
+      finalPrice = isDiscountActive ? 245 : 300;
+      discount = isDiscountActive ? 55 : 0;
+    } else if (formData.service === services.fullBody120) {
+      originalPrice = 400;
+      finalPrice = isDiscountActive ? 320 : 400;
+      discount = isDiscountActive ? 80 : 0;
+    } else if (formData.service === services.footMassage60) {
+      originalPrice = 200;
+      finalPrice = isDiscountActive ? 165 : 200;
+      discount = isDiscountActive ? 35 : 0;
+    }
+
+    return { originalPrice, finalPrice, discount };
+  }, [formData.service, t.services.items, isDiscountActive]);
+
+  const labels = {
+    en: {
+      summaryTitle: 'Booking Summary & Price',
+      originalPrice: 'Regular Price',
+      discount: 'Direct Discount',
+      finalPrice: 'Total Price',
+      saveText: 'You save',
+      currency: 'SAR',
+      badge: isDiscountActive ? 'PROMO ACTIVE' : 'PROMO PAUSED',
+      checkboxLabel: 'Activate Promo Discount (Click to claim discount)',
+      toggleLabel: 'Promo/Discount Status:'
+    },
+    id: {
+      summaryTitle: 'Informasi Biaya & Booking',
+      originalPrice: 'Harga Normal',
+      discount: 'Diskon Langsung',
+      finalPrice: 'Harga Promo',
+      saveText: 'Hemat',
+      currency: 'SAR',
+      badge: isDiscountActive ? 'PROMO AKTIF' : 'PROMO NONAKTIF',
+      checkboxLabel: 'Aktifkan Bonus Diskon (Klik untuk klaim diskon)',
+      toggleLabel: 'Status Diskon / Promo:'
+    },
+    ar: {
+      summaryTitle: 'تفاصيل الحجز والسعر',
+      originalPrice: 'السعر المعتاد',
+      discount: 'خصم مباشر',
+      finalPrice: 'السعر النهائي',
+      saveText: 'وفرت',
+      currency: 'ريال',
+      badge: isDiscountActive ? 'العرض نشط' : 'العرض غير نشط',
+      checkboxLabel: 'تفعيل مكافأة الخصم (اضغط للحصول على الخصم)',
+      toggleLabel: 'حالة الخصم والترويج:'
+    }
+  };
+
+  const currentLabels = labels[lang as 'en' | 'id' | 'ar'] || labels.en;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Price mapping logic
-    let totalPrice = 0;
-    const services = t.services.items;
-    
-    if (formData.service === services.fullBody60) totalPrice = 165;
-    else if (formData.service === services.fullBody90) totalPrice = 245;
-    else if (formData.service === services.fullBody120) totalPrice = 320;
-    else if (formData.service === services.footMassage60) totalPrice = 165;
+    const totalPrice = priceDetails.finalPrice;
 
     const genderLabel = formData.gender === 'Male' ? t.booking.male : t.booking.female;
-    const message = `${t.booking.whatsappMessagePrefix}\n\n${t.booking.fullName}: ${formData.name}\n${t.booking.gender}: ${genderLabel}\n${t.booking.hotelName}: ${formData.hotel}\n${t.booking.roomNumber}: ${formData.room}\n${t.booking.serviceType}: ${formData.service}\n${t.booking.bookingDate}: ${formData.date}\n${t.booking.preferredTime}: ${formData.time}\n${t.booking.additionalNotes}: ${formData.notes}\n\nTotal = ${totalPrice} SAR\n\nPlease inform me about the therapist's availability. Thank you`;
+    const message = `${t.booking.whatsappMessagePrefix}\n\n` +
+                    `${t.booking.fullName}: ${formData.name}\n` +
+                    `${t.booking.gender}: ${genderLabel}\n` +
+                    `${t.booking.hotelName}: ${formData.hotel}\n` +
+                    `${t.booking.roomNumber}: ${formData.room}\n` +
+                    `${t.booking.serviceType}: ${formData.service}\n` +
+                    `${t.booking.bookingDate}: ${formData.date}\n` +
+                    `${t.booking.preferredTime}: ${formData.time}\n\n` +
+                    `Total = ${totalPrice} SAR\n\n` +
+                    `Please inform me about the therapist's availability. Thank you`;
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/966506173369?text=${encodedMessage}`, '_blank');
@@ -797,10 +865,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>
-                      {t.booking.bookingDate} 
-                      <span className="text-gold ml-1">
-                        ({t.booking.meccaTimeLabel})
-                      </span>
+                      {t.booking.bookingDate}
                     </label>
                     <input 
                       required
@@ -813,9 +878,6 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                   <div className="space-y-2">
                     <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>
                       {t.booking.preferredTime}
-                      <span className="text-gold ml-1">
-                        ({t.booking.meccaTimeLabel})
-                      </span>
                     </label>
                     <input 
                       required
@@ -827,15 +889,99 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className={`text-[10px] uppercase tracking-widest font-bold text-slate-400 ${lang === 'ar' ? 'mr-1' : 'ml-1'}`}>{t.booking.additionalNotes}</label>
-                  <textarea 
-                    rows={2}
-                    className="w-full bg-slate-50 border border-slate-100 rounded-xl px-6 py-3 text-slate-800 focus:outline-none focus:border-gold transition-all shadow-sm resize-none"
-                    placeholder="..."
-                    value={formData.notes}
-                    onChange={e => setFormData({...formData, notes: e.target.value})}
-                  />
+                {/* Price Receipt Section */}
+                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 space-y-4" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+                  <div className="flex items-center justify-between border-b border-dashed border-slate-200 pb-3">
+                    <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                      {currentLabels.summaryTitle}
+                    </span>
+                    <span className={`text-[9px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap ${
+                      isDiscountActive ? 'bg-emerald-500/10 text-emerald-700 animate-pulse' : 'bg-red-500/10 text-red-700'
+                    }`}>
+                      {currentLabels.badge}
+                    </span>
+                  </div>
+
+                  {/* Switchable Discount Checkbox */}
+                  <label 
+                    className={`flex items-center gap-3 cursor-pointer select-none bg-white p-3.5 rounded-xl border-2 transition-all shadow-sm ${
+                      isDiscountActive 
+                        ? 'border-emerald-500 bg-emerald-500/[0.02] shadow-emerald-500/5' 
+                        : 'border-slate-200 hover:border-slate-300 bg-slate-50/50'
+                    }`} 
+                    dir={lang === 'ar' ? 'rtl' : 'ltr'}
+                  >
+                    <div className="relative flex items-center justify-center shrink-0">
+                      <input
+                        type="checkbox"
+                        checked={isDiscountActive}
+                        onChange={() => setIsDiscountActive(!isDiscountActive)}
+                        className="sr-only"
+                      />
+                      <div className={`w-6 h-6 rounded-lg border-2 transition-all flex items-center justify-center ${
+                        isDiscountActive 
+                          ? 'border-emerald-500 bg-emerald-500 text-white shadow-sm shadow-emerald-500/20' 
+                          : 'border-slate-300 bg-white'
+                      }`}>
+                        {isDiscountActive ? (
+                          <svg className="w-3.5 h-3.5 stroke-current" fill="none" viewBox="0 0 24 24" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        ) : (
+                          <div className="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className={`text-xs font-bold transition-colors ${isDiscountActive ? 'text-emerald-800' : 'text-slate-700'}`}>
+                        {currentLabels.checkboxLabel}
+                      </p>
+                      <p className="text-[10px] text-slate-450 font-medium mt-0.5">
+                        {isDiscountActive 
+                          ? (lang === 'ar' ? 'الباقة المخفضة مفعلة الآن' : lang === 'id' ? 'Diskon aktif & berhasil diterapkan' : 'Discount is active and applied')
+                          : (lang === 'ar' ? 'اضغط لتفعيل العرض المباشر والخصم' : lang === 'id' ? 'Klik untuk mengaktifkan potongan harga' : 'Click to activate your direct reduction')
+                        }
+                      </p>
+                    </div>
+                  </label>
+                  
+                  <div className="space-y-2">
+                    {/* Normal Price */}
+                    <div className="flex justify-between items-center text-xs text-slate-500">
+                      <span>{currentLabels.originalPrice}</span>
+                      <span className={`${isDiscountActive ? 'line-through decoration-red-500 decoration-[1.5px] text-slate-500 text-sm font-bold' : 'text-slate-800 text-xs font-bold'} font-mono transition-all`}>
+                        {priceDetails.originalPrice} {currentLabels.currency}
+                      </span>
+                    </div>
+
+                    {/* Discount */}
+                    <div className={`flex justify-between items-center text-xs ${isDiscountActive ? 'text-emerald-600 font-medium' : 'text-slate-400 font-light'}`}>
+                      <span>{currentLabels.discount}</span>
+                      <span className="font-mono">
+                        {isDiscountActive ? `-${priceDetails.discount}` : '0'} {currentLabels.currency}
+                      </span>
+                    </div>
+
+                    {/* Final Price */}
+                    <div className="flex justify-between items-center pt-3 border-t border-slate-200">
+                      <span className="text-sm font-bold text-slate-800">
+                        {currentLabels.finalPrice}
+                      </span>
+                      <span className="text-xl font-extrabold text-gold font-mono">
+                        {priceDetails.finalPrice} {currentLabels.currency}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Saving callout */}
+                  {isDiscountActive && priceDetails.discount > 0 && (
+                    <div className="bg-emerald-50 text-emerald-800 text-[11px] font-semibold py-2 px-4 rounded-xl text-center flex items-center justify-center gap-1.5">
+                      <span>🎉</span>
+                      <span>
+                        {currentLabels.saveText} <strong>{priceDetails.discount} {currentLabels.currency}</strong> ({Math.round((priceDetails.discount / priceDetails.originalPrice) * 100)}%)!
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <button 
@@ -1137,15 +1283,26 @@ const Contact = ({ t, onWhatsAppClick }: any) => {
               <p className="text-slate-500 mb-16 text-lg font-light">{t.contact.info}</p>
               
               <div className="space-y-12">
-                <div className="flex items-start gap-8 group">
+                <a 
+                  href="https://maps.app.goo.gl/K7NNHzqpYXMG5nSo8" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-start gap-8 group cursor-pointer block transition-all"
+                >
                   <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center text-maroon shrink-0 shadow-lg group-hover:gold-gradient group-hover:text-white transition-all duration-500">
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-800 mb-2 uppercase tracking-widest text-[11px]">{t.contact.location}</h4>
-                    <p className="text-slate-500 text-sm leading-relaxed">{t.contact.locationDesc}</p>
+                    <h4 className="font-bold text-slate-800 mb-2 uppercase tracking-widest text-[11px] group-hover:text-gold transition-colors">{t.contact.location}</h4>
+                    <p className="text-slate-500 text-sm leading-relaxed group-hover:text-slate-700 transition-colors">{t.contact.locationDesc}</p>
+                    <span className="text-[10px] text-gold font-bold uppercase tracking-wider mt-1.5 inline-flex items-center gap-1">
+                      {t.contact.openMaps}
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                      </svg>
+                    </span>
                   </div>
-                </div>
+                </a>
                 <div className="flex items-start gap-8 group">
                   <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center text-maroon shrink-0 shadow-lg group-hover:gold-gradient group-hover:text-white transition-all duration-500">
                     <Clock className="w-6 h-6" />
@@ -1164,11 +1321,20 @@ const Contact = ({ t, onWhatsAppClick }: any) => {
                   </svg>
                   WhatsApp
                 </button>
+                <a 
+                  href="https://maps.app.goo.gl/K7NNHzqpYXMG5nSo8" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200/80 px-10 py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-3 transition-all hover:border-slate-300"
+                >
+                  <MapPin className="w-4 h-4 text-slate-700" />
+                  Google Maps
+                </a>
               </div>
             </div>
             <div className="lg:w-1/2 h-[500px] lg:h-auto min-h-[600px] relative">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6500!2d39.6111818!3d24.4686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ssa!4v1715856422341!5m2!1sen!2ssa" 
+                src="https://maps.google.com/maps?q=Madinah+Massage,+Medina&ll=24.4672124,39.6110258&z=15&t=m&output=embed" 
                 className="w-full h-full transition-all duration-500 border-none"
                 allowFullScreen={true}
                 loading="lazy"
@@ -1205,9 +1371,6 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
               </button>
               <a href="tel:+966506173369" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:text-maroon transition-all duration-500 text-gold shadow-lg">
                 <Phone className="w-5 h-5" />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:gold-gradient hover:text-white transition-all duration-500 text-gold shadow-lg">
-                <Instagram className="w-5 h-5" />
               </a>
               <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-500 text-gold shadow-lg">
                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
@@ -1543,13 +1706,28 @@ export default function App() {
                 `\u200Fالاسم:\n` +
                 `\u200Fاسم الفندق / الموقع:\n` +
                 `\u200Fرقم الغرفة:\n` +
+                `\u200Fالجنس: ذكر / أنثى\n` +
                 `\u200Fالمدة:\n` +
                 `\u200Fالوقت المفضل:\n\n` +
                 `\u200Fيرجى إفادتي بمدى توفر المعالج. شكراً لكم`;
     } else if (lang === 'id') {
-      message = `Halo Madinah Massage, saya tertarik untuk memesan pijat panggilan kamar hotel. \n\nNama: \nNama Hotel / Lokasi: \nNomor Kamar: \nDurasi:\nWaktu yang Diinginkan: \n\nSilakan beri tahu saya tentang ketersediaan terapis. Terima kasih`;
+      message = `Halo Madinah Massage, saya tertarik untuk memesan pijat panggilan kamar hotel.\n\n` +
+                `Nama:\n` +
+                `Nama Hotel / Lokasi:\n` +
+                `Nomor Kamar:\n` +
+                `Jenis Kelamin: Pria / Wanita\n` +
+                `Durasi:\n` +
+                `Waktu yang Diinginkan:\n\n` +
+                `Silakan beri tahu saya tentang ketersediaan terapis. Terima kasih`;
     } else {
-      message = `Hello Madinah Massage, I am interested in booking an in-room hotel massage. \n\nName: \nHotel / Location Name: \nRoom Number: \nDuration:\nPreferred Time: \n\nPlease inform me about the therapist's availability. Thank you`;
+      message = `Hello Madinah Massage, I am interested in booking an in-room hotel massage.\n\n` +
+                `Name:\n` +
+                `Hotel / Location Name:\n` +
+                `Room Number:\n` +
+                `Gender: Male / Female\n` +
+                `Duration:\n` +
+                `Preferred Time:\n\n` +
+                `Please inform me about the therapist's availability. Thank you`;
     }
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/966506173369?text=${encodedMessage}`, '_blank');

@@ -103,6 +103,7 @@ export interface Translation {
     contactTag: string;
     locationDesc: string;
     hoursDesc: string;
+    openMaps: string;
   };
   footer: {
     quickLinks: string;
@@ -126,9 +127,9 @@ export const translations: Record<Language, Translation> = {
       bookNow: 'Book Now',
     },
     hero: {
-      headline: 'Professional Hotel Call-Out Massage in Madinah',
+      headline: 'Professional Hotel Massage in Madinah',
       forMenAndWomen: 'for Men & Women',
-      subheadline: 'Looking for the best hotel massage for men or women in Madinah? We bring wellness services straight to your room anywhere near Masjid Nabawi. Enjoy a recovery session with our professional and experienced team: male therapists for men and female therapists for women, ensuring 100% privacy, comfort, and safety.',
+      subheadline: 'Looking for a hotel massage for men or women in Madinah? We come to your hotel room anywhere near Masjid Nabawi, bringing wellness services straight to you. Enjoy a recovery session with our professional and experienced team: male therapists for men and female therapists for women, ensuring 100% privacy, comfort, and safety.',
       bookViaWhatsApp: 'Book via WhatsApp',
       viewServices: 'View Services',
     },
@@ -190,13 +191,14 @@ export const translations: Record<Language, Translation> = {
     about: {
       title: 'About Madinah Massage',
       tag: 'The Heritage',
-      content: 'MADINAH MASSAGE is a professional mobile massage service in Madinah. We specialize in providing professional wellness treatments directly to your hotel, apartment, or residence. Our mission is to support pilgrims and travelers in their journey by offering the ultimate relaxation experience near the Holy Mosque.',
+      content: 'MADINAH MASSAGE is the leading professional provider for anyone looking for a hotel massage in Madinah for both men and women. We specialize in delivering expert massage therapy directly to your hotel room, apartment, or residence. If you are searching for a relaxing massage near me while staying near Masjid Nabawi, our mission is to support pilgrims, Umrah performers, and travelers on their spiritual journey. We proudly offer dedicated massage for men and women in Madinah with our professional male and female therapists, ensuring the ultimate relaxation, 100% privacy, comfort, and safety for everyone.',
       highlightTitle: 'Why Choose Us?',
       highlights: [
         'Professional & Certified Therapists',
         'Hygienic & Professional Equipment',
         'Muslim-Friendly & Private',
         'Direct Hotel / Home Visits',
+        'We Come to Your Hotel',
         'Professional Hospitality Standards',
       ],
       pilgrimsServed: 'Pilgrims Served',
@@ -222,7 +224,8 @@ export const translations: Record<Language, Translation> = {
       location: 'Service Area',
       contactTag: 'Get In Touch',
       locationDesc: 'Central Madinah & Hotels near Masjid Nabawi. We come to you.',
-      hoursDesc: '24 Hours / 7 Days. Global Concierge Standards.'
+      hoursDesc: '24 Hours / 7 Days. Global Concierge Standards.',
+      openMaps: 'Open in Google Maps'
     },
     footer: {
       quickLinks: 'Quick Links',
@@ -244,9 +247,9 @@ export const translations: Record<Language, Translation> = {
       bookNow: 'احجز الآن',
     },
     hero: {
-      headline: 'مساج فندقي احترافي بالطلب في المدينة المنورة',
+      headline: 'مساج فندقي احترافي في المدينة المنورة',
       forMenAndWomen: 'للرجال والنساء',
-      subheadline: 'هل تبحث عن أفضل مساج فندقي للرجال أو النساء في المدينة المنورة؟ نقدم خدمات الاستشفاء والعافية مباشرة إلى غرفتك في أي مكان بالقرب من المسجد النبوي. استمتع بجلسة استشفاء مع فريقنا المحترف وذو الخبرة: معالجون للرجال ومعالجات للنساء، مع ضمان الخصوصية والراحة والأمان بنسبة 100%.',
+      subheadline: 'هل تبحث عن مساج فندقي للرجال أو النساء في المدينة المنورة؟ نقدم خدمات الاستشفاء والعافية مباشرة إلى غرفتك في أي مكان بالقرب من المسجد النبوي. استمتع بجلسة استشفاء مع فريقنا المحترف وذو الخبرة: معالجون للرجال ومعالجات للنساء، مع ضمان الخصوصية والراحة والأمان بنسبة 100%.',
       bookViaWhatsApp: 'احجز عبر واتساب',
       viewServices: 'عرض الخدمات',
     },
@@ -315,6 +318,7 @@ export const translations: Record<Language, Translation> = {
         'معدات صحية واحترافية',
         'صديق للمسلمين وخصوصية تامة',
         'زيارات مباشرة للفنادق والمنازل',
+        'نأتي إلى فندقك',
         'معايير ضيافة احترافية',
       ],
       pilgrimsServed: 'معتمر مخدوم',
@@ -340,7 +344,8 @@ export const translations: Record<Language, Translation> = {
       location: 'منطقة الخدمة',
       contactTag: 'تواصل معنا',
       locationDesc: 'وسط المدينة المنورة والفنادق القريبة من المسجد النبوي. نأتي إليك.',
-      hoursDesc: '٢٤ ساعة / ٧ أيام. معايير ضيافة عالمية.'
+      hoursDesc: '٢٤ ساعة / ٧ أيام. معايير ضيافة عالمية.',
+      openMaps: 'افتح في خرائط جوجل'
     },
     footer: {
       quickLinks: 'روابط سريعة',
@@ -362,9 +367,9 @@ export const translations: Record<Language, Translation> = {
       bookNow: 'Pesan Sekarang',
     },
     hero: {
-      headline: 'Pijat Panggilan Hotel Profesional di Madinah',
+      headline: 'Pijat Hotel Profesional di Madinah',
       forMenAndWomen: 'untuk Pria & Wanita',
-      subheadline: 'Mencari pijat hotel terbaik untuk pria atau wanita di Madinah? Kami menghadirkan layanan kebugaran langsung ke kamar Anda di mana saja di dekat Masjid Nabawi. Nikmati sesi pemulihan bersama tim kami yang profesional dan berpengalaman: terapis pria untuk pria dan terapis wanita untuk wanita, menjamin 100% privasi, kenyamanan, dan keamanan.',
+      subheadline: 'Mencari pijat hotel untuk pria atau wanita di Madinah? Kami menghadirkan layanan kebugaran langsung ke kamar Anda di mana saja di dekat Masjid Nabawi. Nikmati sesi pemulihan bersama tim kami yang profesional dan berpengalaman: terapis pria untuk pria dan terapis wanita untuk wanita, menjamin 100% privasi, kenyamanan, dan keamanan.',
       bookViaWhatsApp: 'Pesan via WhatsApp',
       viewServices: 'Lihat Layanan',
     },
@@ -433,6 +438,7 @@ export const translations: Record<Language, Translation> = {
         'Peralatan Higienis & Profesional',
         'Ramah Muslim & Privasi Terjaga',
         'Kunjungan Langsung ke Hotel / Rumah',
+        'Kami Datang ke Hotel Anda',
         'Standar Hospitalitas Profesional',
       ],
       pilgrimsServed: 'Jamaah Terlayani',
@@ -458,7 +464,8 @@ export const translations: Record<Language, Translation> = {
       location: 'Area Layanan',
       contactTag: 'Hubungi Kami',
       locationDesc: 'Pusat Madinah & Hotel dekat Masjid Nabawi. Kami datang ke tempat Anda.',
-      hoursDesc: '24 Jam / 7 Hari. Standar Layanan Global.'
+      hoursDesc: '24 Jam / 7 Hari. Standar Layanan Global.',
+      openMaps: 'Buka di Google Maps'
     },
     footer: {
       quickLinks: 'Tautan Cepat',
