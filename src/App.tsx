@@ -375,60 +375,6 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
   );
 });
 
-const AnimatedPrice = ({ start, end }: { start: number; end: number }) => {
-  const [current, setCurrent] = useState(start);
-  const elementRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    let animId: number | null = null;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          let startTime: number | null = null;
-          const duration = 2000; // 2 seconds for a premium, buttery-smooth transition
-
-          const step = (timestamp: number) => {
-            if (!startTime) startTime = timestamp;
-            const progress = Math.min((timestamp - startTime) / duration, 1);
-            
-            // Premium smooth deceleration formula (easeOutExpo)
-            const easeOutExpo = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-            
-            const value = Math.round(start - (start - end) * easeOutExpo);
-            setCurrent(value);
-
-            if (progress < 1) {
-              animId = requestAnimationFrame(step);
-            }
-          };
-
-          animId = requestAnimationFrame(step);
-        } else {
-          // Reset to original value when scrolled out of view to re-trigger next time nicely
-          setCurrent(start);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-      if (animId) cancelAnimationFrame(animId);
-    };
-  }, [start, end]);
-
-  return (
-    <span ref={elementRef} id={`price-anim-${start}-${end}`} className="tabular-nums font-bold text-maroon">
-      {current}
-    </span>
-  );
-};
-
 const Services = ({ t, scrollToSection, setSelectedService }: any) => {
   const serviceList = [
     { 
@@ -557,14 +503,7 @@ const Services = ({ t, scrollToSection, setSelectedService }: any) => {
                   </div>
                   <div className="flex items-baseline gap-1">
                     <span className="text-2xl font-bold text-maroon">
-                      {service.oldPrice ? (
-                        <AnimatedPrice 
-                          start={parseInt(service.oldPrice, 10)} 
-                          end={parseInt(service.price, 10)} 
-                        />
-                      ) : (
-                        service.price
-                      )}
+                      {service.price}
                     </span>
                     <span className="text-xs font-bold text-gold uppercase tracking-widest">{t.services.price}</span>
                   </div>
