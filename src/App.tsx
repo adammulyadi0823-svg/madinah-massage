@@ -1537,14 +1537,22 @@ export default function App() {
   };
 
   const handleWhatsAppClick = () => {
-    setShowToast(true);
-    scrollToSection('booking');
-    if (toastTimeoutRef.current) {
-      clearTimeout(toastTimeoutRef.current);
+    let message = '';
+    if (lang === 'ar') {
+      message = `\u200Fمرحباً مساج المدينة، أنا مهتم بحجز مساج فندقي في الغرفة.\n\n` +
+                `\u200Fالاسم:\n` +
+                `\u200Fاسم الفندق / الموقع:\n` +
+                `\u200Fرقم الغرفة:\n` +
+                `\u200Fالمدة:\n` +
+                `\u200Fالوقت المفضل:\n\n` +
+                `\u200Fيرجى إفادتي بمدى توفر المعالج. شكراً لكم`;
+    } else if (lang === 'id') {
+      message = `Halo Madinah Massage, saya tertarik untuk memesan pijat panggilan kamar hotel. \n\nNama: \nNama Hotel / Lokasi: \nNomor Kamar: \nDurasi:\nWaktu yang Diinginkan: \n\nSilakan beri tahu saya tentang ketersediaan terapis. Terima kasih`;
+    } else {
+      message = `Hello Madinah Massage, I am interested in booking an in-room hotel massage. \n\nName: \nHotel / Location Name: \nRoom Number: \nDuration:\nPreferred Time: \n\nPlease inform me about the therapist's availability. Thank you`;
     }
-    toastTimeoutRef.current = setTimeout(() => {
-      setShowToast(false);
-    }, 8000);
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/966506173369?text=${encodedMessage}`, '_blank');
   };
 
   useEffect(() => {
