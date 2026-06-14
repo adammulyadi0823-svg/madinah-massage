@@ -575,7 +575,7 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
     name: '',
     hotel: '',
     room: '',
-    service: t.services.items.fullBody90,
+    service: t.services.items.fullBody60,
     gender: 'Male',
     date: meccaTime.date,
     time: meccaTime.time,
@@ -588,6 +588,27 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
       setFormData(prev => ({ ...prev, service: selectedService }));
     }
   }, [selectedService]);
+
+  useEffect(() => {
+    let foundKey: string | null = null;
+    const previousService = formData.service;
+    
+    for (const l of ['en', 'ar', 'id'] as const) {
+      const items = translations[l].services.items;
+      const key = Object.keys(items).find(k => items[k as keyof typeof items] === previousService);
+      if (key) {
+        foundKey = key;
+        break;
+      }
+    }
+    
+    if (foundKey) {
+      const newServiceValue = t.services.items[foundKey as keyof typeof t.services.items];
+      if (newServiceValue && newServiceValue !== previousService) {
+        setFormData(prev => ({ ...prev, service: newServiceValue }));
+      }
+    }
+  }, [lang, t.services.items]);
 
   const priceDetails = useMemo(() => {
     const services = t.services.items;
