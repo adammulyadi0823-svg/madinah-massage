@@ -44,6 +44,7 @@ import AboutImage from './assets/images/regenerated_image_1778941470110.png';
 import Gallery120 from './assets/images/regenerated_image_1778943907732.png';
 import FootMassageImg from './assets/images/regenerated_image_1778943911153.png';
 import Logo from './assets/images/regenerated_image_1780779334505.png';
+import WhatsAppLogo from './assets/images/logo whatsapp.png';
 // @ts-ignore
 import videoBg from './assets/images/bg-spa.webm';
 
@@ -275,8 +276,8 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
         onCanPlay={handleVideoPlaying}
         onPlaying={handleVideoPlaying}
         onCanPlayThrough={handleVideoPlaying}
-        onError={(e) => {
-          console.warn("Hero video playback was prevented or failed. Falling back gracefully to static image.", e);
+        onError={() => {
+          console.warn("Hero video playback was prevented or failed. Falling back gracefully to static image.");
           setIsVideoPlaying(false);
         }}
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isVideoPlaying ? 'opacity-100' : 'opacity-0'} pointer-events-none`}
@@ -698,15 +699,20 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
             </p>
             
             <div className="space-y-8 hidden lg:block">
-              <div className="flex items-center gap-6">
-                <div className="w-12 h-12 rounded-full border border-maroon/10 flex items-center justify-center text-maroon">
-                  <Phone className="w-5 h-5" />
+              <a 
+                href="https://wa.me/966506173369" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-6 cursor-pointer group hover:opacity-90 transition-opacity inline-flex"
+              >
+                <div className="w-12 h-12 overflow-hidden flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
+                  <img src={WhatsAppLogo} alt="WhatsApp Support" className="w-full h-full object-contain" />
                 </div>
                 <div>
                    <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Direct Support</p>
-                   <p className="font-bold text-slate-800 tracking-wide selectable" dir="ltr">+966 50 617 3369</p>
+                   <p className="font-bold text-slate-800 tracking-wide selectable group-hover:text-gold transition-colors" dir="ltr">+966 50 617 3369</p>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -1311,11 +1317,6 @@ const Footer = ({ t, scrollToSection, onWhatsAppClick }: any) => {
               <a href="tel:+966506173369" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:text-maroon transition-all duration-500 text-gold shadow-lg">
                 <Phone className="w-5 h-5" />
               </a>
-              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-500 text-gold shadow-lg">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.09-1.47-.88-.64-1.61-1.47-2.11-2.44v6.4c.02 2.76-1.11 5.43-3.13 7.31-2.13 2.01-5.26 2.75-8.03 1.83-2.92-.91-5.18-3.59-5.74-6.59-.62-3.16.51-6.55 2.89-8.73 2.05-1.89 4.96-2.58 7.64-1.87V8.12c-1.39-.43-2.99-.25-4.22.5-.94.57-1.63 1.5-1.92 2.57-.45 1.54-.03 3.32.96 4.54 1.12 1.34 2.97 1.95 4.63 1.62 1.44-.24 2.68-1.22 3.18-2.58.26-.64.36-1.34.33-2.03V0z"/>
-                </svg>
-              </a>
               <button onClick={() => scrollToSection('home')} className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all duration-500 text-gold shadow-lg">
                 <Globe className="w-5 h-5" />
               </button>
@@ -1770,9 +1771,9 @@ export default function App() {
         whileTap={{ scale: 0.95 }}
         className={`fixed bottom-6 ${lang === 'ar' ? 'left-6' : 'right-6'} z-50 bg-[#25D366] text-white p-3 rounded-full shadow-2xl`}
       >
-        <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.733 5.479 2.016 7.78L0 32l8.369-2.195c2.253 1.22 4.821 1.921 7.631 1.921c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.311 22.181c-.34.957-1.705 1.748-2.613 1.861-.624.08-1.44.144-2.316-.144-.544-.176-1.228-.404-2.108-.78-3.748-1.552-6.189-5.325-6.376-5.576-.184-.251-1.504-2.004-1.504-3.824 0-1.82 1.052-2.716 1.34-3.004.288-.288.752-.36 1.136-.36.144 0 .272.008.384.016.328.016.488.024.704.536.264.632.904 2.192.984 2.352.08.16.136.344.032.552-.104.208-.16.336-.32.512-.16.176-.344.4-.488.536-.168.16-.344.336-.144.68.2.336.888 1.464 1.904 2.368 1.312 1.168 2.416 1.528 2.76 1.696.344.168.544.144.752-.08.208-.224.888-1.032 1.128-1.392.24-.36.48-.304.808-.184.328.12 2.088 1.032 2.448 1.216.352.184.584.272.672.424.088.168.088.952-.256 1.904z"/>
-        </svg>
+        <div className="w-6 h-6 overflow-hidden flex items-center justify-center">
+          <img src={WhatsAppLogo} alt="WhatsApp" className="w-full h-full object-contain" />
+        </div>
       </motion.button>
 
       {/* Elegant Toast Notification */}
