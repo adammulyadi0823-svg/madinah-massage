@@ -94,7 +94,7 @@ const Navbar = ({ lang, setLang, t, scrollToSection }: any) => {
               MADINAH MASSAGE
             </span>
             <span className={`text-[9px] uppercase tracking-[0.2em] font-semibold ${isScrolled ? 'text-gold' : 'text-gold-light'}`}>
-              Professional Wellness Service
+              Wellness Service
             </span>
           </div>
         </div>
@@ -325,13 +325,11 @@ const Hero = React.memo(({ t, scrollToSection, onWhatsAppClick, lang }: any) => 
           
           <div className="flex flex-col sm:flex-row gap-6">
             <button 
-              onClick={onWhatsAppClick}
+              onClick={() => scrollToSection('services')}
               className="group gold-gradient text-white px-12 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3 hover:brightness-110 transition-all duration-500 shadow-2xl"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.503-2.961-2.617-.087-.114-.708-.941-.708-1.792s.448-1.273.607-1.446c.159-.173.346-.217.462-.217s.231.006.332.013c.105.007.246-.04.384.295.144.346.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.289.072.398-.058c.109-.13.463-.535.586-.717.123-.181.246-.152.412-.094.167.058 1.055.498 1.236.587s.304.13.348.21c.043.079.043.462-.101.867z" />
-              </svg>
-              {t.hero.bookViaWhatsApp}
+              <span>{t.hero.viewServices}</span>
+              <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${lang === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
             </button>
             
             <div className="hidden md:flex items-center gap-4">
@@ -694,7 +692,24 @@ const BookingForm = ({ t, selectedService, scrollToSection, lang }: any) => {
                     `Please inform me about the therapist's availability. Thank you`;
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/966506173369?text=${encodedMessage}`, '_blank');
+    const whatsappUrl = `https://wa.me/966506173369?text=${encodedMessage}`;
+    try {
+      const newWin = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
+        const a = document.createElement('a');
+        a.href = whatsappUrl;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.click();
+      }
+    } catch (e) {
+      console.warn("Direct window.open blocked, using dynamic element click fallback", e);
+      const a = document.createElement('a');
+      a.href = whatsappUrl;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.click();
+    }
   };
 
   return (
@@ -1492,15 +1507,6 @@ export default function App() {
     }
   }, []);
 
-  // Force update favicon to bust browser caches immediately on load
-  useEffect(() => {
-    const iconLinks = document.querySelectorAll("link[rel*='icon']");
-    iconLinks.forEach((link) => {
-      const el = link as HTMLLinkElement;
-      el.href = `/favicon.png?v=3`;
-    });
-  }, []);
-
   // Mengunci penyalinan teks, klik kanan, seret gambar, serta shortcut keyboard salin/inspeksi
   useEffect(() => {
     const preventCopy = (e: ClipboardEvent) => {
@@ -1510,7 +1516,14 @@ export default function App() {
       }
 
       // Selalu ijinkan menyalin nomor telepon atau elemen yang memiliki class 'selectable'
-      const selection = window.getSelection()?.toString() || '';
+      let selection = '';
+      try {
+        if (typeof window !== 'undefined' && typeof window.getSelection === 'function') {
+          selection = window.getSelection()?.toString() || '';
+        }
+      } catch (err) {
+        console.warn("Could not retrieve selection in sandboxed frame environment", err);
+      }
       const trimmed = selection.trim();
       const isPhoneNumber = /^[+\s\d()-]{4,25}$/.test(trimmed) || trimmed.includes("966") || trimmed.includes("3369");
 
@@ -1556,7 +1569,14 @@ export default function App() {
       // Ctrl+C / Cmd+C
       if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
         if (!isInputting) {
-          const selection = window.getSelection()?.toString() || '';
+          let selection = '';
+          try {
+            if (typeof window !== 'undefined' && typeof window.getSelection === 'function') {
+              selection = window.getSelection()?.toString() || '';
+            }
+          } catch (err) {
+            console.warn("Could not retrieve selection in sandboxed frame environment", err);
+          }
           const trimmed = selection.trim();
           const isPhoneNumber = /^[+\s\d()-]{4,25}$/.test(trimmed) || trimmed.includes("966") || trimmed.includes("3369");
           
@@ -1610,7 +1630,11 @@ export default function App() {
     const currentPath = window.location.pathname.toLowerCase().replace(/\/$/, "");
     const targetPath = `/${lang}`;
     if (currentPath !== targetPath) {
-      window.history.pushState({ lang }, "", targetPath + window.location.hash);
+      try {
+        window.history.pushState({ lang }, "", targetPath + window.location.hash);
+      } catch (err) {
+        console.warn("Could not push language dynamic path to state inside sandboxed environment", err);
+      }
     }
   }, [lang]);
 
@@ -1691,7 +1715,24 @@ export default function App() {
                 `Please inform me about the therapist's availability. Thank you`;
     }
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/966506173369?text=${encodedMessage}`, '_blank');
+    const whatsappUrl = `https://wa.me/966506173369?text=${encodedMessage}`;
+    try {
+      const newWin = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
+        const a = document.createElement('a');
+        a.href = whatsappUrl;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.click();
+      }
+    } catch (e) {
+      console.warn("Direct window.open blocked, using dynamic element click fallback", e);
+      const a = document.createElement('a');
+      a.href = whatsappUrl;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.click();
+    }
   };
 
   useEffect(() => {

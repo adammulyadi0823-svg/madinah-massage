@@ -127,15 +127,15 @@ export const translations: Record<Language, Translation> = {
       bookNow: 'Book Now',
     },
     hero: {
-      headline: 'Professional Hotel Massage in Madinah',
+      headline: 'Hotel Massage in Madinah',
       forMenAndWomen: 'for Men & Women',
-      subheadline: 'Looking for a hotel massage for men or women in Madinah? We come to your hotel room anywhere near Masjid Nabawi, bringing wellness services straight to you. Enjoy a recovery session with our professional and experienced team: male therapists for men and female therapists for women, ensuring 100% privacy, comfort, and safety.',
+      subheadline: 'Looking for a hotel massage for men or women in Madinah? We come to your hotel room anywhere near Masjid Nabawi, bringing wellness services straight to you. Enjoy a recovery session with our experienced team: male therapists for men and female therapists for women, ensuring 100% privacy, comfort, and safety.',
       bookViaWhatsApp: 'Book via WhatsApp',
       viewServices: 'View Services',
     },
     services: {
-      title: 'Our Professional Services',
-      subtitle: 'Professional treatments tailored for your recovery and relaxation',
+      title: 'Our Services',
+      subtitle: 'Treatments tailored for your recovery and relaxation',
       genderTag: 'Male Therapists for Men, Female Therapists for Women',
       items: {
         fullBody60: 'Full Body Massage 60 Minutes',
@@ -191,15 +191,15 @@ export const translations: Record<Language, Translation> = {
     about: {
       title: 'About Madinah Massage',
       tag: 'The Heritage',
-      content: 'MADINAH MASSAGE is the leading professional provider for anyone looking for a hotel massage in Madinah for both men and women. We specialize in delivering expert massage therapy directly to your hotel room, apartment, or residence. If you are searching for a relaxing massage near me while staying near Masjid Nabawi, our mission is to support pilgrims, Umrah performers, and travelers on their spiritual journey. We proudly offer dedicated massage for men and women in Madinah with our professional male and female therapists, ensuring the ultimate relaxation, 100% privacy, comfort, and safety for everyone.',
+      content: 'MADINAH MASSAGE is the leading provider for anyone looking for a hotel massage in Madinah for both men and women. We specialize in delivering expert massage therapy directly to your hotel room, apartment, or residence. If you are searching for a relaxing massage near me while staying near Masjid Nabawi, our mission is to support pilgrims, Umrah performers, and travelers on their spiritual journey. We proudly offer dedicated massage for men and women in Madinah with our male and female therapists, ensuring the ultimate relaxation, 100% privacy, comfort, and safety for everyone.',
       highlightTitle: 'Why Choose Us?',
       highlights: [
-        'Professional & Certified Therapists',
-        'Hygienic & Professional Equipment',
+        'Certified Therapists',
+        'Hygienic Equipment',
         'Muslim-Friendly & Private',
         'Direct Hotel / Home Visits',
         'We Come to Your Hotel',
-        'Professional Hospitality Standards',
+        'High Hospitality Standards',
       ],
       pilgrimsServed: 'Pilgrims Served',
       learnMore: 'Learn more about our standards'
@@ -229,7 +229,7 @@ export const translations: Record<Language, Translation> = {
     },
     footer: {
       quickLinks: 'Quick Links',
-      footerDesc: 'Crafting professional wellness experiences for the global pilgrim in the Heart of Madinah. Redefining mobile spa services with professional standards.',
+      footerDesc: 'Crafting premium wellness experiences for the global pilgrim in the Heart of Madinah. Redefining mobile spa services with high standards.',
       footerServices: 'Services',
       footerSupport: 'Support',
       footerSvcsList: ['Full Body Therapy', 'Foot Reflexology', 'Umrah Recovery', 'Deep Tissue']
@@ -247,15 +247,15 @@ export const translations: Record<Language, Translation> = {
       bookNow: 'احجز الآن',
     },
     hero: {
-      headline: 'مساج فندقي احترافي في المدينة المنورة',
+      headline: 'مساج فندقي في المدينة المنورة',
       forMenAndWomen: 'للرجال والنساء',
-      subheadline: 'هل تبحث عن مساج فندقي للرجال أو النساء في المدينة المنورة؟ نقدم خدمات الاستشفاء والعافية مباشرة إلى غرفتك في أي مكان بالقرب من المسجد النبوي. استمتع بجلسة استشفاء مع فريقنا المحترف وذو الخبرة: معالجون للرجال ومعالجات للنساء، مع ضمان الخصوصية والراحة والأمان بنسبة 100%.',
+      subheadline: 'هل تبحث عن مساج فندقي للرجال أو النساء في المدينة المنورة؟ نقدم خدمات الاستشفاء والعافية مباشرة إلى غرفتك في أي مكان بالقرب من المسجد النبوي. استمتع بجلسة استشفاء مع فريقنا ذو الخبرة: معالجون للرجال ومعالجات للنساء، مع ضمان الخصوصية والراحة والأمان بنسبة 100%.',
       bookViaWhatsApp: 'احجز عبر واتساب',
       viewServices: 'عرض الخدمات',
     },
     services: {
-      title: 'خدماتنا الاحترافية',
-      subtitle: 'علاجات احترافية مصممة لاستعادتك واسترخائك',
+      title: 'خدماتنا',
+      subtitle: 'علاجات مصممة لاستعادتك واسترخائك',
       genderTag: 'معالجون للرجال، ومعالجات للنساء',
       items: {
         fullBody60: 'مساج كامل للجسم 60 دقيقة',
@@ -311,15 +311,15 @@ export const translations: Record<Language, Translation> = {
     about: {
       title: 'حول مساج المدينة',
       tag: 'تراثنا',
-      content: 'مساج المدينة هو خدمة تدليك متنقلة احترافية في المدينة المنورة. نحن متخصصون في تقديم علاجات عافية احترافية مباشرة إلى فندقك أو شقتك أو سكنك. مهمتنا هي دعم المعتمرين والمسافرين في رحلتهم من خلال تقديم تجربة استرخاء مثالية بالقرب من الحرم الشريف.',
+      content: 'مساج المدينة هو خدمة تدليك متنقلة في المدينة المنورة. نحن متخصصون في تقديم علاجات عافية مباشرة إلى فندقك أو شقتك أو سكنك. مهمتنا هي دعم المعتمرين والمسافرين في رحلتهم من خلال تقديم تجربة استرخاء مثالية بالقرب من الحرم الشريف.',
       highlightTitle: 'لماذا تختارنا؟',
       highlights: [
-        'معالجون محترفون ومعتمدون',
-        'معدات صحية واحترافية',
+        'معالجون معتمدون',
+        'معدات صحية ونظيفة',
         'صديق للمسلمين وخصوصية تامة',
         'زيارات مباشرة للفنادق والمنازل',
         'نأتي إلى فندقك',
-        'معايير ضيافة احترافية',
+        'معايير ضيافة عالية',
       ],
       pilgrimsServed: 'معتمر مخدوم',
       learnMore: 'تعرف على المزيد عن معاييرنا'
@@ -349,7 +349,7 @@ export const translations: Record<Language, Translation> = {
     },
     footer: {
       quickLinks: 'روابط سريعة',
-      footerDesc: 'صياغة تجارب عافية احترافية للمعتمرين من جميع أنحاء العالم في قلب المدينة المنورة. إعادة تعريف خدمات السبا المتنقلة بمعايير احترافية.',
+      footerDesc: 'صياغة تجارب عافية للمعتمرين من جميع أنحاء العالم في قلب المدينة المنورة. إعادة تعريف خدمات السبا المتنقلة بمعايير عالية.',
       footerServices: 'خدماتنا',
       footerSupport: 'الدعم',
       footerSvcsList: ['جسم كامل', 'مساج قدمين', 'استشفاء العمرة', 'أنسجة عميقة']
@@ -367,15 +367,15 @@ export const translations: Record<Language, Translation> = {
       bookNow: 'Pesan Sekarang',
     },
     hero: {
-      headline: 'Pijat Hotel Profesional di Madinah',
+      headline: 'Pijat Hotel di Madinah',
       forMenAndWomen: 'untuk Pria & Wanita',
-      subheadline: 'Mencari pijat hotel untuk pria atau wanita di Madinah? Kami menghadirkan layanan kebugaran langsung ke kamar Anda di mana saja di dekat Masjid Nabawi. Nikmati sesi pemulihan bersama tim kami yang profesional dan berpengalaman: terapis pria untuk pria dan terapis wanita untuk wanita, menjamin 100% privasi, kenyamanan, dan keamanan.',
+      subheadline: 'Mencari pijat hotel untuk pria atau wanita di Madinah? Kami menghadirkan layanan kebugaran langsung ke kamar Anda di mana saja di dekat Masjid Nabawi. Nikmati sesi pemulihan bersama tim kami yang berpengalaman: terapis pria untuk pria dan terapis wanita untuk wanita, menjamin 100% privasi, kenyamanan, dan keamanan.',
       bookViaWhatsApp: 'Pesan via WhatsApp',
       viewServices: 'Lihat Layanan',
     },
     services: {
-      title: 'Layanan Profesional Kami',
-      subtitle: 'Perawatan profesional yang disesuaikan untuk pemulihan dan relaksasi Anda',
+      title: 'Layanan Kami',
+      subtitle: 'Perawatan yang disesuaikan untuk pemulihan dan relaksasi Anda',
       genderTag: 'Terapis Pria untuk Pria, Terapis Wanita untuk Wanita',
       items: {
         fullBody60: 'Pijat Seluruh Tubuh 60 Menit',
@@ -431,15 +431,15 @@ export const translations: Record<Language, Translation> = {
     about: {
       title: 'Tentang Madinah Massage',
       tag: 'Warisan Kami',
-      content: 'MADINAH MASSAGE adalah layanan pijat panggilan profesional di Madinah. Kami spesialis dalam menyediakan perawatan kebugaran profesional langsung ke hotel, apartemen, atau kediaman Anda. Misi kami adalah mendukung para jemaah dan pelancong dalam perjalanan mereka dengan menawarkan pengalaman relaksasi terbaik di dekat Masjid Nabawi.',
+      content: 'MADINAH MASSAGE adalah layanan pijat panggilan di Madinah. Kami spesialis dalam menyediakan perawatan kebugaran langsung ke hotel, apartemen, atau kediaman Anda. Misi kami adalah mendukung para jemaah dan pelancong dalam perjalanan mereka dengan menawarkan pengalaman relaksasi terbaik di dekat Masjid Nabawi.',
       highlightTitle: 'Mengapa Memilih Kami?',
       highlights: [
-        'Terapis Profesional & Bersertifikat',
-        'Peralatan Higienis & Profesional',
+        'Terapis Bersertifikat',
+        'Peralatan Higienis',
         'Ramah Muslim & Privasi Terjaga',
         'Kunjungan Langsung ke Hotel / Rumah',
         'Kami Datang ke Hotel Anda',
-        'Standar Hospitalitas Profesional',
+        'Standar Hospitalitas Tinggi',
       ],
       pilgrimsServed: 'Jamaah Terlayani',
       learnMore: 'Pelajari lebih lanjut tentang standar kami'
@@ -469,7 +469,7 @@ export const translations: Record<Language, Translation> = {
     },
     footer: {
       quickLinks: 'Tautan Cepat',
-      footerDesc: 'Menghadirkan pengalaman kebugaran profesional bagi jemaah global di Jantung Kota Madinah. Mendefinisikan ulang layanan spa panggilan dengan standar profesional.',
+      footerDesc: 'Menghadirkan pengalaman kebugaran bagi jemaah global di Jantung Kota Madinah. Mendefinisikan ulang layanan spa panggilan dengan standar tinggi.',
       footerServices: 'Layanan',
       footerSupport: 'Dukungan',
       footerSvcsList: ['Terapi Seluruh Tubuh', 'Pijat Refleksi Kaki', 'Pemulihan Umroh', 'Jaringan Dalam']
